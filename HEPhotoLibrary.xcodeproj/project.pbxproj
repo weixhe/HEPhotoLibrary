@@ -1,0 +1,544 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		04EC08B71EA5076700C81ABE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC08B61EA5076700C81ABE /* main.m */; };
+		04EC08BA1EA5076700C81ABE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC08B91EA5076700C81ABE /* AppDelegate.m */; };
+		04EC08BD1EA5076700C81ABE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC08BC1EA5076700C81ABE /* ViewController.m */; };
+		04EC08C01EA5076700C81ABE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04EC08BE1EA5076700C81ABE /* Main.storyboard */; };
+		04EC08C21EA5076700C81ABE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04EC08C11EA5076700C81ABE /* Assets.xcassets */; };
+		04EC08C51EA5076700C81ABE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04EC08C31EA5076700C81ABE /* LaunchScreen.storyboard */; };
+		04EC08D01EA5076700C81ABE /* HEPhotoLibraryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC08CF1EA5076700C81ABE /* HEPhotoLibraryTests.m */; };
+		04EC08DB1EA5076700C81ABE /* HEPhotoLibraryUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC08DA1EA5076700C81ABE /* HEPhotoLibraryUITests.m */; };
+		04EC08EA1EA5077A00C81ABE /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04EC08E91EA5077A00C81ABE /* Photos.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		04EC08CC1EA5076700C81ABE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04EC08AA1EA5076700C81ABE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 04EC08B11EA5076700C81ABE;
+			remoteInfo = HEPhotoLibrary;
+		};
+		04EC08D71EA5076700C81ABE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04EC08AA1EA5076700C81ABE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 04EC08B11EA5076700C81ABE;
+			remoteInfo = HEPhotoLibrary;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		04EC08B21EA5076700C81ABE /* HEPhotoLibrary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HEPhotoLibrary.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		04EC08B61EA5076700C81ABE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		04EC08B81EA5076700C81ABE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		04EC08B91EA5076700C81ABE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		04EC08BB1EA5076700C81ABE /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		04EC08BC1EA5076700C81ABE /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		04EC08BF1EA5076700C81ABE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		04EC08C11EA5076700C81ABE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		04EC08C41EA5076700C81ABE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		04EC08C61EA5076700C81ABE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04EC08CB1EA5076700C81ABE /* HEPhotoLibraryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HEPhotoLibraryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		04EC08CF1EA5076700C81ABE /* HEPhotoLibraryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HEPhotoLibraryTests.m; sourceTree = "<group>"; };
+		04EC08D11EA5076700C81ABE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04EC08D61EA5076700C81ABE /* HEPhotoLibraryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HEPhotoLibraryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		04EC08DA1EA5076700C81ABE /* HEPhotoLibraryUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HEPhotoLibraryUITests.m; sourceTree = "<group>"; };
+		04EC08DC1EA5076700C81ABE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04EC08E91EA5077A00C81ABE /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		04EC08AF1EA5076700C81ABE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04EC08EA1EA5077A00C81ABE /* Photos.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04EC08C81EA5076700C81ABE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04EC08D31EA5076700C81ABE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		04EC08A91EA5076700C81ABE = {
+			isa = PBXGroup;
+			children = (
+				04EC08B41EA5076700C81ABE /* HEPhotoLibrary */,
+				04EC08CE1EA5076700C81ABE /* HEPhotoLibraryTests */,
+				04EC08D91EA5076700C81ABE /* HEPhotoLibraryUITests */,
+				04EC08B31EA5076700C81ABE /* Products */,
+				04EC08E81EA5077A00C81ABE /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		04EC08B31EA5076700C81ABE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				04EC08B21EA5076700C81ABE /* HEPhotoLibrary.app */,
+				04EC08CB1EA5076700C81ABE /* HEPhotoLibraryTests.xctest */,
+				04EC08D61EA5076700C81ABE /* HEPhotoLibraryUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		04EC08B41EA5076700C81ABE /* HEPhotoLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				04EC08B81EA5076700C81ABE /* AppDelegate.h */,
+				04EC08B91EA5076700C81ABE /* AppDelegate.m */,
+				04EC08BB1EA5076700C81ABE /* ViewController.h */,
+				04EC08BC1EA5076700C81ABE /* ViewController.m */,
+				04EC08BE1EA5076700C81ABE /* Main.storyboard */,
+				04EC08C11EA5076700C81ABE /* Assets.xcassets */,
+				04EC08C31EA5076700C81ABE /* LaunchScreen.storyboard */,
+				04EC08C61EA5076700C81ABE /* Info.plist */,
+				04EC08B51EA5076700C81ABE /* Supporting Files */,
+			);
+			path = HEPhotoLibrary;
+			sourceTree = "<group>";
+		};
+		04EC08B51EA5076700C81ABE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				04EC08B61EA5076700C81ABE /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		04EC08CE1EA5076700C81ABE /* HEPhotoLibraryTests */ = {
+			isa = PBXGroup;
+			children = (
+				04EC08CF1EA5076700C81ABE /* HEPhotoLibraryTests.m */,
+				04EC08D11EA5076700C81ABE /* Info.plist */,
+			);
+			path = HEPhotoLibraryTests;
+			sourceTree = "<group>";
+		};
+		04EC08D91EA5076700C81ABE /* HEPhotoLibraryUITests */ = {
+			isa = PBXGroup;
+			children = (
+				04EC08DA1EA5076700C81ABE /* HEPhotoLibraryUITests.m */,
+				04EC08DC1EA5076700C81ABE /* Info.plist */,
+			);
+			path = HEPhotoLibraryUITests;
+			sourceTree = "<group>";
+		};
+		04EC08E81EA5077A00C81ABE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				04EC08E91EA5077A00C81ABE /* Photos.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		04EC08B11EA5076700C81ABE /* HEPhotoLibrary */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04EC08DF1EA5076700C81ABE /* Build configuration list for PBXNativeTarget "HEPhotoLibrary" */;
+			buildPhases = (
+				04EC08AE1EA5076700C81ABE /* Sources */,
+				04EC08AF1EA5076700C81ABE /* Frameworks */,
+				04EC08B01EA5076700C81ABE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HEPhotoLibrary;
+			productName = HEPhotoLibrary;
+			productReference = 04EC08B21EA5076700C81ABE /* HEPhotoLibrary.app */;
+			productType = "com.apple.product-type.application";
+		};
+		04EC08CA1EA5076700C81ABE /* HEPhotoLibraryTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04EC08E21EA5076700C81ABE /* Build configuration list for PBXNativeTarget "HEPhotoLibraryTests" */;
+			buildPhases = (
+				04EC08C71EA5076700C81ABE /* Sources */,
+				04EC08C81EA5076700C81ABE /* Frameworks */,
+				04EC08C91EA5076700C81ABE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				04EC08CD1EA5076700C81ABE /* PBXTargetDependency */,
+			);
+			name = HEPhotoLibraryTests;
+			productName = HEPhotoLibraryTests;
+			productReference = 04EC08CB1EA5076700C81ABE /* HEPhotoLibraryTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		04EC08D51EA5076700C81ABE /* HEPhotoLibraryUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04EC08E51EA5076700C81ABE /* Build configuration list for PBXNativeTarget "HEPhotoLibraryUITests" */;
+			buildPhases = (
+				04EC08D21EA5076700C81ABE /* Sources */,
+				04EC08D31EA5076700C81ABE /* Frameworks */,
+				04EC08D41EA5076700C81ABE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				04EC08D81EA5076700C81ABE /* PBXTargetDependency */,
+			);
+			name = HEPhotoLibraryUITests;
+			productName = HEPhotoLibraryUITests;
+			productReference = 04EC08D61EA5076700C81ABE /* HEPhotoLibraryUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		04EC08AA1EA5076700C81ABE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = weixhe;
+				TargetAttributes = {
+					04EC08B11EA5076700C81ABE = {
+						CreatedOnToolsVersion = 8.3.1;
+						ProvisioningStyle = Automatic;
+					};
+					04EC08CA1EA5076700C81ABE = {
+						CreatedOnToolsVersion = 8.3.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 04EC08B11EA5076700C81ABE;
+					};
+					04EC08D51EA5076700C81ABE = {
+						CreatedOnToolsVersion = 8.3.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 04EC08B11EA5076700C81ABE;
+					};
+				};
+			};
+			buildConfigurationList = 04EC08AD1EA5076700C81ABE /* Build configuration list for PBXProject "HEPhotoLibrary" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 04EC08A91EA5076700C81ABE;
+			productRefGroup = 04EC08B31EA5076700C81ABE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				04EC08B11EA5076700C81ABE /* HEPhotoLibrary */,
+				04EC08CA1EA5076700C81ABE /* HEPhotoLibraryTests */,
+				04EC08D51EA5076700C81ABE /* HEPhotoLibraryUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		04EC08B01EA5076700C81ABE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04EC08C51EA5076700C81ABE /* LaunchScreen.storyboard in Resources */,
+				04EC08C21EA5076700C81ABE /* Assets.xcassets in Resources */,
+				04EC08C01EA5076700C81ABE /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04EC08C91EA5076700C81ABE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04EC08D41EA5076700C81ABE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		04EC08AE1EA5076700C81ABE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04EC08BD1EA5076700C81ABE /* ViewController.m in Sources */,
+				04EC08BA1EA5076700C81ABE /* AppDelegate.m in Sources */,
+				04EC08B71EA5076700C81ABE /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04EC08C71EA5076700C81ABE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04EC08D01EA5076700C81ABE /* HEPhotoLibraryTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04EC08D21EA5076700C81ABE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04EC08DB1EA5076700C81ABE /* HEPhotoLibraryUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		04EC08CD1EA5076700C81ABE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 04EC08B11EA5076700C81ABE /* HEPhotoLibrary */;
+			targetProxy = 04EC08CC1EA5076700C81ABE /* PBXContainerItemProxy */;
+		};
+		04EC08D81EA5076700C81ABE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 04EC08B11EA5076700C81ABE /* HEPhotoLibrary */;
+			targetProxy = 04EC08D71EA5076700C81ABE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		04EC08BE1EA5076700C81ABE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04EC08BF1EA5076700C81ABE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		04EC08C31EA5076700C81ABE /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04EC08C41EA5076700C81ABE /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		04EC08DD1EA5076700C81ABE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		04EC08DE1EA5076700C81ABE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		04EC08E01EA5076700C81ABE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = HEPhotoLibrary/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.weixhe.HEPhotoLibrary;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		04EC08E11EA5076700C81ABE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = HEPhotoLibrary/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.weixhe.HEPhotoLibrary;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		04EC08E31EA5076700C81ABE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = HEPhotoLibraryTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.weixhe.HEPhotoLibraryTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HEPhotoLibrary.app/HEPhotoLibrary";
+			};
+			name = Debug;
+		};
+		04EC08E41EA5076700C81ABE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = HEPhotoLibraryTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.weixhe.HEPhotoLibraryTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HEPhotoLibrary.app/HEPhotoLibrary";
+			};
+			name = Release;
+		};
+		04EC08E61EA5076700C81ABE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = HEPhotoLibraryUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.weixhe.HEPhotoLibraryUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = HEPhotoLibrary;
+			};
+			name = Debug;
+		};
+		04EC08E71EA5076700C81ABE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = HEPhotoLibraryUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.weixhe.HEPhotoLibraryUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = HEPhotoLibrary;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		04EC08AD1EA5076700C81ABE /* Build configuration list for PBXProject "HEPhotoLibrary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04EC08DD1EA5076700C81ABE /* Debug */,
+				04EC08DE1EA5076700C81ABE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04EC08DF1EA5076700C81ABE /* Build configuration list for PBXNativeTarget "HEPhotoLibrary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04EC08E01EA5076700C81ABE /* Debug */,
+				04EC08E11EA5076700C81ABE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		04EC08E21EA5076700C81ABE /* Build configuration list for PBXNativeTarget "HEPhotoLibraryTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04EC08E31EA5076700C81ABE /* Debug */,
+				04EC08E41EA5076700C81ABE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		04EC08E51EA5076700C81ABE /* Build configuration list for PBXNativeTarget "HEPhotoLibraryUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04EC08E61EA5076700C81ABE /* Debug */,
+				04EC08E71EA5076700C81ABE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 04EC08AA1EA5076700C81ABE /* Project object */;
+}
