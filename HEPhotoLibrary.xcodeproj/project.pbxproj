@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		048C1BE41EAE3CBC00C0D95A /* HEPhotoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C1BE31EAE3CBC00C0D95A /* HEPhotoTool.m */; };
 		04EC08B71EA5076700C81ABE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC08B61EA5076700C81ABE /* main.m */; };
 		04EC08BA1EA5076700C81ABE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC08B91EA5076700C81ABE /* AppDelegate.m */; };
 		04EC08BD1EA5076700C81ABE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC08BC1EA5076700C81ABE /* ViewController.m */; };
@@ -36,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		048C1BE21EAE3CBC00C0D95A /* HEPhotoTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HEPhotoTool.h; sourceTree = "<group>"; };
+		048C1BE31EAE3CBC00C0D95A /* HEPhotoTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HEPhotoTool.m; sourceTree = "<group>"; };
 		04EC08B21EA5076700C81ABE /* HEPhotoLibrary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HEPhotoLibrary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04EC08B61EA5076700C81ABE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		04EC08B81EA5076700C81ABE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -81,6 +84,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		048C1BE11EAE3C9100C0D95A /* HEPhotos */ = {
+			isa = PBXGroup;
+			children = (
+				048C1BE21EAE3CBC00C0D95A /* HEPhotoTool.h */,
+				048C1BE31EAE3CBC00C0D95A /* HEPhotoTool.m */,
+			);
+			path = HEPhotos;
+			sourceTree = "<group>";
+		};
 		04EC08A91EA5076700C81ABE = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +122,7 @@
 				04EC08BB1EA5076700C81ABE /* ViewController.h */,
 				04EC08BC1EA5076700C81ABE /* ViewController.m */,
 				04EC08BE1EA5076700C81ABE /* Main.storyboard */,
+				048C1BE11EAE3C9100C0D95A /* HEPhotos */,
 				04EC08C11EA5076700C81ABE /* Assets.xcassets */,
 				04EC08C31EA5076700C81ABE /* LaunchScreen.storyboard */,
 				04EC08C61EA5076700C81ABE /* Info.plist */,
@@ -214,6 +227,7 @@
 		04EC08AA1EA5076700C81ABE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = HE;
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = weixhe;
 				TargetAttributes = {
@@ -286,6 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04EC08BD1EA5076700C81ABE /* ViewController.m in Sources */,
+				048C1BE41EAE3CBC00C0D95A /* HEPhotoTool.m in Sources */,
 				04EC08BA1EA5076700C81ABE /* AppDelegate.m in Sources */,
 				04EC08B71EA5076700C81ABE /* main.m in Sources */,
 			);
@@ -521,6 +536,7 @@
 				04EC08E11EA5076700C81ABE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		04EC08E21EA5076700C81ABE /* Build configuration list for PBXNativeTarget "HEPhotoLibraryTests" */ = {
 			isa = XCConfigurationList;
@@ -529,6 +545,7 @@
 				04EC08E41EA5076700C81ABE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		04EC08E51EA5076700C81ABE /* Build configuration list for PBXNativeTarget "HEPhotoLibraryUITests" */ = {
 			isa = XCConfigurationList;
@@ -537,6 +554,7 @@
 				04EC08E71EA5076700C81ABE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
