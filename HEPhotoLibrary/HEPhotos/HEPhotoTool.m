@@ -38,15 +38,11 @@ static HEPhotoTool *instance = nil;
     
     NSMutableArray *array = [NSMutableArray array];
     
-    // 获取所有的智能相册
+    // 1.获取所有的系统智能相册
     PHFetchResult *result = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
-    
-    // 遍历每个相册, 从相册中取asset
     [result enumerateObjectsUsingBlock:^(PHAssetCollection * _Nonnull collection, NSUInteger idx, BOOL * _Nonnull stop) {
-        
         // 过滤掉视频和已删除
         if (collection.assetCollectionSubtype != 202 || collection.assetCollectionSubtype < 212) {
-            
             // 从相册中取资源
             NSArray <PHAsset *> *assets = [self getAssetsInAssetCollection:collection ascending:NO];
             if (assets.count != 0) {
@@ -55,12 +51,26 @@ static HEPhotoTool *instance = nil;
                 ablum.count = assets.count;                         // 该相册内相片数量
                 ablum.headImageAsset = assets.firstObject;          // 相册第一张图片缩略图
                 ablum.assetCollection = collection;                 // 相册集，通过该属性获取该相册集下所有照片
-                
                 [array addObject:ablum];
             }
         }
-        
     }];
+    
+    // 2.获取用户自定义的相册
+    PHFetchResult *userAlbums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeSmartAlbumUserLibrary options:nil];
+    [userAlbums enumerateObjectsUsingBlock:^(PHAssetCollection * _Nonnull collection, NSUInteger idx, BOOL * _Nonnull stop) {
+        // 从相册中取资源
+        NSArray <PHAsset *> *assets = [self getAssetsInAssetCollection:collection ascending:NO];
+        if (assets.count != 0) {
+            HEPhotoAblumList *ablum = [[HEPhotoAblumList alloc] init];
+            ablum.title = collection.localizedTitle;            // 相册名字
+            ablum.count = assets.count;                         // 该相册内相片数量
+            ablum.headImageAsset = assets.firstObject;          // 相册第一张图片缩略图
+            ablum.assetCollection = collection;                 // 相册集，通过该属性获取该相册集下所有照片
+            [array addObject:ablum];
+        }
+    }];
+    
     return array;
 }
 
