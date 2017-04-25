@@ -102,11 +102,31 @@ static HEPhotoTool *instance = nil;
 }
 
 
+#pragma mark - 获取相册内所有照片资源
+/*!
+ *  @brief 直接从相簿中获取所有的图片，部分单个相册
+ */
+- (NSArray <PHAsset *> *)getAllAssetInPhotoAlumbWithAscending:(BOOL)ascending {
+    
+    NSMutableArray<PHAsset *> *assets = [NSMutableArray array];
+
+    PHFetchOptions *option = [[PHFetchOptions alloc] init];
+    // ascending 为YES时，按照照片的创建时间升序排列;为NO时，则降序排列
+    option.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:ascending]];
+
+    PHFetchResult *result = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:option];
+    [result enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        PHAsset *asset = (PHAsset *)obj;
+        [assets addObject:asset];
+    }];
+    
+    return assets;
+}
 
 
-
-
-
+//#pragma mark - 获取asset对应的图片
+//
+//- (void)requestImage
 
 
 

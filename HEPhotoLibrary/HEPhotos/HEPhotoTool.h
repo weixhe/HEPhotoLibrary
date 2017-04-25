@@ -22,9 +22,23 @@
 
 + (instancetype)sharePhotoTool;
 
+#pragma mark - 获取所有相册列表
 /*!
  *  @brief 获取用户所有相册列表
  */
 - (NSArray <HEPhotoAblumList *> *)getPhotoAblumList;
+
+#pragma mark - 获取指定相册内的所有图片
+
+/*!
+ *  @brief 获取指定相册内的所有图片
+ */
+- (NSArray<PHAsset *> *)getAssetsInAssetCollection:(PHAssetCollection *)assetCollection ascending:(BOOL)ascending;
+
+#pragma mark - 获取相册内所有照片资源
+/*!
+ *  @brief 直接从相簿中获取所有的图片，部分单个相册
+ */
+- (NSArray <PHAsset *> *)getAllAssetInPhotoAlumbWithAscending:(BOOL)ascending;
 
 @end
