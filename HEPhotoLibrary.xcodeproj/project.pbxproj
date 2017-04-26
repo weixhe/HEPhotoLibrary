@@ -233,6 +233,7 @@
 				TargetAttributes = {
 					04EC08B11EA5076700C81ABE = {
 						CreatedOnToolsVersion = 8.3.1;
+						DevelopmentTeam = KY78F3P96D;
 						ProvisioningStyle = Automatic;
 					};
 					04EC08CA1EA5076700C81ABE = {
@@ -451,10 +452,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = KY78F3P96D;
 				INFOPLIST_FILE = HEPhotoLibrary/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.weixhe.HEPhotoLibrary;
+				PRODUCT_BUNDLE_IDENTIFIER = com.weixhe.HEPhotoLibrary11;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -463,10 +465,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = KY78F3P96D;
 				INFOPLIST_FILE = HEPhotoLibrary/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.weixhe.HEPhotoLibrary;
+				PRODUCT_BUNDLE_IDENTIFIER = com.weixhe.HEPhotoLibrary11;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

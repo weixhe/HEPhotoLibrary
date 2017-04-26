@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "HEPhotoTool.h"
-
+#import <Photos/Photos.h>
 @interface ViewController ()
 
 @end
@@ -20,10 +20,29 @@
     
     
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        [[HEPhotoTool sharePhotoTool] getAllAssetInPhotoAlumbWithAscending:YES];
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    
+    
+    [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+        if (status == PHAuthorizationStatusAuthorized) {
+            NSLog(@"Authorized");
+            NSArray *arr = [[HEPhotoTool sharePhotoTool] getAllAssetInPhotoAlumbWithAscending:YES];
+            NSLog(@"%@", arr);
+        }else{
+            NSLog(@"Denied or Restricted");
+        }
+    }];
+    
+//        PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
+//
+//            if (status == PHAuthorizationStatusAuthorized) {
+//                NSArray *arr = [[HEPhotoTool sharePhotoTool] getAllAssetInPhotoAlumbWithAscending:YES];
+//                NSLog(@"%@", arr);
+//
+//            } else if (status == PHAuthorizationStatusRestricted || status == PHAuthorizationStatusDenied || status == PHAuthorizationStatusNotDetermined) {
+//                NSLog(@"PHAuthorizationStatusDenied");
+//            }
+//    });
 }
 
 
