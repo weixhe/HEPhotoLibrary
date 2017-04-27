@@ -9,8 +9,12 @@
 #import "HEAlbumListViewController.h"
 #import "HEPhotoTool.h"
 #import <Photos/Photos.h>
+#import "HEAlbumListCellCell.h"
 
-@interface HEAlbumListViewController ()
+@interface HEAlbumListViewController () <UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSArray *dataSource;
 
 @end
 
@@ -20,12 +24,28 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
+    self.dataSource = [NSArray array];
     
+    [self authorizationPhotoLibrary];
+    [self setupTableView];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)setupTableView {
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStylePlain];
+    [self.view addSubview:self.tableView];
+    [self.tableView registerClass:[HEAlbumListCellCell class] forCellReuseIdentifier:NSStringFromClass([HEAlbumListCellCell class])];
+}
+
+- (void)authorizationPhotoLibrary {
     PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
     switch (status) {
         case PHAuthorizationStatusAuthorized: {         // 用户已授权，允许访问
-            NSArray *arr = [[HEPhotoTool sharePhotoTool] getPhotoAblumList];
-            NSLog(@"%@", arr);
+            [self setAlbumList];
             break;
         }
         case PHAuthorizationStatusDenied: {             // 用户拒绝访问
@@ -35,8 +55,7 @@
         case PHAuthorizationStatusNotDetermined: {      // 用户从未进行过授权等处理，首次访问相应内容会提示用户进行授权
             [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
                 if (status == PHAuthorizationStatusAuthorized) {
-                    NSArray *arr = [[HEPhotoTool sharePhotoTool] getPhotoAblumList];
-                    NSLog(@"%@", arr);
+                    [self setAlbumList];
                 } else {
                     NSLog(@"Denied or Restricted");
                 }
@@ -52,19 +71,28 @@
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)setAlbumList {
+    NSArray *arr = [[HEPhotoTool sharePhotoTool] getPhotoAblumList];
+    NSLog(@"%@", arr);
+    
+//    [[HEPhotoTool sharePhotoTool] get];
+
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - UITableViewDelegate UITableViewDataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
 }
-*/
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 10;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    HEAlbumListCellCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([HEAlbumListCellCell class]) forIndexPath:indexPath];
+    
+    return cell;
+}
+
 
 @end

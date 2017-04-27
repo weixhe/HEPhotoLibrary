@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		047655241EB227C300E0DCD9 /* ToastUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 047655231EB227C300E0DCD9 /* ToastUtils.m */; };
 		047655271EB2307700E0DCD9 /* HEAlbumListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047655261EB2307700E0DCD9 /* HEAlbumListViewController.m */; };
+		0476552A1EB238C900E0DCD9 /* HEAlbumListCellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 047655291EB238C900E0DCD9 /* HEAlbumListCellCell.m */; };
 		048C1BE41EAE3CBC00C0D95A /* HEPhotoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C1BE31EAE3CBC00C0D95A /* HEPhotoTool.m */; };
 		04EC08B71EA5076700C81ABE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC08B61EA5076700C81ABE /* main.m */; };
 		04EC08BA1EA5076700C81ABE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC08B91EA5076700C81ABE /* AppDelegate.m */; };
@@ -43,6 +44,8 @@
 		047655231EB227C300E0DCD9 /* ToastUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToastUtils.m; sourceTree = "<group>"; };
 		047655251EB2307700E0DCD9 /* HEAlbumListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HEAlbumListViewController.h; sourceTree = "<group>"; };
 		047655261EB2307700E0DCD9 /* HEAlbumListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HEAlbumListViewController.m; sourceTree = "<group>"; };
+		047655281EB238C900E0DCD9 /* HEAlbumListCellCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HEAlbumListCellCell.h; sourceTree = "<group>"; };
+		047655291EB238C900E0DCD9 /* HEAlbumListCellCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HEAlbumListCellCell.m; sourceTree = "<group>"; };
 		048C1BE21EAE3CBC00C0D95A /* HEPhotoTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HEPhotoTool.h; sourceTree = "<group>"; };
 		048C1BE31EAE3CBC00C0D95A /* HEPhotoTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HEPhotoTool.m; sourceTree = "<group>"; };
 		04EC08B21EA5076700C81ABE /* HEPhotoLibrary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HEPhotoLibrary.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,6 +100,8 @@
 				048C1BE31EAE3CBC00C0D95A /* HEPhotoTool.m */,
 				047655251EB2307700E0DCD9 /* HEAlbumListViewController.h */,
 				047655261EB2307700E0DCD9 /* HEAlbumListViewController.m */,
+				047655281EB238C900E0DCD9 /* HEAlbumListCellCell.h */,
+				047655291EB238C900E0DCD9 /* HEAlbumListCellCell.m */,
 			);
 			path = HEPhotos;
 			sourceTree = "<group>";
@@ -312,6 +317,7 @@
 			files = (
 				047655241EB227C300E0DCD9 /* ToastUtils.m in Sources */,
 				047655271EB2307700E0DCD9 /* HEAlbumListViewController.m in Sources */,
+				0476552A1EB238C900E0DCD9 /* HEAlbumListCellCell.m in Sources */,
 				04EC08BD1EA5076700C81ABE /* ViewController.m in Sources */,
 				048C1BE41EAE3CBC00C0D95A /* HEPhotoTool.m in Sources */,
 				04EC08BA1EA5076700C81ABE /* AppDelegate.m in Sources */,

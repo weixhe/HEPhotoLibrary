@@ -43,7 +43,7 @@
 
 #pragma mark - 获取相册内所有照片资源
 /*!
- *  @brief 直接从相簿中获取所有的图片，部分单个相册
+ *  @brief 直接从相簿中获取所有的图片，不分单个相册
  */
 - (NSArray <PHAsset *> *)getAllAssetInPhotoAlumbWithAscending:(BOOL)ascending;
 
