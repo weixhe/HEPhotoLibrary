@@ -9,8 +9,13 @@
 #import "ViewController.h"
 #import "HEPhotoTool.h"
 #import <Photos/Photos.h>
+#import "ToastUtils.h"
+
+#import "HEAlbumListViewController.h"
+
 @interface ViewController ()
 
+- (IBAction)showAlbumList:(id)sender;
 @end
 
 @implementation ViewController
@@ -18,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    ShowToast(@"asdfafasfsfsf");
     
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
     
@@ -52,4 +57,10 @@
 }
 
 
+- (IBAction)showAlbumList:(id)sender {
+    
+    HEAlbumListViewController *albumListVC = [[HEAlbumListViewController alloc] init];
+    
+    [self.navigationController pushViewController:albumListVC animated:YES];
+}
 @end
