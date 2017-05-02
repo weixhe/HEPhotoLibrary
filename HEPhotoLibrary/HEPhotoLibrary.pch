@@ -1,0 +1,18 @@
+//
+//  HEPhotoLibrary.pch
+//  HEPhotoLibrary
+//
+//  Created by weixhe on 2017/5/2.
+//  Copyright © 2017年 weixhe. All rights reserved.
+//
+
+#ifndef HEPhotoLibrary_pch
+#define HEPhotoLibrary_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+
+#import "Categories.h"
+
+#endif /* HEPhotoLibrary_pch */

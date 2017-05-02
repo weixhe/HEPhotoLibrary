@@ -11,6 +11,9 @@
 /*!
  *  @brief 相簿列表的cell
  */
+@class HEPhotoAblumModel;
 @interface HEAlbumListCellCell : UITableViewCell
+
+@property (nonatomic, strong) HEPhotoAblumModel *model;
 
 @end

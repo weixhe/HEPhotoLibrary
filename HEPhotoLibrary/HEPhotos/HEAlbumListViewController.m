@@ -26,8 +26,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.dataSource = [NSArray array];
     
-    [self authorizationPhotoLibrary];
     [self setupTableView];
+    [self authorizationPhotoLibrary];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,7 +36,9 @@
 }
 
 - (void)setupTableView {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height) style:UITableViewStylePlain];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
     [self.tableView registerClass:[HEAlbumListCellCell class] forCellReuseIdentifier:NSStringFromClass([HEAlbumListCellCell class])];
 }
@@ -72,10 +74,8 @@
 }
 
 - (void)setAlbumList {
-    NSArray *arr = [[HEPhotoTool sharePhotoTool] getPhotoAblumList];
-    NSLog(@"%@", arr);
-    
-//    [[HEPhotoTool sharePhotoTool] get];
+    self.dataSource = [[HEPhotoTool sharePhotoTool] getPhotoAblumList];
+    [self.tableView reloadData];
 
 }
 
@@ -85,11 +85,17 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.dataSource.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 50;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     HEAlbumListCellCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([HEAlbumListCellCell class]) forIndexPath:indexPath];
+    
+    cell.model = [self.dataSource objectAtIndex:(NSUInteger)indexPath.row];
     
     return cell;
 }

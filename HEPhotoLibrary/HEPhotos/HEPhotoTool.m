@@ -13,7 +13,7 @@
 #define CollectionName [[NSBundle mainBundle].infoDictionary valueForKey:(__bridge NSString *)kCFBundleNameKey]
 
 
-@implementation HEPhotoAblumList
+@implementation HEPhotoAblumModel
 
 
 @end
@@ -114,7 +114,7 @@ static HEPhotoTool *instance = nil;
 /*!
  *  @brief 获取用户所有相册列表，并遍历相册，获取每个相册的相关信息（相册名，照片个数，第一种缩略图等）
  */
-- (NSArray <HEPhotoAblumList *> *)getPhotoAblumList {
+- (NSArray <HEPhotoAblumModel *> *)getPhotoAblumList {
     
     NSMutableArray *array = [NSMutableArray array];
     
@@ -126,7 +126,7 @@ static HEPhotoTool *instance = nil;
             // 从相册中取资源
             NSArray <PHAsset *> *assets = [self getAssetsInAssetCollection:collection ascending:NO];
             if (assets.count != 0) {
-                HEPhotoAblumList *ablum = [[HEPhotoAblumList alloc] init];
+                HEPhotoAblumModel *ablum = [[HEPhotoAblumModel alloc] init];
                 ablum.title = collection.localizedTitle;            // 相册名字
                 ablum.count = assets.count;                         // 该相册内相片数量
                 ablum.headImageAsset = assets.firstObject;          // 相册第一张图片缩略图
@@ -142,7 +142,7 @@ static HEPhotoTool *instance = nil;
         // 从相册中取资源
         NSArray <PHAsset *> *assets = [self getAssetsInAssetCollection:collection ascending:NO];
         if (assets.count != 0) {
-            HEPhotoAblumList *ablum = [[HEPhotoAblumList alloc] init];
+            HEPhotoAblumModel *ablum = [[HEPhotoAblumModel alloc] init];
             ablum.title = collection.localizedTitle;            // 相册名字
             ablum.count = assets.count;                         // 该相册内相片数量
             ablum.headImageAsset = assets.firstObject;          // 相册第一张图片缩略图

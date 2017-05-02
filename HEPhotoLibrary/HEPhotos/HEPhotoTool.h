@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 #import <Photos/Photos.h>
 
-@interface HEPhotoAblumList : NSObject
+@interface HEPhotoAblumModel : NSObject
 
 @property (nonatomic, copy) NSString *title;                        // 相册名字
 @property (nonatomic, assign) NSInteger count;                      // 该相册内相片数量
@@ -32,7 +32,7 @@
 /*!
  *  @brief 获取用户所有相册列表
  */
-- (NSArray <HEPhotoAblumList *> *)getPhotoAblumList;
+- (NSArray <HEPhotoAblumModel *> *)getPhotoAblumList;
 
 #pragma mark - 获取指定相册内的所有图片
 

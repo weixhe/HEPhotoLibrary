@@ -11,6 +11,8 @@
 		047655271EB2307700E0DCD9 /* HEAlbumListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047655261EB2307700E0DCD9 /* HEAlbumListViewController.m */; };
 		0476552A1EB238C900E0DCD9 /* HEAlbumListCellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 047655291EB238C900E0DCD9 /* HEAlbumListCellCell.m */; };
 		048C1BE41EAE3CBC00C0D95A /* HEPhotoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C1BE31EAE3CBC00C0D95A /* HEPhotoTool.m */; };
+		04C543FC1EB8BEDE0077C31D /* default1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 04C543FB1EB8BEDE0077C31D /* default1.jpg */; };
+		04C544371EB8BF230077C31D /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C544241EB8BF230077C31D /* UIView+Extension.m */; };
 		04EC08B71EA5076700C81ABE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC08B61EA5076700C81ABE /* main.m */; };
 		04EC08BA1EA5076700C81ABE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC08B91EA5076700C81ABE /* AppDelegate.m */; };
 		04EC08BD1EA5076700C81ABE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC08BC1EA5076700C81ABE /* ViewController.m */; };
@@ -48,6 +50,11 @@
 		047655291EB238C900E0DCD9 /* HEAlbumListCellCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HEAlbumListCellCell.m; sourceTree = "<group>"; };
 		048C1BE21EAE3CBC00C0D95A /* HEPhotoTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HEPhotoTool.h; sourceTree = "<group>"; };
 		048C1BE31EAE3CBC00C0D95A /* HEPhotoTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HEPhotoTool.m; sourceTree = "<group>"; };
+		04C543FB1EB8BEDE0077C31D /* default1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default1.jpg; sourceTree = "<group>"; };
+		04C544001EB8BF230077C31D /* Categories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Categories.h; sourceTree = "<group>"; };
+		04C544231EB8BF230077C31D /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		04C544241EB8BF230077C31D /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		04C544381EB8BF450077C31D /* HEPhotoLibrary.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HEPhotoLibrary.pch; sourceTree = "<group>"; };
 		04EC08B21EA5076700C81ABE /* HEPhotoLibrary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HEPhotoLibrary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04EC08B61EA5076700C81ABE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		04EC08B81EA5076700C81ABE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -96,6 +103,7 @@
 		048C1BE11EAE3C9100C0D95A /* HEPhotos */ = {
 			isa = PBXGroup;
 			children = (
+				04C543FB1EB8BEDE0077C31D /* default1.jpg */,
 				048C1BE21EAE3CBC00C0D95A /* HEPhotoTool.h */,
 				048C1BE31EAE3CBC00C0D95A /* HEPhotoTool.m */,
 				047655251EB2307700E0DCD9 /* HEAlbumListViewController.h */,
@@ -104,6 +112,16 @@
 				047655291EB238C900E0DCD9 /* HEAlbumListCellCell.m */,
 			);
 			path = HEPhotos;
+			sourceTree = "<group>";
+		};
+		04C543FD1EB8BF230077C31D /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				04C544001EB8BF230077C31D /* Categories.h */,
+				04C544231EB8BF230077C31D /* UIView+Extension.h */,
+				04C544241EB8BF230077C31D /* UIView+Extension.m */,
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 		04EC08A91EA5076700C81ABE = {
@@ -137,10 +155,12 @@
 				04EC08BB1EA5076700C81ABE /* ViewController.h */,
 				04EC08BC1EA5076700C81ABE /* ViewController.m */,
 				04EC08BE1EA5076700C81ABE /* Main.storyboard */,
+				04C543FD1EB8BF230077C31D /* Categories */,
 				048C1BE11EAE3C9100C0D95A /* HEPhotos */,
 				04EC08C11EA5076700C81ABE /* Assets.xcassets */,
 				04EC08C31EA5076700C81ABE /* LaunchScreen.storyboard */,
 				04EC08C61EA5076700C81ABE /* Info.plist */,
+				04C544381EB8BF450077C31D /* HEPhotoLibrary.pch */,
 				04EC08B51EA5076700C81ABE /* Supporting Files */,
 			);
 			path = HEPhotoLibrary;
@@ -289,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04EC08C51EA5076700C81ABE /* LaunchScreen.storyboard in Resources */,
+				04C543FC1EB8BEDE0077C31D /* default1.jpg in Resources */,
 				04EC08C21EA5076700C81ABE /* Assets.xcassets in Resources */,
 				04EC08C01EA5076700C81ABE /* Main.storyboard in Resources */,
 			);
@@ -316,6 +337,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				047655241EB227C300E0DCD9 /* ToastUtils.m in Sources */,
+				04C544371EB8BF230077C31D /* UIView+Extension.m in Sources */,
 				047655271EB2307700E0DCD9 /* HEAlbumListViewController.m in Sources */,
 				0476552A1EB238C900E0DCD9 /* HEAlbumListCellCell.m in Sources */,
 				04EC08BD1EA5076700C81ABE /* ViewController.m in Sources */,
@@ -471,6 +493,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = KY78F3P96D;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/HEPhotoLibrary/HEPhotoLibrary.pch";
 				INFOPLIST_FILE = HEPhotoLibrary/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -484,6 +508,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = KY78F3P96D;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/HEPhotoLibrary/HEPhotoLibrary.pch";
 				INFOPLIST_FILE = HEPhotoLibrary/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
