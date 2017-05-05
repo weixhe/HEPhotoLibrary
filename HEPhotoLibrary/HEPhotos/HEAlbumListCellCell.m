@@ -46,7 +46,7 @@
     // Configure the view for the selected state
 }
 
-- (void)setModel:(HEPhotoAblumModel *)model {
+- (void)setModel:(HEPhotoAlbumModel *)model {
     
     _model = model;
     

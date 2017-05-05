@@ -74,7 +74,7 @@
 }
 
 - (void)setAlbumList {
-    self.dataSource = [[HEPhotoTool sharePhotoTool] getPhotoAblumList];
+    self.dataSource = [[HEPhotoTool sharePhotoTool] getPhotoAlbumList];
     [self.tableView reloadData];
 
 }

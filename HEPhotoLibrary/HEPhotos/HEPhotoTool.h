@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 #import <Photos/Photos.h>
 
-@interface HEPhotoAblumModel : NSObject
+@interface HEPhotoAlbumModel : NSObject
 
 @property (nonatomic, copy) NSString *title;                        // 相册名字
 @property (nonatomic, assign) NSInteger count;                      // 该相册内相片数量
@@ -26,13 +26,13 @@
 /*!
  * @brief 保存图片到系统相册
  */
-- (void)saveImageToAblum:(UIImage *)image completion:(void (^)(BOOL suc, PHAsset *asset))completion;
+- (void)saveImageToAlbum:(UIImage *)image completion:(void (^)(BOOL suc, PHAsset *asset))completion;
 
 #pragma mark - 获取所有相册列表
 /*!
  *  @brief 获取用户所有相册列表
  */
-- (NSArray <HEPhotoAblumModel *> *)getPhotoAblumList;
+- (NSArray <HEPhotoAlbumModel *> *)getPhotoAlbumList;
 
 #pragma mark - 获取指定相册内的所有图片
 
@@ -69,6 +69,6 @@
 /*!
  * @brief 判断图片是否存储在本地/或者已经从iCloud上下载到本地
  */
-- (BOOL)judgeAssetisInLocalAblum:(PHAsset *)asset;
+- (BOOL)judgeAssetisInLocalAlbum:(PHAsset *)asset;
 
 @end
