@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0431B9681EE2F06C00745672 /* HEPhotos.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0431B9671EE2F06C00745672 /* HEPhotos.bundle */; };
 		047655241EB227C300E0DCD9 /* ToastUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 047655231EB227C300E0DCD9 /* ToastUtils.m */; };
 		047655271EB2307700E0DCD9 /* HEAlbumListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047655261EB2307700E0DCD9 /* HEAlbumListViewController.m */; };
 		0476552A1EB238C900E0DCD9 /* HEAlbumListCellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 047655291EB238C900E0DCD9 /* HEAlbumListCellCell.m */; };
 		048C1BE41EAE3CBC00C0D95A /* HEPhotoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 048C1BE31EAE3CBC00C0D95A /* HEPhotoTool.m */; };
-		04C543FC1EB8BEDE0077C31D /* default1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 04C543FB1EB8BEDE0077C31D /* default1.jpg */; };
 		04C544371EB8BF230077C31D /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C544241EB8BF230077C31D /* UIView+Extension.m */; };
 		04EC08B71EA5076700C81ABE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC08B61EA5076700C81ABE /* main.m */; };
 		04EC08BA1EA5076700C81ABE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC08B91EA5076700C81ABE /* AppDelegate.m */; };
@@ -42,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0431B9671EE2F06C00745672 /* HEPhotos.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HEPhotos.bundle; sourceTree = "<group>"; };
+		0431B96B1EE303C000745672 /* HEPhotoConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HEPhotoConstant.h; sourceTree = "<group>"; };
 		047655221EB227C300E0DCD9 /* ToastUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToastUtils.h; sourceTree = "<group>"; };
 		047655231EB227C300E0DCD9 /* ToastUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToastUtils.m; sourceTree = "<group>"; };
 		047655251EB2307700E0DCD9 /* HEAlbumListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HEAlbumListViewController.h; sourceTree = "<group>"; };
@@ -50,7 +52,6 @@
 		047655291EB238C900E0DCD9 /* HEAlbumListCellCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HEAlbumListCellCell.m; sourceTree = "<group>"; };
 		048C1BE21EAE3CBC00C0D95A /* HEPhotoTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HEPhotoTool.h; sourceTree = "<group>"; };
 		048C1BE31EAE3CBC00C0D95A /* HEPhotoTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HEPhotoTool.m; sourceTree = "<group>"; };
-		04C543FB1EB8BEDE0077C31D /* default1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default1.jpg; sourceTree = "<group>"; };
 		04C544001EB8BF230077C31D /* Categories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Categories.h; sourceTree = "<group>"; };
 		04C544231EB8BF230077C31D /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		04C544241EB8BF230077C31D /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
@@ -103,7 +104,8 @@
 		048C1BE11EAE3C9100C0D95A /* HEPhotos */ = {
 			isa = PBXGroup;
 			children = (
-				04C543FB1EB8BEDE0077C31D /* default1.jpg */,
+				0431B96B1EE303C000745672 /* HEPhotoConstant.h */,
+				0431B9671EE2F06C00745672 /* HEPhotos.bundle */,
 				048C1BE21EAE3CBC00C0D95A /* HEPhotoTool.h */,
 				048C1BE31EAE3CBC00C0D95A /* HEPhotoTool.m */,
 				047655251EB2307700E0DCD9 /* HEAlbumListViewController.h */,
@@ -309,7 +311,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04EC08C51EA5076700C81ABE /* LaunchScreen.storyboard in Resources */,
-				04C543FC1EB8BEDE0077C31D /* default1.jpg in Resources */,
+				0431B9681EE2F06C00745672 /* HEPhotos.bundle in Resources */,
 				04EC08C21EA5076700C81ABE /* Assets.xcassets in Resources */,
 				04EC08C01EA5076700C81ABE /* Main.storyboard in Resources */,
 			);

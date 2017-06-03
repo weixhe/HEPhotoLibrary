@@ -12,6 +12,7 @@
 #import "ToastUtils.h"
 
 #import "HEAlbumListViewController.h"
+#import "HEPhotoConstant.h"
 
 @interface ViewController ()
 
@@ -48,6 +49,7 @@
 //                NSLog(@"PHAuthorizationStatusDenied");
 //            }
 //    });
+    
 }
 
 

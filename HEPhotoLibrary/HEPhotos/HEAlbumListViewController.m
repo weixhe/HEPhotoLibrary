@@ -10,6 +10,7 @@
 #import "HEPhotoTool.h"
 #import <Photos/Photos.h>
 #import "HEAlbumListCellCell.h"
+#import "HEPhotoConstant.h"
 
 @interface HEAlbumListViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -24,10 +25,18 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    // 背景图片
+    UIImageView *bgImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    bgImageView.image = HEPhotoImageFromBundleWithName(@"background_1.jpeg");
+    [self.view addSubview:bgImageView];
+    
     self.dataSource = [NSArray array];
     
     [self setupTableView];
     [self authorizationPhotoLibrary];
+    
+    self.automaticallyAdjustsScrollViewInsets = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,7 +45,8 @@
 }
 
 - (void)setupTableView {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height) style:UITableViewStylePlain];
+    self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
@@ -89,12 +99,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 50;
+    return 80;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     HEAlbumListCellCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([HEAlbumListCellCell class]) forIndexPath:indexPath];
-    
     cell.model = [self.dataSource objectAtIndex:(NSUInteger)indexPath.row];
     
     return cell;

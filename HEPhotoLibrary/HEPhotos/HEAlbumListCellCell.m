@@ -8,6 +8,7 @@
 
 #import "HEAlbumListCellCell.h"
 #import "HEPhotoTool.h"
+#import "HEPhotoConstant.h"
 
 @interface HEAlbumListCellCell ()
 
@@ -21,17 +22,20 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.backgroundColor = [UIColor clearColor];
+
         [self setup];
     }
     return self;
 }
 
+
 - (void)setup {
     
     // 1.iconImageView
-    self.iconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"default1.jpg"]];
-    self.iconImageView.frame = CGRectMake(10, 0, 40, 40);
-    self.iconImageView.centerY = self.contentView.centerY;
+    self.iconImageView = [[UIImageView alloc] initWithImage:HEPhotoImageFromBundleWithName(@"default_icon.jpg")];
+    self.iconImageView.frame = CGRectMake(15, 0, 60, 60);
+    self.iconImageView.centerY = 40;
     [self.contentView addSubview:self.iconImageView];
     
     // 2.titleLabel

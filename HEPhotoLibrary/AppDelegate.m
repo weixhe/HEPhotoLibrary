@@ -16,9 +16,50 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
     return YES;
 }
+
+
+
+//写入默认值
+
+-(void)registerDefaultsFromSettingsBundle{
+    
+    NSString * settingsBundle =[[NSBundle mainBundle]pathForResource:@"Settings"   ofType:@"bundle"];
+    
+    if (!settingsBundle) {
+        
+        NSLog(@"Could not find Settings.bundle");
+        
+        return;
+        
+    }
+    
+    NSDictionary * settings =[NSDictionary dictionaryWithContentsOfFile:                        [settingsBundle stringByAppendingPathComponent:@"Root.plist"]];
+    
+    NSArray * Preference =[settings objectForKey:@"PreferenceSpecifiers"];
+    
+    NSMutableDictionary *defaultsToRegister =[[NSMutableDictionary alloc]initWithCapacity:[Preference count]];
+    
+    for (NSDictionary * prefSpecification in Preference) {
+        
+        NSString * key =[prefSpecification objectForKey:@"Key"];
+        
+        if (key) {
+            
+            [defaultsToRegister setObject:[prefSpecification objectForKey:@"DefaultValue"] forKey:@"key"];
+            
+        }
+        
+    }
+    
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultsToRegister];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+}
+
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
