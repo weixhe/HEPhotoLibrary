@@ -11,6 +11,7 @@
 #import <Photos/Photos.h>
 #import "HEAlbumListCellCell.h"
 #import "HEPhotoConstant.h"
+#import "HEThumbnailViewController.h"
 
 @interface HEAlbumListViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -25,13 +26,12 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
+     self.title = @"相册";
     
     // 背景图片
     UIImageView *bgImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
     bgImageView.image = HEPhotoImageFromBundleWithName(@"background_1.jpeg");
     [self.view addSubview:bgImageView];
-    
-    self.dataSource = [NSArray array];
     
     [self setupTableView];
     [self authorizationPhotoLibrary];
@@ -110,5 +110,14 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    HEPhotoAlbumModel *model = [self.dataSource objectAtIndex:(NSUInteger)indexPath.row];
+    
+    HEThumbnailViewController *thumbVC = [[HEThumbnailViewController alloc] init];
+    thumbVC.assetCollection = model.assetCollection;
+    [self.navigationController pushViewController:thumbVC animated:YES];
+}
 
 @end

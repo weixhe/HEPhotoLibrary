@@ -9,8 +9,9 @@
 #ifndef HEPhotoConstant_h
 #define HEPhotoConstant_h
 
-#define kPhotoWidth      [[UIScreen mainScreen] bounds].size.width
-#define kPhotoHeight     [[UIScreen mainScreen] bounds].size.height
+#define WS(weakSelf)                    __weak __typeof(&*self)weakSelf = self;
+#define ScreenWidth      [[UIScreen mainScreen] bounds].size.width
+#define ScreenHeight     [[UIScreen mainScreen] bounds].size.height
 
 #define CollectionName [[NSBundle mainBundle].infoDictionary valueForKey:(__bridge NSString *)kCFBundleNameKey]
 

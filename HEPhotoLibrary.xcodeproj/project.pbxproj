@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		041404151EE418AA003F53F5 /* HEThumbnailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041404141EE418AA003F53F5 /* HEThumbnailViewController.m */; };
+		041404181EE41E3D003F53F5 /* HEThumbnailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041404171EE41E3D003F53F5 /* HEThumbnailCell.m */; };
+		0414041B1EE44215003F53F5 /* HEThumbnailBottomBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0414041A1EE44215003F53F5 /* HEThumbnailBottomBar.m */; };
 		0431B9681EE2F06C00745672 /* HEPhotos.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0431B9671EE2F06C00745672 /* HEPhotos.bundle */; };
 		047655241EB227C300E0DCD9 /* ToastUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 047655231EB227C300E0DCD9 /* ToastUtils.m */; };
 		047655271EB2307700E0DCD9 /* HEAlbumListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047655261EB2307700E0DCD9 /* HEAlbumListViewController.m */; };
@@ -42,6 +45,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		041404131EE418AA003F53F5 /* HEThumbnailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HEThumbnailViewController.h; sourceTree = "<group>"; };
+		041404141EE418AA003F53F5 /* HEThumbnailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HEThumbnailViewController.m; sourceTree = "<group>"; };
+		041404161EE41E3D003F53F5 /* HEThumbnailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HEThumbnailCell.h; sourceTree = "<group>"; };
+		041404171EE41E3D003F53F5 /* HEThumbnailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HEThumbnailCell.m; sourceTree = "<group>"; };
+		041404191EE44215003F53F5 /* HEThumbnailBottomBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HEThumbnailBottomBar.h; sourceTree = "<group>"; };
+		0414041A1EE44215003F53F5 /* HEThumbnailBottomBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HEThumbnailBottomBar.m; sourceTree = "<group>"; };
 		0431B9671EE2F06C00745672 /* HEPhotos.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HEPhotos.bundle; sourceTree = "<group>"; };
 		0431B96B1EE303C000745672 /* HEPhotoConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HEPhotoConstant.h; sourceTree = "<group>"; };
 		047655221EB227C300E0DCD9 /* ToastUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToastUtils.h; sourceTree = "<group>"; };
@@ -112,6 +121,12 @@
 				047655261EB2307700E0DCD9 /* HEAlbumListViewController.m */,
 				047655281EB238C900E0DCD9 /* HEAlbumListCellCell.h */,
 				047655291EB238C900E0DCD9 /* HEAlbumListCellCell.m */,
+				041404131EE418AA003F53F5 /* HEThumbnailViewController.h */,
+				041404141EE418AA003F53F5 /* HEThumbnailViewController.m */,
+				041404161EE41E3D003F53F5 /* HEThumbnailCell.h */,
+				041404171EE41E3D003F53F5 /* HEThumbnailCell.m */,
+				041404191EE44215003F53F5 /* HEThumbnailBottomBar.h */,
+				0414041A1EE44215003F53F5 /* HEThumbnailBottomBar.m */,
 			);
 			path = HEPhotos;
 			sourceTree = "<group>";
@@ -342,10 +357,13 @@
 				04C544371EB8BF230077C31D /* UIView+Extension.m in Sources */,
 				047655271EB2307700E0DCD9 /* HEAlbumListViewController.m in Sources */,
 				0476552A1EB238C900E0DCD9 /* HEAlbumListCellCell.m in Sources */,
+				041404151EE418AA003F53F5 /* HEThumbnailViewController.m in Sources */,
 				04EC08BD1EA5076700C81ABE /* ViewController.m in Sources */,
 				048C1BE41EAE3CBC00C0D95A /* HEPhotoTool.m in Sources */,
+				041404181EE41E3D003F53F5 /* HEThumbnailCell.m in Sources */,
 				04EC08BA1EA5076700C81ABE /* AppDelegate.m in Sources */,
 				04EC08B71EA5076700C81ABE /* main.m in Sources */,
+				0414041B1EE44215003F53F5 /* HEThumbnailBottomBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

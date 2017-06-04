@@ -35,7 +35,7 @@
 - (void)setup {
     
     // 1.iconImageView
-    self.iconImageView = [[UIImageView alloc] initWithImage:HEPhotoImageFromBundleWithName(@"default_icon.jpg")];
+    self.iconImageView = [[UIImageView alloc] initWithImage:HEPhotoImageFromBundleWithName(@"defaultphoto")];
     self.iconImageView.frame = CGRectMake(15, 0, 60, 60);
     self.iconImageView.centerY = 40;
     [self.contentView addSubview:self.iconImageView];

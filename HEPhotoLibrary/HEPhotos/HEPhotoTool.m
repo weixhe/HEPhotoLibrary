@@ -263,7 +263,7 @@ static HEPhotoTool *instance = nil;
     // 请求大图界面，当切换图片时，取消上一张图片的请求，对于iCloud端的图片，可以节省流量
     static PHImageRequestID requestID = -1;
     CGFloat scale = [UIScreen mainScreen].scale;        // @1x, @2x, @3x
-    CGFloat width = MIN(kPhotoWidth, kPhotoHeight);
+    CGFloat width = MIN(ScreenWidth, ScreenHeight);
     
     if (requestID >= 1 && size.width / width == scale) {
         // 取消请求

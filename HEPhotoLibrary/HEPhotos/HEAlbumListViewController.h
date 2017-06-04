@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 /*!
- *  @brief 相簿列表
+ *  @brief 相簿列表（分相机胶卷和用户自定义的相册）
  */
 @interface HEAlbumListViewController : UIViewController
 
