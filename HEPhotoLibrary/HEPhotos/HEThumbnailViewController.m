@@ -86,6 +86,15 @@
     
     cell.asset = [self.dataSource objectAtIndex:indexPath.item];
     
+    WS(weakSelf);
+    cell.CheckImage = ^(UIImage *image, BOOL check) {
+        if (check) {
+            [weakSelf.bottomBar addImage:image];
+        } else {
+            [weakSelf.bottomBar deleteImage:image];
+        }
+    };
+    
     return cell;
 }
 

@@ -10,7 +10,9 @@
 
 @interface HEThumbnailBottomBar : UIView
 
+@property (nonatomic, assign) NSInteger maxCount;   // 最多几张图片
 
-
+- (void)addImage:(UIImage *)image;
+- (void)deleteImage:(UIImage *)image;
 
 @end

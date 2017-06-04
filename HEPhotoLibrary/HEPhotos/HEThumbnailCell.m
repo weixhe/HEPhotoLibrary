@@ -48,6 +48,10 @@
 
 - (void)onCheckImageAction:(UIButton *)button {
     button.selected = !button.selected;
+    
+    if (self.CheckImage) {
+        self.CheckImage(self.imageView.image, button.selected);
+    }
 }
 
 - (void)setAsset:(PHAsset *)asset {
