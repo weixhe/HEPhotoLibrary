@@ -16,6 +16,8 @@
 
 @property (nonatomic, strong) UILabel *titleLabel;
 
+@property (nonatomic, strong) UILabel *subTibleLabel;
+
 @end
 
 @implementation HEAlbumListCellCell
@@ -38,10 +40,16 @@
     self.iconImageView.centerY = 40;
     [self.contentView addSubview:self.iconImageView];
     
+    CGFloat titleHeight = 40;
     // 2.titleLabel
-    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.iconImageView.right + 10, self.iconImageView.top, 100, self.iconImageView.height)];
+    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.iconImageView.right + 10, self.iconImageView.top, 100, titleHeight)];
     [self.contentView addSubview:self.titleLabel];
     
+    
+    // 3.subTibleLabel
+    self.subTibleLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.iconImageView.right + 10, self.titleLabel.bottom, 100, self.iconImageView.height - titleHeight - 4)];
+    self.subTibleLabel.font = [UIFont systemFontOfSize:13];
+    [self.contentView addSubview:self.subTibleLabel];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -54,12 +62,14 @@
     
     _model = model;
     
-    [[HEPhotoTool sharePhotoTool] requestImageForAsset:model.headImageAsset size:CGSizeMake(40, 40) resizeMode:PHImageRequestOptionsResizeModeFast complete:^(UIImage *image, NSDictionary *info) {
+    [[HEPhotoTool sharePhotoTool] requestImageForAsset:model.headImageAsset size:CGSizeMake(60, 60) resizeMode:PHImageRequestOptionsResizeModeFast complete:^(UIImage *image, NSDictionary *info) {
         
         self.iconImageView.image = image;
     }];
     
     self.titleLabel.text = model.title;
+    
+    self.subTibleLabel.text = [NSString stringWithFormat:@"共 %ld 张图片", model.count];
 }
 
 @end

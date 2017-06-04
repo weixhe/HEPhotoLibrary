@@ -16,4 +16,9 @@
 
 #define HEPhotoImageFromBundleWithName(imageName) [UIImage imageNamed:[@"HEPhotos.bundle" stringByAppendingPathComponent:imageName]]
 
+
+/// 应用没有权限
+static NSString * const kAccessAuthorityStatusRestricted        = @"应用没有相关权限，且当前用户无法改变这个权限";
+/// 用户拒绝访问相簿
+static NSString * const kAccessAuthorityStatusDenied            = @"您已拒绝app访问相簿，若想访问，请到设置中赋予权限";
 #endif /* HEPhoto_h */

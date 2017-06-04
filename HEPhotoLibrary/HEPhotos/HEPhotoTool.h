@@ -30,9 +30,14 @@
 
 #pragma mark - 获取所有相册列表
 /*!
- *  @brief 获取用户所有相册列表
+ *  @brief 获取相机胶卷
  */
-- (NSArray <HEPhotoAlbumModel *> *)getPhotoAlbumList;
+- (NSArray <HEPhotoAlbumModel *> *)getPhotoAlbumForCameraRoll;
+
+/*!
+ *  @brief 获取用户自定义的相册
+ */
+- (NSArray <HEPhotoAlbumModel *> *)getPhotosAlbumForUsers;
 
 #pragma mark - 获取指定相册内的所有图片
 

@@ -89,6 +89,7 @@ static HEPhotoTool *instance = nil;
 - (PHAssetCollection *)getDestinationCollection {
     // 找是否已经创建自定义相册
     PHFetchResult<PHAssetCollection *> *collectionResult = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
+    
     for (PHAssetCollection *collection in collectionResult) {
         if ([collection.localizedTitle isEqualToString:CollectionName]) {
             return collection;
@@ -110,22 +111,24 @@ static HEPhotoTool *instance = nil;
 #pragma mark - 获取所有相册列表
 
 /*!
- *  @brief 获取用户所有相册列表，并遍历相册，获取每个相册的相关信息（相册名，照片个数，第一种缩略图等）
+ *  @brief 获取相机胶卷
  */
-- (NSArray <HEPhotoAlbumModel *> *)getPhotoAlbumList {
+- (NSArray <HEPhotoAlbumModel *> *)getPhotoAlbumForCameraRoll {
     
     NSMutableArray *array = [NSMutableArray array];
     
-    // 1.获取所有的系统智能相册
-    PHFetchResult *result = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
+    PHFetchResult *result = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeSmartAlbumUserLibrary options:nil];
     [result enumerateObjectsUsingBlock:^(PHAssetCollection * _Nonnull collection, NSUInteger idx, BOOL * _Nonnull stop) {
+        // 从相册中取资源
         // 过滤掉视频和已删除
         if (collection.assetCollectionSubtype != PHAssetCollectionSubtypeSmartAlbumVideos || collection.assetCollectionSubtype < PHAssetCollectionSubtypeSmartAlbumDepthEffect) {
-            // 从相册中取资源
             NSArray <PHAsset *> *assets = [self getAssetsInAssetCollection:collection ascending:NO];
             if (assets.count != 0) {
                 HEPhotoAlbumModel *album = [[HEPhotoAlbumModel alloc] init];
                 album.title = collection.localizedTitle;            // 相册名字
+                if ([collection.localizedTitle isEqualToString:@"Camera Roll"]) {
+                    album.title = @"相机胶卷";
+                }
                 album.count = assets.count;                         // 该相册内相片数量
                 album.headImageAsset = assets.firstObject;          // 相册第一张图片缩略图
                 album.assetCollection = collection;                 // 相册集，通过该属性获取该相册集下所有照片
@@ -134,29 +137,17 @@ static HEPhotoTool *instance = nil;
         }
     }];
     
-    // 2.获取用户自定义的相册
-    PHFetchResult *userAlbums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeSmartAlbumUserLibrary options:nil];
-    [userAlbums enumerateObjectsUsingBlock:^(PHAssetCollection * _Nonnull collection, NSUInteger idx, BOOL * _Nonnull stop) {
-        // 从相册中取资源
-        NSArray <PHAsset *> *assets = [self getAssetsInAssetCollection:collection ascending:NO];
-        if (assets.count != 0) {
-            HEPhotoAlbumModel *album = [[HEPhotoAlbumModel alloc] init];
-            album.title = collection.localizedTitle;            // 相册名字
-            album.count = assets.count;                         // 该相册内相片数量
-            album.headImageAsset = assets.firstObject;          // 相册第一张图片缩略图
-            album.assetCollection = collection;                 // 相册集，通过该属性获取该相册集下所有照片
-            [array addObject:album];
-        }
-    }];
-    
     return array;
 }
 
-/// 获取用户自定义的相册
-- (NSArray <HEPhotoAlbumModel *> *)getUsersPhotosAlbum {
+/*!
+ *  @brief 获取用户自定义的相册
+ */
+- (NSArray <HEPhotoAlbumModel *> *)getPhotosAlbumForUsers {
     NSMutableArray *array = [NSMutableArray array];
     
     PHFetchResult *result = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
+    
     [result enumerateObjectsUsingBlock:^(PHAssetCollection * _Nonnull collection, NSUInteger idx, BOOL * _Nonnull stop) {
         // 从相册中取资源
         NSArray <PHAsset *> *assets = [self getAssetsInAssetCollection:collection ascending:NO];
@@ -188,13 +179,12 @@ static HEPhotoTool *instance = nil;
     return nil;
 }
 
-/**
+/*!
  *  遍历相簿中的所有图片
  *  @param assetCollection 相簿
  *  @param original        是否要原图
  */
-- (void)enumerateAssetsInAssetCollection:(PHAssetCollection *)assetCollection original:(BOOL)original
-{
+- (void)enumerateAssetsInAssetCollection:(PHAssetCollection *)assetCollection original:(BOOL)original {
     NSLog(@"相簿名:%@", assetCollection.localizedTitle);
     
     PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
@@ -319,8 +309,7 @@ static HEPhotoTool *instance = nil;
 /*!
  * @brief 点击确定时，获取每个Asset对应的图片（imageData）
  */
-- (void)requestImageForAsset:(PHAsset *)asset scale:(CGFloat)scale resizeMode:(PHImageRequestOptionsResizeMode)resizeMode completion:(void (^)(UIImage *image))completion
-{
+- (void)requestImageForAsset:(PHAsset *)asset scale:(CGFloat)scale resizeMode:(PHImageRequestOptionsResizeMode)resizeMode completion:(void (^)(UIImage *image))completion {
     PHImageRequestOptions *option = [[PHImageRequestOptions alloc] init];
     option.resizeMode = resizeMode;//控制照片尺寸
     option.networkAccessAllowed = YES;
@@ -338,8 +327,7 @@ static HEPhotoTool *instance = nil;
 /*!
  * @brief 获取数组内图片的字节大小
  */
-- (void)getPhotosBytesWithArray:(NSArray <PHAsset *> *)photos completion:(void (^)(NSString *photosBytes))completion
-{
+- (void)getPhotosBytesWithArray:(NSArray <PHAsset *> *)photos completion:(void (^)(NSString *photosBytes))completion {
     __block NSInteger dataLength = 0;
     
     __block NSInteger count = photos.count;
