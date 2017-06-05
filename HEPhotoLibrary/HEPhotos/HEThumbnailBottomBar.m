@@ -76,7 +76,7 @@ static NSString * const kForIndexPath           = @"HEPhotos_Thumbnail_BottomVie
     self.countLabel = [[UILabel alloc] initWithFrame:view.bounds];
     self.countLabel.textAlignment = NSTextAlignmentCenter;
     self.countLabel.textColor = [UIColor whiteColor];
-    self.countLabel.text = [NSString stringWithFormat:@"0/%ld", self.maxCount];
+    self.countLabel.text = [NSString stringWithFormat:@"0/%ld", self.maxSelectCount];
     [view addSubview:self.countLabel];
 }
 
@@ -130,7 +130,7 @@ static NSString * const kForIndexPath           = @"HEPhotos_Thumbnail_BottomVie
     }
     self.scrollView.contentSize = CGSizeMake(self.dataSource.count * self.scrollView.height, self.scrollView.height);
     [self.scrollView scrollRectToVisible:CGRectMake((self.dataSource.count - 1) * self.scrollView.height, 0, self.scrollView.height, self.scrollView.height) animated:YES];
-    self.countLabel.text = [NSString stringWithFormat:@"%ld/%ld", self.dataSource.count, self.maxCount];
+    self.countLabel.text = [NSString stringWithFormat:@"%ld/%ld", self.dataSource.count, self.maxSelectCount];
 }
 
 - (void)addImage:(UIImage *)image asset:(PHAsset *)asset {

@@ -12,6 +12,7 @@
 #import "HEAlbumListCellCell.h"
 #import "HEPhotoConstant.h"
 #import "HEThumbnailViewController.h"
+#import "HEThumbnailViewController.h"
 
 @interface HEAlbumListViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -35,23 +36,69 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
-     self.title = @"相册";
+    self.title = @"相册列表";
     
     // 背景图片
     UIImageView *bgImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
     bgImageView.image = HEPhotoImageFromBundleWithName(@"background_1.jpeg");
     [self.view addSubview:bgImageView];
     
+    [self layoutNavigation];
     [self setupTableView];
     [self authorizationPhotoLibrary];
     
-    self.automaticallyAdjustsScrollViewInsets = YES;
+    // 直接跳转到thumb的控制器中
+    [self jumpToThumbnailController];
+
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+/// 直接跳转到thumb的控制器中
+- (void)jumpToThumbnailController {
+    
+    if (self.dataSource.count == 0) {
+        return;
+    }
+    NSInteger i = 0;
+    for (HEPhotoAlbumModel *model in self.dataSource) {
+        if (model.assetCollection.assetCollectionSubtype == PHAssetCollectionSubtypeSmartAlbumUserLibrary) {
+            i = [self.dataSource indexOfObject:model];
+            break;
+        }
+    }
+    
+    HEPhotoAlbumModel *model = [self.dataSource objectAtIndex:i];
+    HEThumbnailViewController *thumbVC = [[HEThumbnailViewController alloc] init];
+    thumbVC.title = model.title;
+    thumbVC.assetCollection = model.assetCollection;
+    thumbVC.maxSelectCount = self.maxSelectCount;
+    thumbVC.selectedAsset = self.selectedAsset;
+    [self.navigationController pushViewController:thumbVC animated:NO];
+}
+
+#pragma mark - UINavigationBar
+
+- (void)layoutNavigation {
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(0, 0, 44, 44);
+    btn.titleLabel.font = [UIFont systemFontOfSize:16];
+    [btn setTitle:@"取消" forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    btn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -10);
+    [btn addTarget:self action:@selector(onCancelAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    self.navigationItem.hidesBackButton = YES;
+}
+
+- (void)onCancelAction:(UIButton *)button {
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - SetupUI
 
 - (void)setupTableView {
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height) style:UITableViewStylePlain];
@@ -93,8 +140,11 @@
 }
 
 - (void)getAlbumList {
-    self.dataSource = [NSMutableArray arrayWithArray:[[HEPhotoTool sharePhotoTool] getPhotoAlbumForCameraRoll]];
-    [self.dataSource addObjectsFromArray:[[HEPhotoTool sharePhotoTool] getPhotosAlbumForUsers]];
+//    self.dataSource = [NSMutableArray arrayWithArray:[[HEPhotoTool sharePhotoTool] getPhotoAlbumForCameraRoll]];
+//    [self.dataSource addObjectsFromArray:[[HEPhotoTool sharePhotoTool] getPhotosAlbumForUsers]];
+    
+    self.dataSource = [NSMutableArray arrayWithArray:[[HEPhotoTool sharePhotoTool] getAllPhotoAblumList]];
+    
     [self.tableView reloadData];
 
 }
@@ -125,7 +175,10 @@
     HEPhotoAlbumModel *model = [self.dataSource objectAtIndex:(NSUInteger)indexPath.row];
     
     HEThumbnailViewController *thumbVC = [[HEThumbnailViewController alloc] init];
+    thumbVC.title = model.title;
     thumbVC.assetCollection = model.assetCollection;
+    thumbVC.maxSelectCount = self.maxSelectCount;
+    thumbVC.selectedAsset = self.selectedAsset;
     [self.navigationController pushViewController:thumbVC animated:YES];
 }
 

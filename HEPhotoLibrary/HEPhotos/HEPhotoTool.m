@@ -163,20 +163,45 @@ static HEPhotoTool *instance = nil;
     return array;
 }
 
-/// 获取相机胶卷
-- (HEPhotoAlbumModel *)getCameraRollAlbum {
-    PHAssetCollection *cameraRoll = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeSmartAlbumUserLibrary options:nil].lastObject;
+/*!
+ *   @brief 获取所有相册列表
+ */
+- (NSArray<HEPhotoAlbumModel *> *)getAllPhotoAblumList {
     
-    NSArray <PHAsset *> *assets = [self getAssetsInAssetCollection:cameraRoll ascending:NO];
-    if (assets.count != 0) {
-        HEPhotoAlbumModel *album = [[HEPhotoAlbumModel alloc] init];
-        album.title = cameraRoll.localizedTitle;            // 相册名字
-        album.count = assets.count;                         // 该相册内相片数量
-        album.headImageAsset = assets.firstObject;          // 相册第一张图片缩略图
-        album.assetCollection = cameraRoll;                 // 相册集，通过该属性获取该相册集下所有照片
-        return album;
-    }
-    return nil;
+    NSMutableArray<HEPhotoAlbumModel *> *photoAblumList = [NSMutableArray array];
+    
+    // 获取所有智能相册(由相机生成的)
+    PHFetchResult *smartAlbums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
+    [smartAlbums enumerateObjectsUsingBlock:^(PHAssetCollection * _Nonnull collection, NSUInteger idx, BOOL *stop) {
+        // 过滤掉视频和最近删除
+        if(collection.assetCollectionSubtype != 202 && collection.assetCollectionSubtype < 212){
+            NSArray<PHAsset *> *assets = [self getAssetsInAssetCollection:collection ascending:NO];
+            if (assets.count > 0) {
+                HEPhotoAlbumModel *ablum = [[HEPhotoAlbumModel alloc] init];
+                ablum.title = collection.localizedTitle;
+                ablum.count = assets.count;
+                ablum.headImageAsset = assets.firstObject;
+                ablum.assetCollection = collection;
+                [photoAblumList addObject:ablum];
+            }
+        }
+    }];
+    
+    // 获取用户创建的相册
+    PHFetchResult *userAlbums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeSmartAlbumUserLibrary options:nil];
+    [userAlbums enumerateObjectsUsingBlock:^(PHAssetCollection * _Nonnull collection, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSArray<PHAsset *> *assets = [self getAssetsInAssetCollection:collection ascending:NO];
+        if (assets.count > 0) {
+            HEPhotoAlbumModel *ablum = [[HEPhotoAlbumModel alloc] init];
+            ablum.title = collection.localizedTitle;
+            ablum.count = assets.count;
+            ablum.headImageAsset = assets.firstObject;
+            ablum.assetCollection = collection;
+            [photoAblumList addObject:ablum];
+        }
+    }];
+    
+    return photoAblumList;
 }
 
 /*!
@@ -263,7 +288,7 @@ static HEPhotoTool *instance = nil;
     // 请求大图界面，当切换图片时，取消上一张图片的请求，对于iCloud端的图片，可以节省流量
     static PHImageRequestID requestID = -1;
     CGFloat scale = [UIScreen mainScreen].scale;        // @1x, @2x, @3x
-    CGFloat width = MIN(ScreenWidth, ScreenHeight);
+    CGFloat width = MIN(kViewWidth, kViewHeight);
     
     if (requestID >= 1 && size.width / width == scale) {
         // 取消请求

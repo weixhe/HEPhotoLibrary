@@ -60,12 +60,12 @@ static UILabel *toastView = nil;
         [[UIApplication sharedApplication].keyWindow addSubview:toastView];
     }
     
-    CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
+    CGFloat kViewWidth = [[UIScreen mainScreen] bounds].size.width;
     
     CGFloat width = [self stringText:message font:18 isHeightFixed:YES fixedValue:30];
     CGFloat height = 30;
-    if (width > screenWidth - 20) {
-        width = screenWidth - 20;
+    if (width > kViewWidth - 20) {
+        width = kViewWidth - 20;
         height = [self stringText:message font:18 isHeightFixed:NO fixedValue:width];
     }
     

@@ -50,13 +50,15 @@
     
     CGFloat titleHeight = 40;
     // 2.titleLabel
-    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.iconImageView.right + 10, self.iconImageView.top, 100, titleHeight)];
+    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.iconImageView.right + 10, self.iconImageView.top, self.width - self.iconImageView.right - 20, titleHeight)];
+    self.titleLabel.textColor = [UIColor whiteColor];
     [self.contentView addSubview:self.titleLabel];
     
     
     // 3.subTibleLabel
     self.subTibleLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.iconImageView.right + 10, self.titleLabel.bottom, 100, self.iconImageView.height - titleHeight - 4)];
     self.subTibleLabel.font = [UIFont systemFontOfSize:13];
+    self.subTibleLabel.textColor = [UIColor lightTextColor];
     [self.contentView addSubview:self.subTibleLabel];
 }
 

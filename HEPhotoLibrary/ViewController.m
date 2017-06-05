@@ -62,7 +62,9 @@
 - (IBAction)showAlbumList:(id)sender {
     
     HEAlbumListViewController *albumListVC = [[HEAlbumListViewController alloc] init];
+    albumListVC.maxSelectCount = 10;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:albumListVC];
     
-    [self.navigationController pushViewController:albumListVC animated:YES];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 @end

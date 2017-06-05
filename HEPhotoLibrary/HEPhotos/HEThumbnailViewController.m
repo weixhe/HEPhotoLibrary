@@ -38,8 +38,8 @@
     self.collectionView = nil;
     self.dataSource = nil;
     self.bottomBar = nil;
-    [self.checkedAsset removeAllObjects];
-    self.checkedAsset = nil;
+    [self.selectedAsset removeAllObjects];
+    self.selectedAsset = nil;
     self.assetCollection = nil;
     NSLog(@"HEThumbnailViewController dealloc");
 }
@@ -48,7 +48,6 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    self.title = @"照片";
     
     // 背景图片
     UIImageView *bgImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
@@ -70,7 +69,7 @@
 }
 
 - (void)setupCollectionView {
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, self.view.height - Height_BottomView - 64) collectionViewLayout:[[UICollectionViewFlowLayout alloc] init]];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, kViewWidth, self.view.height - Height_BottomView - 64) collectionViewLayout:[[UICollectionViewFlowLayout alloc] init]];
     self.collectionView.backgroundColor = [UIColor clearColor];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
@@ -79,12 +78,12 @@
 }
 
 - (void)setupBottomBar {
-    self.bottomBar = [[HEThumbnailBottomBar alloc] initWithFrame:CGRectMake(0, self.view.bottom - Height_BottomView, ScreenWidth, Height_BottomView)];
+    self.bottomBar = [[HEThumbnailBottomBar alloc] initWithFrame:CGRectMake(0, self.view.bottom - Height_BottomView, kViewWidth, Height_BottomView)];
     [self.view addSubview:self.bottomBar];
     WS(weakSelf)
     self.bottomBar.DeleteOneImage = ^(UIImage *image, PHAsset *asset) {
-        if ([weakSelf.checkedAsset containsObject:asset]) {
-            [weakSelf.checkedAsset removeObject:asset];
+        if ([weakSelf.selectedAsset containsObject:asset]) {
+            [weakSelf.selectedAsset removeObject:asset];
             [weakSelf.collectionView reloadData];
         }
     };
@@ -106,7 +105,7 @@
     
     PHAsset *asset = [self.dataSource objectAtIndex:indexPath.item];
     cell.asset = asset;
-    if ([self.checkedAsset containsObject:asset]) {
+    if ([self.selectedAsset containsObject:asset]) {
         cell.checked = YES;
     } else {
         cell.checked = NO;
@@ -116,14 +115,14 @@
     cell.CheckImage = ^(UIImage *image, PHAsset *asset1, BOOL check) {
         if (check) {
             [weakSelf.bottomBar addImage:image asset:asset1];
-            if (!weakSelf.checkedAsset) {
-                weakSelf.checkedAsset = [NSMutableArray array];
+            if (!weakSelf.selectedAsset) {
+                weakSelf.selectedAsset = [NSMutableArray array];
             }
-            [weakSelf.checkedAsset addObject:asset1];
+            [weakSelf.selectedAsset addObject:asset1];
         } else {
             [weakSelf.bottomBar deleteImage:image asset:asset1];
-            if ([weakSelf.checkedAsset containsObject:asset1]) {
-                [weakSelf.checkedAsset removeObject:asset1];
+            if ([weakSelf.selectedAsset containsObject:asset1]) {
+                [weakSelf.selectedAsset removeObject:asset1];
             }
         }
     };

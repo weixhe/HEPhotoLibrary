@@ -39,6 +39,11 @@
  */
 - (NSArray <HEPhotoAlbumModel *> *)getPhotosAlbumForUsers;
 
+/*!
+ *   @brief 获取所有相册列表
+ */
+- (NSArray<HEPhotoAlbumModel *> *)getAllPhotoAblumList;
+
 #pragma mark - 获取指定相册内的所有图片
 
 /*!
