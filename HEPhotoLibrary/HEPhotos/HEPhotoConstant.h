@@ -9,7 +9,9 @@
 #ifndef HEPhotoConstant_h
 #define HEPhotoConstant_h
 
-#define WS(weakSelf)                    __weak __typeof(&*self)weakSelf = self;
+#define WS(weakSelf)        __weak __typeof(&*self)weakSelf = self;
+#define weakify(var)        __weak typeof(var) weakSelf = var;
+#define strongify(var)      __strong typeof(var) weakSelf = var;
 #define ScreenWidth      [[UIScreen mainScreen] bounds].size.width
 #define ScreenHeight     [[UIScreen mainScreen] bounds].size.height
 

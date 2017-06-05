@@ -20,6 +20,15 @@
 
 @implementation HEThumbnailCell
 
+- (void)dealloc
+{
+    self.imageView = nil;
+    self.checkBtn = nil;
+    self.asset = nil;
+    self.CheckImage = NULL;
+    NSLog(@"HEThumbnailCell dealloc");
+}
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];

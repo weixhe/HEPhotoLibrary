@@ -21,6 +21,14 @@
 @end
 
 @implementation HEAlbumListCellCell
+- (void)dealloc
+{
+    self.iconImageView = nil;
+    self.titleLabel = nil;
+    self.subTibleLabel = nil;
+    self.model = nil;
+    NSLog(@"HEAlbumListCellCell dealloc");
+}
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {

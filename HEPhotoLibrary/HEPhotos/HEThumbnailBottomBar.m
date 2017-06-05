@@ -48,7 +48,8 @@ static NSString * const kForIndexPath           = @"HEPhotos_Thumbnail_BottomVie
     
     self.scrollView = nil;
     self.countLabel = nil;
-    NSLog(@"HEThumbnailBottomBar 释放");
+    self.DeleteOneImage = NULL;
+    NSLog(@"HEThumbnailBottomBar dealloc");
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -153,17 +154,18 @@ static NSString * const kForIndexPath           = @"HEPhotos_Thumbnail_BottomVie
 }
 
 - (void)deleteImage:(UIImage *)image asset:(PHAsset *)asset {
-    
+    __weak typeof(asset) weakAsset = asset;
+    WS(weakSelf);
     [self.dataSource enumerateObjectsUsingBlock:^(HEThumbailBottomBarModel *model, NSUInteger idx, BOOL * _Nonnull stop) {
-        
-        if ([model.asset isEqual:asset]) {
+
+        if ([model.asset isEqual:weakAsset]) {
             
-            NSArray *subViews = self.scrollView.subviews;
+            NSArray *subViews = weakSelf.scrollView.subviews;
             if (subViews.count > idx) {
                 [[subViews objectAtIndex:idx] removeFromSuperview];
             }
-            [self.dataSource removeObject:model];
-            [self resetFrame];
+            [weakSelf.dataSource removeObject:model];
+            [weakSelf resetFrame];
             
             *stop = YES;
         }

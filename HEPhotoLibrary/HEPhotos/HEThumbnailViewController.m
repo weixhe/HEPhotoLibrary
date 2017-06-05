@@ -31,6 +31,18 @@
 @end
 
 @implementation HEThumbnailViewController
+- (void)dealloc
+{
+    self.collectionView.delegate = nil;
+    self.collectionView.dataSource = nil;
+    self.collectionView = nil;
+    self.dataSource = nil;
+    self.bottomBar = nil;
+    [self.checkedAsset removeAllObjects];
+    self.checkedAsset = nil;
+    self.assetCollection = nil;
+    NSLog(@"HEThumbnailViewController dealloc");
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -104,14 +116,14 @@
     cell.CheckImage = ^(UIImage *image, PHAsset *asset1, BOOL check) {
         if (check) {
             [weakSelf.bottomBar addImage:image asset:asset1];
-            if (!self.checkedAsset) {
-                self.checkedAsset = [NSMutableArray array];
+            if (!weakSelf.checkedAsset) {
+                weakSelf.checkedAsset = [NSMutableArray array];
             }
-            [self.checkedAsset addObject:asset1];
+            [weakSelf.checkedAsset addObject:asset1];
         } else {
             [weakSelf.bottomBar deleteImage:image asset:asset1];
-            if ([self.checkedAsset containsObject:asset1]) {
-                [self.checkedAsset removeObject:asset1];
+            if ([weakSelf.checkedAsset containsObject:asset1]) {
+                [weakSelf.checkedAsset removeObject:asset1];
             }
         }
     };

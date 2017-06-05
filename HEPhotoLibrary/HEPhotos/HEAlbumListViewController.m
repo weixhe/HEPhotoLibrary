@@ -21,6 +21,15 @@
 @end
 
 @implementation HEAlbumListViewController
+- (void)dealloc
+{
+    self.tableView.delegate = nil;
+    self.tableView.dataSource = nil;
+    self.tableView = nil;
+    [self.dataSource removeAllObjects];
+    self.dataSource = nil;
+    NSLog(@"HEAlbumListViewController dealloc");
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
