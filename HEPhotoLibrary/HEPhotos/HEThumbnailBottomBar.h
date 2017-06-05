@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Photos/Photos.h>
 
 @interface HEThumbnailBottomBar : UIView
 
 @property (nonatomic, assign) NSInteger maxCount;   // 最多几张图片
+@property (nonatomic, copy) void (^DeleteOneImage)(UIImage *image, PHAsset *asset);
 
-- (void)addImage:(UIImage *)image;
-- (void)deleteImage:(UIImage *)image;
+- (void)addImage:(UIImage *)image asset:(PHAsset *)asset;
+- (void)deleteImage:(UIImage *)image asset:(PHAsset *)asset;
 
 @end

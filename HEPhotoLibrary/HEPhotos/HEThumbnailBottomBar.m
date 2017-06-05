@@ -9,6 +9,25 @@
 #import "HEThumbnailBottomBar.h"
 #import "HEPhotoConstant.h"
 
+static NSString * const kForView                = @"HEPhotos_Thumbnail_BottomView_View";
+static NSString * const kForImage               = @"HEPhotos_Thumbnail_BottomView_Image";
+static NSString * const kForIndexPath           = @"HEPhotos_Thumbnail_BottomView_IndexPath";
+
+#pragma mark - 类
+@interface HEThumbailBottomBarModel : NSObject
+
+@property (nonatomic, strong) UIImage *image;
+@property (nonatomic, strong) PHAsset *asset;
+@property (nonatomic, strong) UIView *view; // 容器，盛放imageView和closeBtn
+
+@end
+
+@implementation HEThumbailBottomBarModel
+
+@end
+
+#pragma mark - 类
+
 @interface HEThumbnailBottomBar () {
 
 }
@@ -60,50 +79,109 @@
     [view addSubview:self.countLabel];
 }
 
-- (UIImageView *)generateImageViewWithImage:(UIImage *)image {
+- (UIView *)generateImageViewWithImage:(UIImage *)image {
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.scrollView.height, self.scrollView.height)];
+
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-    imageView.frame = CGRectMake(0, 10, self.scrollView.height - 15, self.scrollView.height - 15);
+    imageView.frame = CGRectMake(0, 0, view.height - 15, view.height - 15);
+    imageView.center = CGPointMake(view.width / 2, view.height / 2);
     imageView.contentMode = UIViewContentModeScaleAspectFill;
     imageView.clipsToBounds = YES;
+    [view addSubview:imageView];
     
-    UIButton *deleteBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
-    deleteBtn.backgroundColor = [UIColor redColor];
-    deleteBtn.center = CGPointMake(imageView.right, 0);
-    [imageView addSubview:deleteBtn];
+    UIImageView *closeIcon = [[UIImageView alloc] initWithImage:HEPhotoImageFromBundleWithName(@"icon_close")];
+    closeIcon.frame = CGRectMake(0, 0, 15, 15);
+    closeIcon.center = CGPointMake(imageView.right - 2, imageView.top + 2);
+    [view addSubview:closeIcon];
     
-    return imageView;
+    UIButton *deleteBtn = [[UIButton alloc] initWithFrame:CGRectMake(view.right - 25, 0, 25, 25)];
+    [deleteBtn addTarget:self action:@selector(onDeleteImageAction:) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:deleteBtn];
+    
+    return view;
+}
+
+#pragma mark - UIButton Action
+- (void)onDeleteImageAction:(UIButton *)button {
+    
+    NSInteger index = [self.scrollView.subviews indexOfObject:button.superview];
+
+    if (self.dataSource.count > index) {
+        
+        HEThumbailBottomBarModel *model = [self.dataSource objectAtIndex:index];
+        if (self.DeleteOneImage) {
+            self.DeleteOneImage(model.image, model.asset);
+        }
+        [button.superview removeFromSuperview];
+        [self resetFrame];
+    }
 }
 
 - (void)resetFrame {
     CGFloat willSetX = 0;
     for (int i = 0; i < self.scrollView.subviews.count; i++) {
-        UIImageView *imageView = (UIImageView *)[self.scrollView.subviews objectAtIndex:i];
-        willSetX = i * (imageView.width + 8) + 2;
-        if (imageView.x != willSetX) {
-            imageView.x = willSetX;
+        UIView *view = [self.scrollView.subviews objectAtIndex:i];
+        willSetX = i * view.width + 2;
+        if (view.x != willSetX) {
+            view.x = willSetX;
         }
     }
+    
+    [self.scrollView scrollRectToVisible:CGRectMake(0, 0, self.scrollView.height, self.scrollView.height) animated:YES];
+    self.countLabel.text = [NSString stringWithFormat:@"%ld/%ld", self.dataSource.count, self.maxCount];
 }
 
-- (void)addImage:(UIImage *)image {
+- (void)addImage:(UIImage *)image asset:(PHAsset *)asset {
     if (self.dataSource.count == 0 && self.scrollView.subviews.count != 0) {
         [self.scrollView removeAllSubviews];
     }
     
-    UIImageView *imageView = [self generateImageViewWithImage:image];
-    imageView.x = self.dataSource.count * (imageView.width + 8) + 2;
-    [self.dataSource addObject:image];
-    [self.scrollView addSubview:imageView];
-    self.scrollView.contentSize = CGSizeMake(self.dataSource.count * (imageView.width + 8), self.scrollView.height);
+    UIView *view = [self generateImageViewWithImage:image];
     
-//    [self resetFrame];
-    [self.scrollView scrollRectToVisible:CGRectMake(imageView.x, imageView.y, imageView.width + 8, self.scrollView.height) animated:YES];
-    self.countLabel.text = [NSString stringWithFormat:@"%ld/%ld", self.dataSource.count, self.maxCount];
+    HEThumbailBottomBarModel *model = [[HEThumbailBottomBarModel alloc] init];
+    model.view = view;
+    model.image = image;
+    model.asset = asset;
+    
+    [self.dataSource addObject:model];
+    [self.scrollView addSubview:view];
+    self.scrollView.contentSize = CGSizeMake(self.dataSource.count * view.width, self.scrollView.height);
+    
+    [self resetFrame];
 
 }
 
-- (void)deleteImage:(UIImage *)image {
+- (void)deleteImage:(UIImage *)image asset:(PHAsset *)asset {
     
+    [self.dataSource enumerateObjectsUsingBlock:^(HEThumbailBottomBarModel *model, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        if ([model.asset isEqual:asset]) {
+            
+            NSArray *subViews = self.scrollView.subviews;
+            if (subViews.count > idx) {
+                [[subViews objectAtIndex:idx] removeFromSuperview];
+            }
+            [self.dataSource removeObject:model];
+            [self resetFrame];
+            
+            *stop = YES;
+        }
+    }];
+    
+//    if ([self.dataSource containsObject:image]) {
+//        
+//        NSInteger index = [self.dataSource indexOfObject:image];
+//        
+//        NSArray *subViews = self.scrollView.subviews;
+//        if (subViews.count > index) {
+//            [[subViews objectAtIndex:index] removeFromSuperview];
+//        }
+//        [self.dataSource removeObject:image];
+//        [self resetFrame];
+//    }
 }
 
 @end
+
+

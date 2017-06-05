@@ -11,8 +11,10 @@
 
 @interface HEThumbnailCell : UICollectionViewCell
 
-@property (nonatomic, copy) void (^CheckImage)(UIImage *image, BOOL check);
+@property (nonatomic, copy) void (^CheckImage)(UIImage *image, PHAsset *asset, BOOL check);
 
 @property (nonatomic, strong) PHAsset *asset;   // 资源，可以转换成图片
+
+@property (nonatomic, assign) BOOL checked;
 
 @end

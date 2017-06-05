@@ -43,8 +43,8 @@
     bgImageView.image = HEPhotoImageFromBundleWithName(@"background_1.jpeg");
     [self.view addSubview:bgImageView];
 
-    // 处理数据源
-    self.dataSource = [[HEPhotoTool sharePhotoTool] getAssetsInAssetCollection:self.assetCollection ascending:YES];
+    // 处理数据源, 从相册中取出所有的资源asset
+    self.dataSource = [[HEPhotoTool sharePhotoTool] getAssetsInAssetCollection:self.assetCollection ascending:NO];
     
     [self setupCollectionView];
     [self setupBottomBar];
@@ -69,6 +69,13 @@
 - (void)setupBottomBar {
     self.bottomBar = [[HEThumbnailBottomBar alloc] initWithFrame:CGRectMake(0, self.view.bottom - Height_BottomView, ScreenWidth, Height_BottomView)];
     [self.view addSubview:self.bottomBar];
+    WS(weakSelf)
+    self.bottomBar.DeleteOneImage = ^(UIImage *image, PHAsset *asset) {
+        if ([weakSelf.checkedAsset containsObject:asset]) {
+            [weakSelf.checkedAsset removeObject:asset];
+            [weakSelf.collectionView reloadData];
+        }
+    };
 }
 
 #pragma mark - UICollectionViewDelegate, UICollectionViewDataSource
@@ -82,16 +89,30 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
     HEThumbnailCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HEThumbnailCell" forIndexPath:indexPath];
     
-    cell.asset = [self.dataSource objectAtIndex:indexPath.item];
+    PHAsset *asset = [self.dataSource objectAtIndex:indexPath.item];
+    cell.asset = asset;
+    if ([self.checkedAsset containsObject:asset]) {
+        cell.checked = YES;
+    } else {
+        cell.checked = NO;
+    }
     
     WS(weakSelf);
-    cell.CheckImage = ^(UIImage *image, BOOL check) {
+    cell.CheckImage = ^(UIImage *image, PHAsset *asset1, BOOL check) {
         if (check) {
-            [weakSelf.bottomBar addImage:image];
+            [weakSelf.bottomBar addImage:image asset:asset1];
+            if (!self.checkedAsset) {
+                self.checkedAsset = [NSMutableArray array];
+            }
+            [self.checkedAsset addObject:asset1];
         } else {
-            [weakSelf.bottomBar deleteImage:image];
+            [weakSelf.bottomBar deleteImage:image asset:asset1];
+            if ([self.checkedAsset containsObject:asset1]) {
+                [self.checkedAsset removeObject:asset1];
+            }
         }
     };
     

@@ -15,4 +15,6 @@
 
 @property (nonatomic, strong) PHAssetCollection *assetCollection;       // 相册
 
+@property (nonatomic, strong) NSMutableArray <PHAsset *> *checkedAsset;        // 已经选中的资源
+
 @end

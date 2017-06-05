@@ -50,7 +50,7 @@
     button.selected = !button.selected;
     
     if (self.CheckImage) {
-        self.CheckImage(self.imageView.image, button.selected);
+        self.CheckImage(self.imageView.image, self.asset, button.selected);
     }
 }
 
@@ -69,5 +69,9 @@
     }
 }
 
+- (void)setChecked:(BOOL)checked {
+    _checked = checked;
+    self.checkBtn.selected = checked;
+}
 
 @end
