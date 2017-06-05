@@ -48,15 +48,19 @@
     [self.contentView addSubview:self.imageView];
     
     self.checkBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.checkBtn setImage:HEPhotoImageFromBundleWithName(@"btn_unselected") forState:UIControlStateNormal];
-    [self.checkBtn setImage:HEPhotoImageFromBundleWithName(@"btn_selected") forState:UIControlStateSelected];
-    self.checkBtn.frame = CGRectMake(self.contentView.right - 16 - 2, 2, 16, 16);
+    [self.checkBtn setBackgroundImage:HEPhotoImageFromBundleWithName(@"btn_unselected") forState:UIControlStateNormal];
+    [self.checkBtn setBackgroundImage:HEPhotoImageFromBundleWithName(@"btn_selected") forState:UIControlStateSelected];
+    self.checkBtn.frame = CGRectMake(self.contentView.right - 23 - 2, 2, 23, 23);
     [self.checkBtn addTarget:self action:@selector(onCheckImageAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:self.checkBtn];
 }
 
 - (void)onCheckImageAction:(UIButton *)button {
     button.selected = !button.selected;
+    
+    if (button.selected) {
+        [button.layer addAnimation:GetBtnStatusChangedAnimation() forKey:nil];
+    }
     
     if (self.CheckImage) {
         self.CheckImage(self.imageView.image, self.asset, button.selected);

@@ -24,4 +24,32 @@
 static NSString * const kAccessAuthorityStatusRestricted        = @"应用没有相关权限，且当前用户无法改变这个权限";
 /// 用户拒绝访问相簿
 static NSString * const kAccessAuthorityStatusDenied            = @"您已拒绝app访问相簿，若想访问，请到设置中赋予权限";
+
+
+
+
+
+
+static inline CAKeyframeAnimation * GetBtnStatusChangedAnimation() {
+    CAKeyframeAnimation *animate = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
+    
+    animate.duration = 0.3;
+    animate.removedOnCompletion = YES;
+    animate.fillMode = kCAFillModeForwards;
+    
+    animate.values = @[[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.7, 0.7, 1.0)],
+                       [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.2, 1.2, 1.0)],
+                       [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.8, 0.8, 1.0)],
+                       [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1.0)]];
+    return animate;
+}
+
+
+
+
+
+
+
+
+
 #endif /* HEPhoto_h */

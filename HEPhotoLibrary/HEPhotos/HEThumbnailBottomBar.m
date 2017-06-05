@@ -128,8 +128,8 @@ static NSString * const kForIndexPath           = @"HEPhotos_Thumbnail_BottomVie
             view.x = willSetX;
         }
     }
-    
-    [self.scrollView scrollRectToVisible:CGRectMake(0, 0, self.scrollView.height, self.scrollView.height) animated:YES];
+    self.scrollView.contentSize = CGSizeMake(self.dataSource.count * self.scrollView.height, self.scrollView.height);
+    [self.scrollView scrollRectToVisible:CGRectMake((self.dataSource.count - 1) * self.scrollView.height, 0, self.scrollView.height, self.scrollView.height) animated:YES];
     self.countLabel.text = [NSString stringWithFormat:@"%ld/%ld", self.dataSource.count, self.maxCount];
 }
 
@@ -147,7 +147,6 @@ static NSString * const kForIndexPath           = @"HEPhotos_Thumbnail_BottomVie
     
     [self.dataSource addObject:model];
     [self.scrollView addSubview:view];
-    self.scrollView.contentSize = CGSizeMake(self.dataSource.count * view.width, self.scrollView.height);
     
     [self resetFrame];
 
@@ -158,7 +157,7 @@ static NSString * const kForIndexPath           = @"HEPhotos_Thumbnail_BottomVie
     WS(weakSelf);
     [self.dataSource enumerateObjectsUsingBlock:^(HEThumbailBottomBarModel *model, NSUInteger idx, BOOL * _Nonnull stop) {
 
-        if ([model.asset isEqual:weakAsset]) {
+        if ([model.asset.localIdentifier isEqual:weakAsset.localIdentifier]) {
             
             NSArray *subViews = weakSelf.scrollView.subviews;
             if (subViews.count > idx) {
