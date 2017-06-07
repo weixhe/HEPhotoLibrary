@@ -79,6 +79,7 @@
 
 - (void)setupBottomBar {
     self.bottomBar = [[HEThumbnailBottomBar alloc] initWithFrame:CGRectMake(0, self.view.bottom - Height_BottomView, kViewWidth, Height_BottomView)];
+    self.bottomBar.maxSelectCount = self.maxSelectCount;
     [self.view addSubview:self.bottomBar];
     WS(weakSelf)
     self.bottomBar.DeleteOneImage = ^(UIImage *image, PHAsset *asset) {
@@ -125,6 +126,14 @@
                 [weakSelf.selectedAsset removeObject:asset1];
             }
         }
+    };
+    
+    // 判断是否达到了最大量
+    cell.JudgeWhetherMaximize = ^BOOL {
+        if (self.selectedAsset.count == self.maxSelectCount) {
+            return YES;
+        }
+        return NO;
     };
     
     return cell;

@@ -26,6 +26,7 @@
     self.checkBtn = nil;
     self.asset = nil;
     self.CheckImage = NULL;
+    self.JudgeWhetherMaximize = NULL;
     NSLog(@"HEThumbnailCell dealloc");
 }
 
@@ -49,6 +50,7 @@
     
     self.checkBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.checkBtn setBackgroundImage:HEPhotoImageFromBundleWithName(@"btn_unselected") forState:UIControlStateNormal];
+    [self.checkBtn setBackgroundImage:HEPhotoImageFromBundleWithName(@"btn_unselected") forState:UIControlStateHighlighted];
     [self.checkBtn setBackgroundImage:HEPhotoImageFromBundleWithName(@"btn_selected") forState:UIControlStateSelected];
     self.checkBtn.frame = CGRectMake(self.contentView.right - 23 - 2, 2, 23, 23);
     [self.checkBtn addTarget:self action:@selector(onCheckImageAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -56,6 +58,17 @@
 }
 
 - (void)onCheckImageAction:(UIButton *)button {
+    
+    if (!button.selected) {
+        // 判断是否达到了最大量
+        if (self.JudgeWhetherMaximize) {
+            BOOL result = self.JudgeWhetherMaximize();
+            if (result) {       // 结果：已达到最大量，直接return
+                return;
+            }
+        }
+    }
+    
     button.selected = !button.selected;
     
     if (button.selected) {

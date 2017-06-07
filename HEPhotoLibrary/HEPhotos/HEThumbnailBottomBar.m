@@ -115,6 +115,7 @@ static NSString * const kForIndexPath           = @"HEPhotos_Thumbnail_BottomVie
             self.DeleteOneImage(model.image, model.asset);
         }
         [button.superview removeFromSuperview];
+        [self.dataSource removeObject:model];
         [self resetFrame];
     }
 }
@@ -169,18 +170,6 @@ static NSString * const kForIndexPath           = @"HEPhotos_Thumbnail_BottomVie
             *stop = YES;
         }
     }];
-    
-//    if ([self.dataSource containsObject:image]) {
-//        
-//        NSInteger index = [self.dataSource indexOfObject:image];
-//        
-//        NSArray *subViews = self.scrollView.subviews;
-//        if (subViews.count > index) {
-//            [[subViews objectAtIndex:index] removeFromSuperview];
-//        }
-//        [self.dataSource removeObject:image];
-//        [self resetFrame];
-//    }
 }
 
 @end

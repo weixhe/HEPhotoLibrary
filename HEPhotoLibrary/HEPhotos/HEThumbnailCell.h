@@ -13,6 +13,8 @@
 
 @property (nonatomic, copy) void (^CheckImage)(UIImage *image, PHAsset *asset, BOOL check);
 
+@property (nonatomic, copy) BOOL (^JudgeWhetherMaximize)();     // 判断是否达到了最大量
+
 @property (nonatomic, strong) PHAsset *asset;   // 资源，可以转换成图片
 
 @property (nonatomic, assign) BOOL checked;
