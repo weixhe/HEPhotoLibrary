@@ -42,16 +42,16 @@
 
 - (void)setup {
     self.imageView = [[UIImageView alloc] initWithFrame:self.bounds];
-    self.imageView.image = HEPhotoImageFromBundleWithName(@"defaultphoto");
+    self.imageView.image = UIImageFromPhotoBundle(@"defaultphoto");
     self.imageView.contentMode = UIViewContentModeScaleAspectFill;
     self.imageView.clipsToBounds = YES;
 
     [self.contentView addSubview:self.imageView];
     
     self.checkBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.checkBtn setBackgroundImage:HEPhotoImageFromBundleWithName(@"btn_unselected") forState:UIControlStateNormal];
-    [self.checkBtn setBackgroundImage:HEPhotoImageFromBundleWithName(@"btn_unselected") forState:UIControlStateHighlighted];
-    [self.checkBtn setBackgroundImage:HEPhotoImageFromBundleWithName(@"btn_selected") forState:UIControlStateSelected];
+    [self.checkBtn setBackgroundImage:UIImageFromPhotoBundle(@"btn_unselected") forState:UIControlStateNormal];
+    [self.checkBtn setBackgroundImage:UIImageFromPhotoBundle(@"btn_unselected") forState:UIControlStateHighlighted];
+    [self.checkBtn setBackgroundImage:UIImageFromPhotoBundle(@"btn_selected") forState:UIControlStateSelected];
     self.checkBtn.frame = CGRectMake(self.contentView.right - 23 - 2, 2, 23, 23);
     [self.checkBtn addTarget:self action:@selector(onCheckImageAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:self.checkBtn];

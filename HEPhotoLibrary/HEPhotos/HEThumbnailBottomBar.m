@@ -91,7 +91,7 @@ static NSString * const kForIndexPath           = @"HEPhotos_Thumbnail_BottomVie
     imageView.clipsToBounds = YES;
     [view addSubview:imageView];
     
-    UIImageView *closeIcon = [[UIImageView alloc] initWithImage:HEPhotoImageFromBundleWithName(@"icon_close")];
+    UIImageView *closeIcon = [[UIImageView alloc] initWithImage:UIImageFromPhotoBundle(@"icon_close")];
     closeIcon.frame = CGRectMake(0, 0, 15, 15);
     closeIcon.center = CGPointMake(imageView.right - 2, imageView.top + 2);
     [view addSubview:closeIcon];

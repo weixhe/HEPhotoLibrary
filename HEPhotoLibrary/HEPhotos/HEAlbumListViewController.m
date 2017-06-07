@@ -36,11 +36,11 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    self.title = @"相册列表";
+    self.title = LocalizedStringForKey(kTextForPhotoList);
     
     // 背景图片
     UIImageView *bgImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
-    bgImageView.image = HEPhotoImageFromBundleWithName(@"background_1.jpeg");
+    bgImageView.image = UIImageFromPhotoBundle(@"background_1.jpeg");
     [self.view addSubview:bgImageView];
     
     [self layoutNavigation];
@@ -86,7 +86,7 @@
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(0, 0, 44, 44);
     btn.titleLabel.font = [UIFont systemFontOfSize:16];
-    [btn setTitle:@"取消" forState:UIControlStateNormal];
+    [btn setTitle:LocalizedStringForKey(kTextForCancel) forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     btn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -10);
     [btn addTarget:self action:@selector(onCancelAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -117,7 +117,7 @@
             break;
         }
         case PHAuthorizationStatusDenied: {             // 用户拒绝访问
-            [[[UIAlertView alloc] initWithTitle:@"提示" message:kAccessAuthorityStatusDenied delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil] show];
+            [[[UIAlertView alloc] initWithTitle:LocalizedStringForKey(kTextForTip) message:kAccessAuthorityStatusDenied delegate:nil cancelButtonTitle:LocalizedStringForKey(kTextForIKnow) otherButtonTitles:nil, nil] show];
             break;
         }
         case PHAuthorizationStatusNotDetermined: {      // 用户从未进行过授权等处理，首次访问相应内容会提示用户进行授权
@@ -131,7 +131,7 @@
             break;
         }
         case PHAuthorizationStatusRestricted: {         // 应用没有相关权限，且当前用户无法改变这个权限，比如:家长控制
-            [[[UIAlertView alloc] initWithTitle:@"提示" message:kAccessAuthorityStatusRestricted delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil] show];
+            [[[UIAlertView alloc] initWithTitle:LocalizedStringForKey(kTextForTip) message:kAccessAuthorityStatusRestricted delegate:nil cancelButtonTitle:LocalizedStringForKey(kTextForIKnow) otherButtonTitles:nil, nil] show];
             break;
         }
         default:

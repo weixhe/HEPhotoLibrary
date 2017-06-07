@@ -10,7 +10,6 @@
 		041404151EE418AA003F53F5 /* HEThumbnailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041404141EE418AA003F53F5 /* HEThumbnailViewController.m */; };
 		041404181EE41E3D003F53F5 /* HEThumbnailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041404171EE41E3D003F53F5 /* HEThumbnailCell.m */; };
 		0414041B1EE44215003F53F5 /* HEThumbnailBottomBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0414041A1EE44215003F53F5 /* HEThumbnailBottomBar.m */; };
-		0431B9681EE2F06C00745672 /* HEPhotos.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0431B9671EE2F06C00745672 /* HEPhotos.bundle */; };
 		047655241EB227C300E0DCD9 /* ToastUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 047655231EB227C300E0DCD9 /* ToastUtils.m */; };
 		047655271EB2307700E0DCD9 /* HEAlbumListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047655261EB2307700E0DCD9 /* HEAlbumListViewController.m */; };
 		0476552A1EB238C900E0DCD9 /* HEAlbumListCellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 047655291EB238C900E0DCD9 /* HEAlbumListCellCell.m */; };
@@ -25,6 +24,7 @@
 		04EC08D01EA5076700C81ABE /* HEPhotoLibraryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC08CF1EA5076700C81ABE /* HEPhotoLibraryTests.m */; };
 		04EC08DB1EA5076700C81ABE /* HEPhotoLibraryUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC08DA1EA5076700C81ABE /* HEPhotoLibraryUITests.m */; };
 		04EC08EA1EA5077A00C81ABE /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04EC08E91EA5077A00C81ABE /* Photos.framework */; };
+		45B690ED1EE7ADEC00C0DFD6 /* HEPhotos.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 45B690EC1EE7ADEC00C0DFD6 /* HEPhotos.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +51,6 @@
 		041404171EE41E3D003F53F5 /* HEThumbnailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HEThumbnailCell.m; sourceTree = "<group>"; };
 		041404191EE44215003F53F5 /* HEThumbnailBottomBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HEThumbnailBottomBar.h; sourceTree = "<group>"; };
 		0414041A1EE44215003F53F5 /* HEThumbnailBottomBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HEThumbnailBottomBar.m; sourceTree = "<group>"; };
-		0431B9671EE2F06C00745672 /* HEPhotos.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HEPhotos.bundle; sourceTree = "<group>"; };
 		0431B96B1EE303C000745672 /* HEPhotoConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HEPhotoConstant.h; sourceTree = "<group>"; };
 		047655221EB227C300E0DCD9 /* ToastUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToastUtils.h; sourceTree = "<group>"; };
 		047655231EB227C300E0DCD9 /* ToastUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToastUtils.m; sourceTree = "<group>"; };
@@ -82,6 +81,7 @@
 		04EC08DA1EA5076700C81ABE /* HEPhotoLibraryUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HEPhotoLibraryUITests.m; sourceTree = "<group>"; };
 		04EC08DC1EA5076700C81ABE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04EC08E91EA5077A00C81ABE /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		45B690EC1EE7ADEC00C0DFD6 /* HEPhotos.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HEPhotos.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,8 +113,8 @@
 		048C1BE11EAE3C9100C0D95A /* HEPhotos */ = {
 			isa = PBXGroup;
 			children = (
+				45B690EC1EE7ADEC00C0DFD6 /* HEPhotos.bundle */,
 				0431B96B1EE303C000745672 /* HEPhotoConstant.h */,
-				0431B9671EE2F06C00745672 /* HEPhotos.bundle */,
 				048C1BE21EAE3CBC00C0D95A /* HEPhotoTool.h */,
 				048C1BE31EAE3CBC00C0D95A /* HEPhotoTool.m */,
 				047655251EB2307700E0DCD9 /* HEAlbumListViewController.h */,
@@ -326,7 +326,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04EC08C51EA5076700C81ABE /* LaunchScreen.storyboard in Resources */,
-				0431B9681EE2F06C00745672 /* HEPhotos.bundle in Resources */,
+				45B690ED1EE7ADEC00C0DFD6 /* HEPhotos.bundle in Resources */,
 				04EC08C21EA5076700C81ABE /* Assets.xcassets in Resources */,
 				04EC08C01EA5076700C81ABE /* Main.storyboard in Resources */,
 			);
@@ -422,6 +422,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -470,6 +471,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";

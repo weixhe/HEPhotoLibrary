@@ -51,12 +51,13 @@
     
     // 背景图片
     UIImageView *bgImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
-    bgImageView.image = HEPhotoImageFromBundleWithName(@"background_1.jpeg");
+    bgImageView.image = UIImageFromPhotoBundle(@"background_1.jpeg");
     [self.view addSubview:bgImageView];
 
     // 处理数据源, 从相册中取出所有的资源asset
     self.dataSource = [[HEPhotoTool sharePhotoTool] getAssetsInAssetCollection:self.assetCollection ascending:NO];
     
+    [self layoutNavigation];
     [self setupCollectionView];
     [self setupBottomBar];
     
@@ -67,6 +68,28 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)layoutNavigation {
+    
+    self.navigationItem.hidesBackButton = YES;
+    
+    UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    cancelBtn.frame = CGRectMake(0, 0, 60, 44);
+    cancelBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+    cancelBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 15, 0, -15);
+    [cancelBtn setTitle:LocalizedStringForKey(kTextForCancel) forState:UIControlStateNormal];
+    [cancelBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [cancelBtn addTarget:self action:@selector(onCancelAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:cancelBtn];
+    
+    UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    backBtn.frame = CGRectMake(0, 0, 44, 44);
+    backBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -25, 0, 25);
+    [backBtn setImage:UIImageFromPhotoBundle(@"nav_back_black") forState:UIControlStateNormal];
+    [backBtn addTarget:self action:@selector(onBackToPrivous:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+}
+
 
 - (void)setupCollectionView {
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, kViewWidth, self.view.height - Height_BottomView - 64) collectionViewLayout:[[UICollectionViewFlowLayout alloc] init]];
@@ -88,6 +111,16 @@
             [weakSelf.collectionView reloadData];
         }
     };
+}
+
+#pragma mark - UIButton Action
+
+- (void)onBackToPrivous:(UIButton *)button {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)onCancelAction:(UIButton *)button {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - UICollectionViewDelegate, UICollectionViewDataSource
@@ -130,7 +163,7 @@
     
     // 判断是否达到了最大量
     cell.JudgeWhetherMaximize = ^BOOL {
-        if (self.selectedAsset.count == self.maxSelectCount) {
+        if (weakSelf.selectedAsset.count == weakSelf.maxSelectCount) {
             return YES;
         }
         return NO;
