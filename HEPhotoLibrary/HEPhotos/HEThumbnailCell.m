@@ -27,7 +27,7 @@
     self.asset = nil;
     self.CheckImage = NULL;
     self.JudgeWhetherMaximize = NULL;
-    NSLog(@"HEThumbnailCell dealloc");
+    PhotoLog(@"HEThumbnailCell dealloc");
 }
 
 - (instancetype)initWithFrame:(CGRect)frame

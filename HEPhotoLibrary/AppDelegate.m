@@ -22,45 +22,6 @@
 
 
 
-//写入默认值
-
--(void)registerDefaultsFromSettingsBundle{
-    
-    NSString * settingsBundle =[[NSBundle mainBundle]pathForResource:@"Settings"   ofType:@"bundle"];
-    
-    if (!settingsBundle) {
-        
-        NSLog(@"Could not find Settings.bundle");
-        
-        return;
-        
-    }
-    
-    NSDictionary * settings =[NSDictionary dictionaryWithContentsOfFile:                        [settingsBundle stringByAppendingPathComponent:@"Root.plist"]];
-    
-    NSArray * Preference =[settings objectForKey:@"PreferenceSpecifiers"];
-    
-    NSMutableDictionary *defaultsToRegister =[[NSMutableDictionary alloc]initWithCapacity:[Preference count]];
-    
-    for (NSDictionary * prefSpecification in Preference) {
-        
-        NSString * key =[prefSpecification objectForKey:@"Key"];
-        
-        if (key) {
-            
-            [defaultsToRegister setObject:[prefSpecification objectForKey:@"DefaultValue"] forKey:@"key"];
-            
-        }
-        
-    }
-    
-    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultsToRegister];
-    
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-}
-
-
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -27,7 +27,7 @@
     self.titleLabel = nil;
     self.subTibleLabel = nil;
     self.model = nil;
-    NSLog(@"HEAlbumListCellCell dealloc");
+    PhotoLog(@"HEAlbumListCellCell dealloc");
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {

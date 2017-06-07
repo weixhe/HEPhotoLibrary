@@ -75,7 +75,7 @@ static HEPhotoTool *instance = nil;
 
 - (PHAsset *)getAssetFromlocalIdentifier:(NSString *)localIdentifier {
     if(localIdentifier == nil){
-        NSLog(@"Cannot get asset from localID because it is nil");
+        PhotoLog(@"Cannot get asset from localID because it is nil");
         return nil;
     }
     PHFetchResult *result = [PHAsset fetchAssetsWithLocalIdentifiers:@[localIdentifier] options:nil];
@@ -102,7 +102,7 @@ static HEPhotoTool *instance = nil;
         collectionId = [PHAssetCollectionChangeRequest creationRequestForAssetCollectionWithTitle:CollectionName].placeholderForCreatedAssetCollection.localIdentifier;
     } error:&error];
     if (error) {
-        NSLog(@"创建相册：%@失败", CollectionName);
+        PhotoLog(@"创建相册：%@失败", CollectionName);
         return nil;
     }
     return [PHAssetCollection fetchAssetCollectionsWithLocalIdentifiers:@[collectionId] options:nil].lastObject;
@@ -210,7 +210,7 @@ static HEPhotoTool *instance = nil;
  *  @param original        是否要原图
  */
 - (void)enumerateAssetsInAssetCollection:(PHAssetCollection *)assetCollection original:(BOOL)original {
-    NSLog(@"相簿名:%@", assetCollection.localizedTitle);
+    PhotoLog(@"相簿名:%@", assetCollection.localizedTitle);
     
     PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
     // 同步获得图片, 只会返回1张图片
@@ -224,7 +224,7 @@ static HEPhotoTool *instance = nil;
         
         // 从asset中获得图片
         [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeDefault options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
-            NSLog(@"%@", result);
+            PhotoLog(@"%@", result);
         }];
     }
 }

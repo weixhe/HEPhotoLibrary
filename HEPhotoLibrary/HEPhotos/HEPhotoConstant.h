@@ -9,6 +9,14 @@
 #ifndef HEPhotoConstant_h
 #define HEPhotoConstant_h
 
+/*========================================输出打印============================================*/
+#ifdef DEBUG
+#define PhotoLog(xx, ...)  NSLog(@"%s(%d行):\t\t" xx, __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+#else
+#define PhotoLog(xx, ...)
+#endif
+
+
 #define WS(weakSelf)        __weak __typeof(&*self)weakSelf = self;
 #define weakify(var)        __weak typeof(var) weakSelf = var;
 #define strongify(var)      __strong typeof(var) weakSelf = var;
@@ -32,6 +40,7 @@ static NSString * const kTextForCameraRoll                      = @"Camera Roll"
 static NSString * const kTextForRecentlyAdd                     = @"Recently Added";
 static NSString * const kTextForTip                             = @"tip";
 static NSString * const kTextForIKnow                           = @"i know";
+static NSString * const kTextForSure                            = @"sure";
 
 static inline CAKeyframeAnimation * GetBtnStatusChangedAnimation() {
     CAKeyframeAnimation *animate = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
@@ -81,11 +90,11 @@ static inline UIImage *UIImageFromPhotoBundle(NSString *imageName) {
             if (image) {
                 return image;
             } else {
-                NSLog(@"特殊图片文件后缀，请添加处理方式");
+                PhotoLog(@"特殊图片文件后缀，请添加处理方式");
             }
             
         } else {
-            NSLog(@"特殊图片文件后缀，请添加处理方式");
+            PhotoLog(@"特殊图片文件后缀，请添加处理方式");
         }
     }
     return [UIImage imageWithContentsOfFile:path];

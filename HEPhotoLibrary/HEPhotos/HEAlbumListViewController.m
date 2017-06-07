@@ -29,7 +29,7 @@
     self.tableView = nil;
     [self.dataSource removeAllObjects];
     self.dataSource = nil;
-    NSLog(@"HEAlbumListViewController dealloc");
+    PhotoLog(@"HEAlbumListViewController dealloc");
 }
 
 - (void)viewDidLoad {
@@ -125,7 +125,7 @@
                 if (status == PHAuthorizationStatusAuthorized) {
                     [self getAlbumList];
                 } else {
-                    NSLog(@"Denied or Restricted");
+                    PhotoLog(@"Denied or Restricted");
                 }
             }];
             break;

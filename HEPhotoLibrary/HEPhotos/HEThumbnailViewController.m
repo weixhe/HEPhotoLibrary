@@ -41,7 +41,7 @@
     [self.selectedAsset removeAllObjects];
     self.selectedAsset = nil;
     self.assetCollection = nil;
-    NSLog(@"HEThumbnailViewController dealloc");
+    PhotoLog(@"HEThumbnailViewController dealloc");
 }
 
 - (void)viewDidLoad {

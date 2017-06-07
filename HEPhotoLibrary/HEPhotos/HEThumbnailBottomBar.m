@@ -32,7 +32,7 @@ static NSString * const kForIndexPath           = @"HEPhotos_Thumbnail_BottomVie
 
 }
 
-@property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic, strong) NSMutableArray <HEThumbailBottomBarModel *> *selectedImages;
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 
@@ -43,20 +43,20 @@ static NSString * const kForIndexPath           = @"HEPhotos_Thumbnail_BottomVie
 @implementation HEThumbnailBottomBar
 - (void)dealloc
 {
-    [self.dataSource removeAllObjects];
-    self.dataSource = nil;
+    [self.selectedImages removeAllObjects];
+    self.selectedImages = nil;
     
     self.scrollView = nil;
     self.countLabel = nil;
     self.DeleteOneImage = NULL;
-    NSLog(@"HEThumbnailBottomBar dealloc");
+    PhotoLog(@"HEThumbnailBottomBar dealloc");
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.dataSource = [NSMutableArray array];
+        self.selectedImages = [NSMutableArray array];
         [self setup];
     }
     return self;
@@ -75,9 +75,16 @@ static NSString * const kForIndexPath           = @"HEPhotos_Thumbnail_BottomVie
     
     self.countLabel = [[UILabel alloc] initWithFrame:view.bounds];
     self.countLabel.textAlignment = NSTextAlignmentCenter;
+    self.countLabel.font = [UIFont systemFontOfSize:15];
     self.countLabel.textColor = [UIColor whiteColor];
-    self.countLabel.text = [NSString stringWithFormat:@"0/%ld", self.maxSelectCount];
+    self.countLabel.numberOfLines = 2;
+    self.countLabel.text = [NSString stringWithFormat:@"%@\n0/%ld", LocalizedStringForKey(kTextForSure), self.maxSelectCount];
     [view addSubview:self.countLabel];
+    
+    UIButton *sureBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    sureBtn.frame = view.bounds;
+    [sureBtn addTarget:self action:@selector(onSureAction:) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:sureBtn];
 }
 
 - (UIView *)generateImageViewWithImage:(UIImage *)image {
@@ -104,18 +111,22 @@ static NSString * const kForIndexPath           = @"HEPhotos_Thumbnail_BottomVie
 }
 
 #pragma mark - UIButton Action
+
+- (void)onSureAction:(UIButton *)button {
+    
+}
 - (void)onDeleteImageAction:(UIButton *)button {
     
     NSInteger index = [self.scrollView.subviews indexOfObject:button.superview];
 
-    if (self.dataSource.count > index) {
+    if (self.selectedImages.count > index) {
         
-        HEThumbailBottomBarModel *model = [self.dataSource objectAtIndex:index];
+        HEThumbailBottomBarModel *model = [self.selectedImages objectAtIndex:index];
         if (self.DeleteOneImage) {
             self.DeleteOneImage(model.image, model.asset);
         }
         [button.superview removeFromSuperview];
-        [self.dataSource removeObject:model];
+        [self.selectedImages removeObject:model];
         [self resetFrame];
     }
 }
@@ -129,13 +140,19 @@ static NSString * const kForIndexPath           = @"HEPhotos_Thumbnail_BottomVie
             view.x = willSetX;
         }
     }
-    self.scrollView.contentSize = CGSizeMake(self.dataSource.count * self.scrollView.height, self.scrollView.height);
-    [self.scrollView scrollRectToVisible:CGRectMake((self.dataSource.count - 1) * self.scrollView.height, 0, self.scrollView.height, self.scrollView.height) animated:YES];
-    self.countLabel.text = [NSString stringWithFormat:@"%ld/%ld", self.dataSource.count, self.maxSelectCount];
+    self.scrollView.contentSize = CGSizeMake(self.selectedImages.count * self.scrollView.height, self.scrollView.height);
+    [self.scrollView scrollRectToVisible:CGRectMake((self.selectedImages.count - 1) * self.scrollView.height, 0, self.scrollView.height, self.scrollView.height) animated:YES];
+    self.countLabel.text = [NSString stringWithFormat:@"%@\n%ld/%ld", LocalizedStringForKey(kTextForSure), self.selectedImages.count, self.maxSelectCount];
+}
+
+- (void)setMaxSelectCount:(NSUInteger)maxSelectCount {
+    _maxSelectCount = maxSelectCount;
+    self.countLabel.text = [NSString stringWithFormat:@"%@\n%ld/%ld", LocalizedStringForKey(kTextForSure), self.selectedImages.count, maxSelectCount];
+
 }
 
 - (void)addImage:(UIImage *)image asset:(PHAsset *)asset {
-    if (self.dataSource.count == 0 && self.scrollView.subviews.count != 0) {
+    if (self.selectedImages.count == 0 && self.scrollView.subviews.count != 0) {
         [self.scrollView removeAllSubviews];
     }
     
@@ -146,7 +163,7 @@ static NSString * const kForIndexPath           = @"HEPhotos_Thumbnail_BottomVie
     model.image = image;
     model.asset = asset;
     
-    [self.dataSource addObject:model];
+    [self.selectedImages addObject:model];
     [self.scrollView addSubview:view];
     
     [self resetFrame];
@@ -156,7 +173,7 @@ static NSString * const kForIndexPath           = @"HEPhotos_Thumbnail_BottomVie
 - (void)deleteImage:(UIImage *)image asset:(PHAsset *)asset {
     __weak typeof(asset) weakAsset = asset;
     WS(weakSelf);
-    [self.dataSource enumerateObjectsUsingBlock:^(HEThumbailBottomBarModel *model, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.selectedImages enumerateObjectsUsingBlock:^(HEThumbailBottomBarModel *model, NSUInteger idx, BOOL * _Nonnull stop) {
 
         if ([model.asset.localIdentifier isEqual:weakAsset.localIdentifier]) {
             
@@ -164,7 +181,7 @@ static NSString * const kForIndexPath           = @"HEPhotos_Thumbnail_BottomVie
             if (subViews.count > idx) {
                 [[subViews objectAtIndex:idx] removeFromSuperview];
             }
-            [weakSelf.dataSource removeObject:model];
+            [weakSelf.selectedImages removeObject:model];
             [weakSelf resetFrame];
             
             *stop = YES;

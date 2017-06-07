@@ -11,7 +11,9 @@
 
 @interface HEThumbnailBottomBar : UIView
 
-@property (nonatomic, assign) NSInteger maxSelectCount;   // 最多选择几张图片
+@property (nonatomic, assign) NSUInteger maxSelectCount;   // 最多选择几张图片
+@property (nonatomic, strong) NSMutableArray <PHAsset *> *selectedAsset;        // 已经选中的资源
+
 @property (nonatomic, copy) void (^DeleteOneImage)(UIImage *image, PHAsset *asset);
 
 - (void)addImage:(UIImage *)image asset:(PHAsset *)asset;

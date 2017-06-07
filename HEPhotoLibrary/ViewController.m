@@ -31,11 +31,11 @@
     
 //    [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
 //        if (status == PHAuthorizationStatusAuthorized) {
-//            NSLog(@"Authorized");
+//            PhotoLog(@"Authorized");
 //            NSArray *arr = [[HEPhotoTool sharePhotoTool] getAllAssetInPhotoAlumbWithAscending:YES];
-//            NSLog(@"%@", arr);
+//            PhotoLog(@"%@", arr);
 //        }else{
-//            NSLog(@"Denied or Restricted");
+//            PhotoLog(@"Denied or Restricted");
 //        }
 //    }];
     
@@ -43,10 +43,10 @@
 //
 //            if (status == PHAuthorizationStatusAuthorized) {
 //                NSArray *arr = [[HEPhotoTool sharePhotoTool] getAllAssetInPhotoAlumbWithAscending:YES];
-//                NSLog(@"%@", arr);
+//                PhotoLog(@"%@", arr);
 //
 //            } else if (status == PHAuthorizationStatusRestricted || status == PHAuthorizationStatusDenied || status == PHAuthorizationStatusNotDetermined) {
-//                NSLog(@"PHAuthorizationStatusDenied");
+//                PhotoLog(@"PHAuthorizationStatusDenied");
 //            }
 //    });
     
