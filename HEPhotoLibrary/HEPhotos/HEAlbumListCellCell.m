@@ -72,8 +72,7 @@
     
     _model = model;
     
-    [[HEPhotoTool sharePhotoTool] requestImageForAsset:model.headImageAsset size:CGSizeMake(60, 60) resizeMode:PHImageRequestOptionsResizeModeFast complete:^(UIImage *image, NSDictionary *info) {
-        
+    [[HEPhotoTool sharePhotoTool] requestImageForAsset:model.headImageAsset size:CGSizeMake(60 * 3, 60 * 3) resizeMode:PHImageRequestOptionsResizeModeFast complete:^(UIImage *image, NSDictionary *info) {
         self.iconImageView.image = image;
     }];
     

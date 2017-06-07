@@ -63,6 +63,12 @@
     
     HEAlbumListViewController *albumListVC = [[HEAlbumListViewController alloc] init];
     albumListVC.maxSelectCount = 10;
+    albumListVC.FinishToSelectImage = ^(NSArray<PHAsset *> *assets) {
+      
+        PhotoLog(@"%@", assets);
+    };
+    
+    
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:albumListVC];
     
     [self presentViewController:nav animated:YES completion:nil];

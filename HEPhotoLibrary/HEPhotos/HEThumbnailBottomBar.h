@@ -13,8 +13,10 @@
 
 @property (nonatomic, assign) NSUInteger maxSelectCount;   // 最多选择几张图片
 @property (nonatomic, strong) NSMutableArray <PHAsset *> *selectedAsset;        // 已经选中的资源
+@property (nonatomic, assign) CGSize size;  // 用户请求图片
 
 @property (nonatomic, copy) void (^DeleteOneImage)(UIImage *image, PHAsset *asset);
+@property (nonatomic, copy) void (^FinishToSelectImage)();  // 完成选择
 
 - (void)addImage:(UIImage *)image asset:(PHAsset *)asset;
 - (void)deleteImage:(UIImage *)image asset:(PHAsset *)asset;

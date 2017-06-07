@@ -18,4 +18,6 @@
 
 @property (nonatomic, assign) NSUInteger maxSelectCount;   // 最多选择几张图片
 
+@property (nonatomic, copy) void (^FinishToSelectImage)(NSArray <PHAsset *> *assets);  // 完成选择回调
+
 @end

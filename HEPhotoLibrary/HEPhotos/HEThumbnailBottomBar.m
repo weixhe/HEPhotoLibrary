@@ -8,6 +8,7 @@
 
 #import "HEThumbnailBottomBar.h"
 #import "HEPhotoConstant.h"
+#import "HEPhotoTool.h"
 
 static NSString * const kForView                = @"HEPhotos_Thumbnail_BottomView_View";
 static NSString * const kForImage               = @"HEPhotos_Thumbnail_BottomView_Image";
@@ -49,6 +50,7 @@ static NSString * const kForIndexPath           = @"HEPhotos_Thumbnail_BottomVie
     self.scrollView = nil;
     self.countLabel = nil;
     self.DeleteOneImage = NULL;
+    self.FinishToSelectImage = NULL;
     PhotoLog(@"HEThumbnailBottomBar dealloc");
 }
 
@@ -113,7 +115,9 @@ static NSString * const kForIndexPath           = @"HEPhotos_Thumbnail_BottomVie
 #pragma mark - UIButton Action
 
 - (void)onSureAction:(UIButton *)button {
-    
+    if (self.FinishToSelectImage) {
+        self.FinishToSelectImage();
+    }
 }
 - (void)onDeleteImageAction:(UIButton *)button {
     
@@ -148,7 +152,18 @@ static NSString * const kForIndexPath           = @"HEPhotos_Thumbnail_BottomVie
 - (void)setMaxSelectCount:(NSUInteger)maxSelectCount {
     _maxSelectCount = maxSelectCount;
     self.countLabel.text = [NSString stringWithFormat:@"%@\n%ld/%ld", LocalizedStringForKey(kTextForSure), self.selectedImages.count, maxSelectCount];
+}
 
+
+- (void)setSelectedAsset:(NSMutableArray<PHAsset *> *)selectedAsset {
+    _selectedAsset = selectedAsset;
+    WS(weakSelf)
+    for (int i = 0; i < selectedAsset.count; i ++) {
+        PHAsset *asset = [selectedAsset objectAtIndex:i];
+        [[HEPhotoTool sharePhotoTool] requestImageForAsset:asset size:weakSelf.size resizeMode:PHImageRequestOptionsResizeModeExact complete:^(UIImage *image, NSDictionary *info) {
+            [weakSelf addImage:image asset:asset];
+        }];
+    }
 }
 
 - (void)addImage:(UIImage *)image asset:(PHAsset *)asset {

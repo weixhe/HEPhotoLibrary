@@ -29,6 +29,7 @@
     self.tableView = nil;
     [self.dataSource removeAllObjects];
     self.dataSource = nil;
+    self.FinishToSelectImage = NULL;
     PhotoLog(@"HEAlbumListViewController dealloc");
 }
 
@@ -77,6 +78,7 @@
     thumbVC.assetCollection = model.assetCollection;
     thumbVC.maxSelectCount = self.maxSelectCount;
     thumbVC.selectedAsset = self.selectedAsset;
+    thumbVC.FinishToSelectImage = self.FinishToSelectImage;
     [self.navigationController pushViewController:thumbVC animated:NO];
 }
 
@@ -179,6 +181,7 @@
     thumbVC.assetCollection = model.assetCollection;
     thumbVC.maxSelectCount = self.maxSelectCount;
     thumbVC.selectedAsset = self.selectedAsset;
+    thumbVC.FinishToSelectImage = self.FinishToSelectImage;
     [self.navigationController pushViewController:thumbVC animated:YES];
 }
 

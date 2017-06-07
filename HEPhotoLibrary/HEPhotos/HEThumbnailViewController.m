@@ -41,6 +41,7 @@
     [self.selectedAsset removeAllObjects];
     self.selectedAsset = nil;
     self.assetCollection = nil;
+    self.FinishToSelectImage = NULL;
     PhotoLog(@"HEThumbnailViewController dealloc");
 }
 
@@ -103,6 +104,9 @@
 - (void)setupBottomBar {
     self.bottomBar = [[HEThumbnailBottomBar alloc] initWithFrame:CGRectMake(0, self.view.bottom - Height_BottomView, kViewWidth, Height_BottomView)];
     self.bottomBar.maxSelectCount = self.maxSelectCount;
+    self.bottomBar.selectedAsset = self.selectedAsset;
+    self.bottomBar.size = CGSizeMake(cellWidth * 2.5, cellWidth * 2.5);
+    
     [self.view addSubview:self.bottomBar];
     WS(weakSelf)
     self.bottomBar.DeleteOneImage = ^(UIImage *image, PHAsset *asset) {
@@ -110,6 +114,13 @@
             [weakSelf.selectedAsset removeObject:asset];
             [weakSelf.collectionView reloadData];
         }
+    };
+    
+    self.bottomBar.FinishToSelectImage = ^{
+        if (weakSelf.FinishToSelectImage) {
+            weakSelf.FinishToSelectImage(weakSelf.selectedAsset);
+        }
+        [weakSelf onCancelAction:nil];
     };
 }
 
