@@ -104,8 +104,8 @@
 - (void)setupBottomBar {
     self.bottomBar = [[HEThumbnailBottomBar alloc] initWithFrame:CGRectMake(0, self.view.bottom - Height_BottomView, kViewWidth, Height_BottomView)];
     self.bottomBar.maxSelectCount = self.maxSelectCount;
-    self.bottomBar.selectedAsset = self.selectedAsset;
     self.bottomBar.size = CGSizeMake(cellWidth * 2.5, cellWidth * 2.5);
+    self.bottomBar.selectedAsset = self.selectedAsset;
     
     [self.view addSubview:self.bottomBar];
     WS(weakSelf)
@@ -118,10 +118,14 @@
     
     self.bottomBar.FinishToSelectImage = ^{
         if (weakSelf.FinishToSelectImage) {
-            weakSelf.FinishToSelectImage(weakSelf.selectedAsset);
+            weakSelf.FinishToSelectImage(weakSelf.selectedAsset.copy);
         }
         [weakSelf onCancelAction:nil];
     };
+}
+
+- (void)setSelectedAsset:(NSMutableArray<PHAsset *> *)selectedAsset {
+    _selectedAsset = selectedAsset.mutableCopy;
 }
 
 #pragma mark - UIButton Action

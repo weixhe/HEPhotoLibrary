@@ -100,4 +100,10 @@
     self.checkBtn.selected = checked;
 }
 
+- (void)setHidenCheckBtn:(BOOL)hidenCheckBtn {
+    _hidenCheckBtn = hidenCheckBtn;
+    
+    self.checkBtn.hidden = hidenCheckBtn;
+}
+
 @end
