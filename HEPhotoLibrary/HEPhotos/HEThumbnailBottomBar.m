@@ -10,10 +10,6 @@
 #import "HEPhotoConstant.h"
 #import "HEPhotoTool.h"
 
-static NSString * const kForView                = @"HEPhotos_Thumbnail_BottomView_View";
-static NSString * const kForImage               = @"HEPhotos_Thumbnail_BottomView_Image";
-static NSString * const kForIndexPath           = @"HEPhotos_Thumbnail_BottomView_IndexPath";
-
 #pragma mark - 类
 @interface HEThumbailBottomBarModel : NSObject
 
@@ -67,6 +63,7 @@ static NSString * const kForIndexPath           = @"HEPhotos_Thumbnail_BottomVie
 - (void)setup {
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.width - self.height, self.height)];
     self.scrollView.showsHorizontalScrollIndicator = NO;
+    self.scrollView.showsVerticalScrollIndicator = NO;
     [self addSubview:self.scrollView];
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(self.scrollView.right + 5, 5, self.height - 10, self.height - 10)];
@@ -167,10 +164,7 @@ static NSString * const kForIndexPath           = @"HEPhotos_Thumbnail_BottomVie
 }
 
 - (void)addImage:(UIImage *)image asset:(PHAsset *)asset {
-    if (self.selectedImages.count == 0 && self.scrollView.subviews.count != 0) {
-        [self.scrollView removeAllSubviews];
-    }
-    
+
     UIView *view = [self generateImageViewWithImage:image];
     
     HEThumbailBottomBarModel *model = [[HEThumbailBottomBarModel alloc] init];

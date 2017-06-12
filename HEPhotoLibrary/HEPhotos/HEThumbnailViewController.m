@@ -61,8 +61,6 @@
     [self layoutNavigation];
     [self setupCollectionView];
     [self setupBottomBar];
-    
-    cellWidth = (self.collectionView.width - (Cell_Item_Num - 1) * Cell_Item_Space) / Cell_Item_Num;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -99,6 +97,8 @@
     self.collectionView.dataSource = self;
     [self.collectionView registerClass:[HEThumbnailCell class] forCellWithReuseIdentifier:@"HEThumbnailCell"];
     [self.view addSubview:self.collectionView];
+    
+    cellWidth = (self.collectionView.width - (Cell_Item_Num - 1) * Cell_Item_Space) / Cell_Item_Num;
 }
 
 - (void)setupBottomBar {
