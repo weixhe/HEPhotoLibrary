@@ -24,6 +24,7 @@
 		04EC08D01EA5076700C81ABE /* HEPhotoLibraryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC08CF1EA5076700C81ABE /* HEPhotoLibraryTests.m */; };
 		04EC08DB1EA5076700C81ABE /* HEPhotoLibraryUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC08DA1EA5076700C81ABE /* HEPhotoLibraryUITests.m */; };
 		04EC08EA1EA5077A00C81ABE /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04EC08E91EA5077A00C81ABE /* Photos.framework */; };
+		451ABB6A1EEF7E150034131E /* HEBigImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 451ABB691EEF7E150034131E /* HEBigImageViewController.m */; };
 		45B690ED1EE7ADEC00C0DFD6 /* HEPhotos.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 45B690EC1EE7ADEC00C0DFD6 /* HEPhotos.bundle */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +82,8 @@
 		04EC08DA1EA5076700C81ABE /* HEPhotoLibraryUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HEPhotoLibraryUITests.m; sourceTree = "<group>"; };
 		04EC08DC1EA5076700C81ABE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04EC08E91EA5077A00C81ABE /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		451ABB681EEF7E150034131E /* HEBigImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HEBigImageViewController.h; sourceTree = "<group>"; };
+		451ABB691EEF7E150034131E /* HEBigImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HEBigImageViewController.m; sourceTree = "<group>"; };
 		45B690EC1EE7ADEC00C0DFD6 /* HEPhotos.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HEPhotos.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,6 +130,8 @@
 				041404171EE41E3D003F53F5 /* HEThumbnailCell.m */,
 				041404191EE44215003F53F5 /* HEThumbnailBottomBar.h */,
 				0414041A1EE44215003F53F5 /* HEThumbnailBottomBar.m */,
+				451ABB681EEF7E150034131E /* HEBigImageViewController.h */,
+				451ABB691EEF7E150034131E /* HEBigImageViewController.m */,
 			);
 			path = HEPhotos;
 			sourceTree = "<group>";
@@ -355,6 +360,7 @@
 			files = (
 				047655241EB227C300E0DCD9 /* ToastUtils.m in Sources */,
 				04C544371EB8BF230077C31D /* UIView+Extension.m in Sources */,
+				451ABB6A1EEF7E150034131E /* HEBigImageViewController.m in Sources */,
 				047655271EB2307700E0DCD9 /* HEAlbumListViewController.m in Sources */,
 				0476552A1EB238C900E0DCD9 /* HEAlbumListCellCell.m in Sources */,
 				041404151EE418AA003F53F5 /* HEThumbnailViewController.m in Sources */,

@@ -13,7 +13,7 @@
  */
 @interface HEThumbnailViewController : UIViewController
 
-@property (nonatomic, strong) PHAssetCollection *assetCollection;       // 相册
+@property (nonatomic, strong) NSArray <PHAsset *> *assets;       // 所有的图片资源数据源
 
 @property (nonatomic, strong) NSMutableArray <PHAsset *> *selectedAsset;        // 已经选中的资源
 
@@ -21,5 +21,5 @@
 
 @property (nonatomic, copy) void (^FinishToSelectImage)(NSArray <PHAsset *> *assets);  // 完成选择回调
 
-
+@property (nonatomic, assign) BOOL clickToShowBigImage; // 是否点击看大图，如果是，则查看大图，否则，选中该图片
 @end

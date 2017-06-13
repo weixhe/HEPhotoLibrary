@@ -27,7 +27,6 @@
     self.tableView.delegate = nil;
     self.tableView.dataSource = nil;
     self.tableView = nil;
-    [self.dataSource removeAllObjects];
     self.dataSource = nil;
     self.FinishToSelectImage = NULL;
     PhotoLog(@"HEAlbumListViewController dealloc");
@@ -75,10 +74,11 @@
     HEPhotoAlbumModel *model = [self.dataSource objectAtIndex:i];
     HEThumbnailViewController *thumbVC = [[HEThumbnailViewController alloc] init];
     thumbVC.title = model.title;
-    thumbVC.assetCollection = model.assetCollection;
+    thumbVC.assets = [[HEPhotoTool sharePhotoTool] getAssetsInAssetCollection:model.assetCollection ascending:NO];
     thumbVC.maxSelectCount = self.maxSelectCount;
     thumbVC.selectedAsset = self.selectedAsset;
     thumbVC.FinishToSelectImage = self.FinishToSelectImage;
+    thumbVC.clickToShowBigImage = NO;
     [self.navigationController pushViewController:thumbVC animated:NO];
 }
 
@@ -142,13 +142,12 @@
 }
 
 - (void)getAlbumList {
-//    self.dataSource = [NSMutableArray arrayWithArray:[[HEPhotoTool sharePhotoTool] getPhotoAlbumForCameraRoll]];
-//    [self.dataSource addObjectsFromArray:[[HEPhotoTool sharePhotoTool] getPhotosAlbumForUsers]];
-    
     self.dataSource = [NSMutableArray arrayWithArray:[[HEPhotoTool sharePhotoTool] getAllPhotoAblumList]];
-    
     [self.tableView reloadData];
+}
 
+- (void)setSelectedAsset:(NSMutableArray<PHAsset *> *)selectedAsset {
+    _selectedAsset = selectedAsset.mutableCopy;
 }
 
 #pragma mark - UITableViewDelegate UITableViewDataSource
@@ -178,10 +177,11 @@
     
     HEThumbnailViewController *thumbVC = [[HEThumbnailViewController alloc] init];
     thumbVC.title = model.title;
-    thumbVC.assetCollection = model.assetCollection;
+    thumbVC.assets = [[HEPhotoTool sharePhotoTool] getAssetsInAssetCollection:model.assetCollection ascending:NO];
     thumbVC.maxSelectCount = self.maxSelectCount;
     thumbVC.selectedAsset = self.selectedAsset;
     thumbVC.FinishToSelectImage = self.FinishToSelectImage;
+    thumbVC.clickToShowBigImage = YES;
     [self.navigationController pushViewController:thumbVC animated:YES];
 }
 

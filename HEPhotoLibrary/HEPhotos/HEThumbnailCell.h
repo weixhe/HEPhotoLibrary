@@ -21,4 +21,6 @@
 
 @property (nonatomic, assign) BOOL hidenCheckBtn;   // 隐藏选择按钮, 默认是显示的
 
+- (UIImage *)getImage;
+
 @end

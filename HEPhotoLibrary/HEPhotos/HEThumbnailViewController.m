@@ -11,6 +11,8 @@
 #import "HEThumbnailCell.h"
 #import "HEPhotoTool.h"
 #import "HEThumbnailBottomBar.h"
+#import "HEBigImageViewController.h"
+#import "ToastUtils.h"
 
 #define Cell_Item_Space 2
 #define Cell_Line_Space 2
@@ -38,9 +40,8 @@
     self.collectionView = nil;
     self.dataSource = nil;
     self.bottomBar = nil;
-    [self.selectedAsset removeAllObjects];
     self.selectedAsset = nil;
-    self.assetCollection = nil;
+    self.assets = nil;
     self.FinishToSelectImage = NULL;
     PhotoLog(@"HEThumbnailViewController dealloc");
 }
@@ -56,7 +57,7 @@
     [self.view addSubview:bgImageView];
 
     // 处理数据源, 从相册中取出所有的资源asset
-    self.dataSource = [[HEPhotoTool sharePhotoTool] getAssetsInAssetCollection:self.assetCollection ascending:NO];
+    self.dataSource = self.assets;
     
     [self layoutNavigation];
     [self setupCollectionView];
@@ -117,15 +118,17 @@
     };
     
     self.bottomBar.FinishToSelectImage = ^{
+        
+        if (weakSelf.selectedAsset.count == 0) {
+            ShowToast(@"您还没有选择图片");
+            return ;
+        }
+        
         if (weakSelf.FinishToSelectImage) {
             weakSelf.FinishToSelectImage(weakSelf.selectedAsset.copy);
         }
         [weakSelf onCancelAction:nil];
     };
-}
-
-- (void)setSelectedAsset:(NSMutableArray<PHAsset *> *)selectedAsset {
-    _selectedAsset = selectedAsset.mutableCopy;
 }
 
 #pragma mark - UIButton Action
@@ -179,6 +182,7 @@
     // 判断是否达到了最大量
     cell.JudgeWhetherMaximize = ^BOOL {
         if (weakSelf.selectedAsset.count == weakSelf.maxSelectCount) {
+            ShowToast(@"已经达到了最大量了");
             return YES;
         }
         return NO;
@@ -187,15 +191,42 @@
     return cell;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.clickToShowBigImage) {
+        HEBigImageViewController *bigImageVC = [[HEBigImageViewController alloc] init];
+        bigImageVC.assets = self.assets;
+    } else {
+        HEThumbnailCell *cell = (HEThumbnailCell *)[collectionView cellForItemAtIndexPath:indexPath];
+        PHAsset *asset = [self.dataSource objectAtIndex:indexPath.item];
+        if ([self.selectedAsset containsObject:asset]) {
+            cell.checked = NO;
+            [self.bottomBar deleteImage:[cell getImage] asset:asset];
+            if ([self.selectedAsset containsObject:asset]) {
+                [self.selectedAsset removeObject:asset];
+            }
+        } else {
+            
+            if (self.selectedAsset.count == self.maxSelectCount) {
+                ShowToast(@"已经达到了最大量了");
+                return;
+            }
+            
+            cell.checked = YES;
+            [self.bottomBar addImage:[cell getImage] asset:asset];
+            if (!self.selectedAsset) {
+                self.selectedAsset = [NSMutableArray array];
+            }
+            [self.selectedAsset addObject:asset];
+        }
+    }
+}
+
 #pragma mark - UICollectionViewDelegateFlowLayout
 /// 设置每个item的宽高
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     return CGSizeMake(cellWidth, cellWidth);
 }
-
-
-//- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section;
 
 /// 行距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
@@ -206,13 +237,5 @@
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     return Cell_Item_Space;
 }
-
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-//    
-//}
-//
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
-//    
-//}
 
 @end

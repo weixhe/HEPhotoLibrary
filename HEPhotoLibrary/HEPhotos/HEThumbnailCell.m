@@ -98,12 +98,20 @@
 - (void)setChecked:(BOOL)checked {
     _checked = checked;
     self.checkBtn.selected = checked;
+    if (self.checkBtn.selected) {
+        [self.checkBtn.layer addAnimation:GetBtnStatusChangedAnimation() forKey:nil];
+    }
+
 }
 
 - (void)setHidenCheckBtn:(BOOL)hidenCheckBtn {
     _hidenCheckBtn = hidenCheckBtn;
     
     self.checkBtn.hidden = hidenCheckBtn;
+}
+
+- (UIImage *)getImage {
+    return self.imageView.image;
 }
 
 @end
