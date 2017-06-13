@@ -78,7 +78,7 @@
     thumbVC.maxSelectCount = self.maxSelectCount;
     thumbVC.selectedAsset = self.selectedAsset;
     thumbVC.FinishToSelectImage = self.FinishToSelectImage;
-    thumbVC.clickToShowBigImage = NO;
+    thumbVC.clickToShowBigImage = YES;
     [self.navigationController pushViewController:thumbVC animated:NO];
 }
 

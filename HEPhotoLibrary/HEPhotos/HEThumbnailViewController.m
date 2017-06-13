@@ -195,6 +195,11 @@
     if (self.clickToShowBigImage) {
         HEBigImageViewController *bigImageVC = [[HEBigImageViewController alloc] init];
         bigImageVC.assets = self.assets;
+        bigImageVC.selectIndex = indexPath.item + 1;
+        bigImageVC.selectedAsset = self.selectedAsset;
+        bigImageVC.maxSelectCount = self.maxSelectCount;
+        bigImageVC.isPresent = NO;
+        [self.navigationController pushViewController:bigImageVC animated:YES];
     } else {
         HEThumbnailCell *cell = (HEThumbnailCell *)[collectionView cellForItemAtIndexPath:indexPath];
         PHAsset *asset = [self.dataSource objectAtIndex:indexPath.item];
