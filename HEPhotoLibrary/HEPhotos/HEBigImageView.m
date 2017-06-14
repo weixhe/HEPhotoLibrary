@@ -18,8 +18,6 @@
 
 @property (nonatomic, strong) NSArray <PHAsset *> *assets;       // 所有的图片资源数据源
 
-@property (nonatomic, assign) NSUInteger selectIndex; // 选中的图片下标
-
 @end
 
 @implementation HEBigImageView
@@ -30,6 +28,8 @@
     self.collectionView.delegate = nil;
     self.collectionView.dataSource = nil;
     self.collectionView = nil;
+    self.BlockOnClickBigImage = NULL;
+    self.BlockOnCurrentImage = NULL;
 }
 
 
@@ -39,11 +39,11 @@
     if (self) {
         self.frame = CGRectMake(0, 0, kViewWidth, kViewHeight);
         self.backgroundColor = [UIColor blackColor];
-
         
         self.assets = assets;
-        self.selectIndex = index;
         [self setupCollectionView];
+        
+        [self.collectionView setContentOffset:CGPointMake((index - 1) * self.collectionView.frame.size.width, 0)];
     }
     return self;
 }
@@ -87,8 +87,16 @@
             weakSelf.BlockOnClickBigImage();
         }
     };
+    
     return cell;
 }
 
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+
+    if (self.BlockOnCurrentImage) {
+        NSUInteger page = scrollView.contentOffset.x / scrollView.frame.size.width + 1;
+        self.BlockOnCurrentImage(page);
+    }
+}
 
 @end

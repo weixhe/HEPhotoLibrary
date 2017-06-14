@@ -12,9 +12,8 @@
 
 @interface HEBigImageCell () <UIScrollViewDelegate>
 
-@property (nonatomic, strong) UIView *containerView;
 @property (nonatomic, strong) UIScrollView *scrollView;
-@property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) UIImageView *bigImageView;
 @property (nonatomic, strong) UIActivityIndicatorView *indicator;
 
 @end
@@ -23,9 +22,8 @@
 
 - (void)dealloc
 {
-    self.containerView = nil;
     self.scrollView = nil;
-    self.imageView = nil;
+    self.bigImageView = nil;
     self.indicator = nil;
 }
 
@@ -34,10 +32,9 @@
     self = [super initWithFrame:frame];
     if (self) {
 
-        [self addSubview:self.scrollView];
-        [self.scrollView addSubview:self.containerView];
-        [self.containerView addSubview:self.imageView];
-        [self addSubview:self.indicator];
+        [self.contentView addSubview:self.scrollView];
+        [self.scrollView addSubview:self.bigImageView];
+        [self.contentView addSubview:self.indicator];
     }
     return self;
 }
@@ -69,21 +66,13 @@
     return _scrollView;
 }
 
-- (UIView *)containerView
+- (UIImageView *)bigImageView
 {
-    if (!_containerView) {
-        _containerView = [[UIView alloc] init];
+    if (!_bigImageView) {
+        _bigImageView = [[UIImageView alloc] init];
+        _bigImageView.contentMode = UIViewContentModeScaleAspectFit;
     }
-    return _containerView;
-}
-
-- (UIImageView *)imageView
-{
-    if (!_imageView) {
-        _imageView = [[UIImageView alloc] init];
-        _imageView.contentMode = UIViewContentModeScaleAspectFit;
-    }
-    return _imageView;
+    return _bigImageView;
 }
 
 - (UIActivityIndicatorView *)indicator
@@ -100,7 +89,7 @@
     CGRect frame;
     frame.origin = CGPointZero;
     
-    UIImage *image = self.imageView.image;
+    UIImage *image = self.bigImageView.image;
     CGFloat imageScale = image.size.height / image.size.width;
     CGFloat screenScale = kViewHeight / kViewWidth;
     if (image.size.width <= CGRectGetWidth(self.frame) && image.size.height <= CGRectGetHeight(self.frame)) {
@@ -119,9 +108,9 @@
     self.scrollView.zoomScale = 1;
     self.scrollView.contentSize = frame.size;
     [self.scrollView scrollRectToVisible:self.bounds animated:NO];
-    self.containerView.frame = frame;
-    self.containerView.center = self.scrollView.center;
-    self.imageView.frame = self.containerView.bounds;
+    self.bigImageView.frame = frame;
+    self.bigImageView.center = self.scrollView.center;
+
 }
 
 #pragma mark - Gesture Action
@@ -140,9 +129,12 @@
     } else {
         scale = 1;
     }
+    // 根据点击的位置放大
     CGRect zoomRect = [self zoomRectForScale:scale withCenter:[gesture locationInView:gesture.view]];
     [scrollView zoomToRect:zoomRect animated:YES];
 
+    // 直接放大scale倍
+//    [scrollView setZoomScale:scale animated:YES];
 }
 
 - (CGRect)zoomRectForScale:(float)scale withCenter:(CGPoint)center {
@@ -154,15 +146,16 @@
     return zoomRect;
 }
 
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-    return scrollView.subviews[0];
-}
 
 #pragma mark - UIScrollViewDelegate
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    return self.bigImageView; 
+}
+
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
     CGFloat offsetX = (CGRectGetWidth(scrollView.frame) > scrollView.contentSize.width) ? (CGRectGetWidth(scrollView.frame) - scrollView.contentSize.width) * 0.5 : 0.0;
     CGFloat offsetY = (CGRectGetHeight(scrollView.frame) > scrollView.contentSize.height) ? (CGRectGetHeight(scrollView.frame) - scrollView.contentSize.height) * 0.5 : 0.0;
-    self.containerView.center = CGPointMake(scrollView.contentSize.width * 0.5 + offsetX, scrollView.contentSize.height * 0.5 + offsetY);
+    self.bigImageView.center = CGPointMake(scrollView.contentSize.width * 0.5 + offsetX, scrollView.contentSize.height * 0.5 + offsetY);
 }
 
 #pragma mark - Setter
@@ -176,7 +169,7 @@
     [self.indicator startAnimating];
     WS(weakSelf)
     [[HEPhotoTool sharePhotoTool] requestImageForAsset:asset size:size resizeMode:PHImageRequestOptionsResizeModeFast complete:^(UIImage *image, NSDictionary *info) {
-        weakSelf.imageView.image = image;
+        weakSelf.bigImageView.image = image;
         [weakSelf resetSubviewSize];
         if (![[info objectForKey:PHImageResultIsDegradedKey] boolValue]) {
             [weakSelf.indicator stopAnimating];

@@ -28,6 +28,7 @@
 		451ABB701EEFD2700034131E /* HEBigImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 451ABB6F1EEFD2700034131E /* HEBigImageCell.m */; };
 		451ABB731EEFF0AF0034131E /* HEBigImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 451ABB721EEFF0AF0034131E /* HEBigImageView.m */; };
 		45B690ED1EE7ADEC00C0DFD6 /* HEPhotos.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 45B690EC1EE7ADEC00C0DFD6 /* HEPhotos.bundle */; };
+		45C1877F1EF10CD100E3C791 /* HEBigImageBottomBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 45C1877E1EF10CD100E3C791 /* HEBigImageBottomBar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,8 @@
 		451ABB711EEFF0AF0034131E /* HEBigImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HEBigImageView.h; sourceTree = "<group>"; };
 		451ABB721EEFF0AF0034131E /* HEBigImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HEBigImageView.m; sourceTree = "<group>"; };
 		45B690EC1EE7ADEC00C0DFD6 /* HEPhotos.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HEPhotos.bundle; sourceTree = "<group>"; };
+		45C1877D1EF10CD100E3C791 /* HEBigImageBottomBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HEBigImageBottomBar.h; sourceTree = "<group>"; };
+		45C1877E1EF10CD100E3C791 /* HEBigImageBottomBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HEBigImageBottomBar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +145,8 @@
 				451ABB721EEFF0AF0034131E /* HEBigImageView.m */,
 				451ABB6E1EEFD2700034131E /* HEBigImageCell.h */,
 				451ABB6F1EEFD2700034131E /* HEBigImageCell.m */,
+				45C1877D1EF10CD100E3C791 /* HEBigImageBottomBar.h */,
+				45C1877E1EF10CD100E3C791 /* HEBigImageBottomBar.m */,
 			);
 			path = HEPhotos;
 			sourceTree = "<group>";
@@ -380,6 +385,7 @@
 				048C1BE41EAE3CBC00C0D95A /* HEPhotoTool.m in Sources */,
 				041404181EE41E3D003F53F5 /* HEThumbnailCell.m in Sources */,
 				04EC08BA1EA5076700C81ABE /* AppDelegate.m in Sources */,
+				45C1877F1EF10CD100E3C791 /* HEBigImageBottomBar.m in Sources */,
 				04EC08B71EA5076700C81ABE /* main.m in Sources */,
 				0414041B1EE44215003F53F5 /* HEThumbnailBottomBar.m in Sources */,
 			);

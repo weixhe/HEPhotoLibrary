@@ -9,7 +9,7 @@
 #import "HEBigImageViewController.h"
 #import "ToastUtils.h"
 #import "HEPhotoConstant.h"
-
+#import "HEBigImageBottomBar.h"
 #import "HEBigImageView.h"
 
 #define kItemMargin 30
@@ -19,6 +19,7 @@
 
 @interface HEBigImageViewController ()
 
+@property (nonatomic, strong) HEBigImageBottomBar *bottomBar;
 
 @end
 
@@ -27,6 +28,7 @@
 {
     self.assets = nil;
     self.selectedAsset = nil;
+    self.bottomBar = nil;
 }
 
 - (void)viewDidLoad {
@@ -35,6 +37,10 @@
     
     [self layoutNavigation];
     [self setupCollectionView];
+    
+    [self changeNavTitleAndBtnStatus:self.selectIndex];
+    // [self setupBottomBar];
+    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -75,14 +81,44 @@
             [weakSelf hidenNavigationBar];
         }
     };
+    
+    bigView.BlockOnCurrentImage = ^(NSUInteger index) {
+      
+        [weakSelf changeNavTitleAndBtnStatus:index];
+    };
+}
+
+- (void)setupBottomBar {
+    self.bottomBar = [[HEBigImageBottomBar alloc] initWithFrame:CGRectMake(0, kViewHeight - 44, kViewWidth, 44)];
+    [self.view addSubview:self.bottomBar];
+    
+    WS(weakSelf)
+    self.bottomBar.BlockOnClickSureButton = ^{
+      
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+    };
 }
 
 - (void)hidenNavigationBar {
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
+    
+    CGRect frame = self.bottomBar.frame;
+    frame.origin.y += frame.size.height;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.bottomBar.frame = frame;
+    }];
 }
 
 - (void)showNavigationBar {
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
+    
+    CGRect frame = self.bottomBar.frame;
+    frame.origin.y -= frame.size.height;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.bottomBar.frame = frame;
+    }];
 }
 
 #pragma mark - UIButton Action
@@ -106,7 +142,15 @@
     }
     
     button.selected = !button.selected;
+    if (button.selected) {
+        [button.layer addAnimation:GetBtnStatusChangedAnimation() forKey:nil];
+    }
+}
 
+#pragma mark - 更新title和按钮状态
+- (void)changeNavTitleAndBtnStatus:(NSUInteger)index {
+    
+    self.title = [NSString stringWithFormat:@"%ld/%ld", index, self.assets.count];
 }
 
 @end

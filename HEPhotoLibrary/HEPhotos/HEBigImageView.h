@@ -11,8 +11,11 @@
 
 @interface HEBigImageView : UIView
 
-@property (nonatomic, copy) void(^BlockOnClickBigImage)();
+@property (nonatomic, copy) void (^BlockOnClickBigImage)();
+
+@property (nonatomic, copy) void (^BlockOnCurrentImage)(NSUInteger index);
 
 - (instancetype)initWithAssets:(NSArray <PHAsset *> *)assets currentIndex:(NSUInteger)index;
 
 @end
+
