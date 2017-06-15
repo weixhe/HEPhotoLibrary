@@ -18,6 +18,7 @@
 @property (nonatomic, copy) void (^DeleteOneImage)(UIImage *image, PHAsset *asset);
 @property (nonatomic, copy) void (^FinishToSelectImage)();  // 完成选择
 
+// 以下两个方法的image属性没有使用，可传nil
 - (void)addImage:(UIImage *)image asset:(PHAsset *)asset;
 - (void)deleteImage:(UIImage *)image asset:(PHAsset *)asset;
 

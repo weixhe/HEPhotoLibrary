@@ -199,6 +199,17 @@
         bigImageVC.selectedAsset = self.selectedAsset;
         bigImageVC.maxSelectCount = self.maxSelectCount;
         bigImageVC.isPresent = NO;
+        WS(weakSelf)
+        bigImageVC.BlockOnRefrashData = ^(PHAsset *asset, BOOL isAdd) {
+            [weakSelf.collectionView reloadData];
+            
+            if (isAdd) {
+                [weakSelf.bottomBar addImage:nil asset:asset];
+                
+            } else {
+                [weakSelf.bottomBar deleteImage:nil asset:asset];
+            }
+        };
         [self.navigationController pushViewController:bigImageVC animated:YES];
     } else {
         HEThumbnailCell *cell = (HEThumbnailCell *)[collectionView cellForItemAtIndexPath:indexPath];

@@ -165,6 +165,14 @@
 
 - (void)addImage:(UIImage *)image asset:(PHAsset *)asset {
 
+    if (!image) {
+        WS(weakSelf)
+        [[HEPhotoTool sharePhotoTool] requestImageForAsset:asset size:weakSelf.size resizeMode:PHImageRequestOptionsResizeModeExact complete:^(UIImage *image, NSDictionary *info) {
+            [weakSelf addImage:image asset:asset];
+        }];
+        return;
+    }
+    
     UIView *view = [self generateImageViewWithImage:image];
     
     HEThumbailBottomBarModel *model = [[HEThumbailBottomBarModel alloc] init];

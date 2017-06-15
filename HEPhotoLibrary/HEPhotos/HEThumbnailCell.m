@@ -98,10 +98,6 @@
 - (void)setChecked:(BOOL)checked {
     _checked = checked;
     self.checkBtn.selected = checked;
-    if (self.checkBtn.selected) {
-        [self.checkBtn.layer addAnimation:GetBtnStatusChangedAnimation() forKey:nil];
-    }
-
 }
 
 - (void)setHidenCheckBtn:(BOOL)hidenCheckBtn {

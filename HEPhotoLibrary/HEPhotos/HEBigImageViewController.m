@@ -21,6 +21,7 @@
 
 @property (nonatomic, strong) HEBigImageBottomBar *bottomBar;
 
+@property (nonatomic, strong) UIButton *selectBtn;
 @end
 
 @implementation HEBigImageViewController
@@ -29,6 +30,8 @@
     self.assets = nil;
     self.selectedAsset = nil;
     self.bottomBar = nil;
+    self.selectBtn = nil;
+    self.BlockOnRefrashData = NULL;
 }
 
 - (void)viewDidLoad {
@@ -41,6 +44,10 @@
     [self changeNavTitleAndBtnStatus:self.selectIndex];
     // [self setupBottomBar];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    // 判断是否已选中
+    BOOL result = [self.selectedAsset containsObject:[self.assets objectAtIndex:self.selectIndex - 1]];
+    [self changeNavRightBtnStatus:result ? YES : NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -58,14 +65,14 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
 
     
-    UIButton *selectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    selectBtn.frame = CGRectMake(0, 0, 25, 25);
-    selectBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 25, 0, -25);
-    [selectBtn setBackgroundImage:UIImageFromPhotoBundle(@"btn_unselected") forState:UIControlStateNormal];
-    [selectBtn setBackgroundImage:UIImageFromPhotoBundle(@"btn_unselected") forState:UIControlStateHighlighted];
-    [selectBtn setBackgroundImage:UIImageFromPhotoBundle(@"btn_selected") forState:UIControlStateSelected];
-    [selectBtn addTarget:self action:@selector(onSelectAction:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:selectBtn];
+    self.selectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.selectBtn.frame = CGRectMake(0, 0, 25, 25);
+    self.selectBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 25, 0, -25);
+    [self.selectBtn setBackgroundImage:UIImageFromPhotoBundle(@"btn_unselected") forState:UIControlStateNormal];
+    [self.selectBtn setBackgroundImage:UIImageFromPhotoBundle(@"btn_unselected") forState:UIControlStateHighlighted];
+    [self.selectBtn setBackgroundImage:UIImageFromPhotoBundle(@"btn_selected") forState:UIControlStateSelected];
+    [self.selectBtn addTarget:self action:@selector(onSelectAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.selectBtn];
 }
 
 - (void)setupCollectionView {
@@ -84,7 +91,13 @@
     
     bigView.BlockOnCurrentImage = ^(NSUInteger index) {
       
+        self.selectIndex = index;
+        // 更新title
         [weakSelf changeNavTitleAndBtnStatus:index];
+        
+        // 判断是否已选中
+        BOOL result = [weakSelf.selectedAsset containsObject:[weakSelf.assets objectAtIndex:index - 1]];
+        [weakSelf changeNavRightBtnStatus:result ? YES : NO];
     };
 }
 
@@ -141,9 +154,22 @@
         }
     }
     
-    button.selected = !button.selected;
+    [self changeNavRightBtnStatus:!button.selected];
+    
+    // 更新数据源
+    PHAsset *asset = [self.assets objectAtIndex:self.selectIndex - 1];
     if (button.selected) {
-        [button.layer addAnimation:GetBtnStatusChangedAnimation() forKey:nil];
+        if (![self.selectedAsset containsObject:asset]) {
+            [self.selectedAsset addObject:asset];
+        }
+    } else {
+        if ([self.selectedAsset containsObject:asset]) {
+            [self.selectedAsset removeObject:asset];
+        }
+    }
+    
+    if (self.BlockOnRefrashData) {
+        self.BlockOnRefrashData(asset, button.selected);
     }
 }
 
@@ -153,4 +179,10 @@
     self.title = [NSString stringWithFormat:@"%ld/%ld", index, self.assets.count];
 }
 
+- (void)changeNavRightBtnStatus:(BOOL)isSelect {
+    self.selectBtn.selected = isSelect;
+    if (self.selectBtn.selected) {
+        [self.selectBtn.layer addAnimation:GetBtnStatusChangedAnimation() forKey:nil];
+    }
+}
 @end

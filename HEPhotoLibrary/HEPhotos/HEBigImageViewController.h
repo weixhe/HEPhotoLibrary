@@ -21,4 +21,7 @@
 
 @property (nonatomic, assign) BOOL isPresent; // 该界面显示方式，预览界面查看大图进来是present，从相册小图进来是push
 
+// 回调刷新
+@property (nonatomic, copy) void (^BlockOnRefrashData)(PHAsset *asset, BOOL isAdd);
+
 @end
