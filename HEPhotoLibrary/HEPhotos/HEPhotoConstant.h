@@ -39,6 +39,8 @@ static NSString * const kTextForRecentlyAdd                     = @"Recently Add
 static NSString * const kTextForTip                             = @"tip";
 static NSString * const kTextForIKnow                           = @"i know";
 static NSString * const kTextForSure                            = @"sure";
+static NSString * const kTextForReachedMax                      = @"has reached the maximum";
+static NSString * const kTextForNotChooseImage                  = @"you have not chosen images";
 
 static inline CAKeyframeAnimation * GetBtnStatusChangedAnimation() {
     CAKeyframeAnimation *animate = [CAKeyframeAnimation animationWithKeyPath:@"transform"];

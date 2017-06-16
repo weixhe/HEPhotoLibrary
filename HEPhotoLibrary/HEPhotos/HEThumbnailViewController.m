@@ -120,7 +120,7 @@
     self.bottomBar.FinishToSelectImage = ^{
         
         if (weakSelf.selectedAsset.count == 0) {
-            ShowToast(@"您还没有选择图片");
+            ShowToast(@"%@", LocalizedStringForKey(kTextForNotChooseImage));
             return ;
         }
         
@@ -182,7 +182,7 @@
     // 判断是否达到了最大量
     cell.JudgeWhetherMaximize = ^BOOL {
         if (weakSelf.selectedAsset.count == weakSelf.maxSelectCount) {
-            ShowToast(@"已经达到了最大量了");
+            ShowToast(@"%@", LocalizedStringForKey(kTextForReachedMax));
             return YES;
         }
         return NO;
@@ -223,7 +223,7 @@
         } else {
             
             if (self.selectedAsset.count == self.maxSelectCount) {
-                ShowToast(@"已经达到了最大量了");
+                ShowToast(@"%@", LocalizedStringForKey(kTextForReachedMax));
                 return;
             }
             

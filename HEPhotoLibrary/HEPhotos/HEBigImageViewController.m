@@ -149,7 +149,7 @@
     if (!button.selected) {
         // 判断是否达到了最大量
         if (self.selectedAsset.count == self.maxSelectCount) {
-            ShowToast(@"已经达到了最大量了");
+            ShowToast(@"%@", LocalizedStringForKey(kTextForReachedMax));
             return;
         }
     }
