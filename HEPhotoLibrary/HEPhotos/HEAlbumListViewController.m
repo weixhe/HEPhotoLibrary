@@ -29,6 +29,7 @@
     self.tableView = nil;
     self.dataSource = nil;
     self.FinishToSelectImage = NULL;
+
     PhotoLog(@"HEAlbumListViewController dealloc");
 }
 

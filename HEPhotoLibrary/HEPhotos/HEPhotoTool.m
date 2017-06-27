@@ -126,9 +126,6 @@ static HEPhotoTool *instance = nil;
             if (assets.count != 0) {
                 HEPhotoAlbumModel *album = [[HEPhotoAlbumModel alloc] init];
                 album.title = collection.localizedTitle;            // 相册名字
-                if ([collection.localizedTitle isEqualToString:@"Camera Roll"]) {
-                    album.title = @"相机胶卷";
-                }
                 album.count = assets.count;                         // 该相册内相片数量
                 album.headImageAsset = assets.firstObject;          // 相册第一张图片缩略图
                 album.assetCollection = collection;                 // 相册集，通过该属性获取该相册集下所有照片

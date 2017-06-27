@@ -34,13 +34,22 @@ static NSString * const kAccessAuthorityStatusDenied            = @"您已拒绝
 
 static NSString * const kTextForPhotoList                       = @"photo list";
 static NSString * const kTextForCancel                          = @"cancel";
-static NSString * const kTextForCameraRoll                      = @"Camera Roll";
-static NSString * const kTextForRecentlyAdd                     = @"Recently Added";
 static NSString * const kTextForTip                             = @"tip";
 static NSString * const kTextForIKnow                           = @"i know";
 static NSString * const kTextForSure                            = @"sure";
 static NSString * const kTextForReachedMax                      = @"has reached the maximum";
 static NSString * const kTextForNotChooseImage                  = @"you have not chosen images";
+
+/// 智能相册名称
+static NSString * const kTextForCameraRoll                      = @"Camera Roll";
+static NSString * const kTextForRecentlyAdd                     = @"Recently Added";
+static NSString * const kTextForSloMo                           = @"Slo-mo";
+static NSString * const kTextForFavorites                       = @"Favorites";
+static NSString * const kTextForRecentlyDeleted                 = @"Recently Deleted";
+static NSString * const kTextForVideos                          = @"Videos";
+static NSString * const kTextForAllPhotos                       = @"All Photos";
+static NSString * const kTextForSelfies                         = @"Selfies";
+static NSString * const kTextForScreenshots                     = @"Screenshots";
 
 static inline CAKeyframeAnimation * GetBtnStatusChangedAnimation() {
     CAKeyframeAnimation *animate = [CAKeyframeAnimation animationWithKeyPath:@"transform"];

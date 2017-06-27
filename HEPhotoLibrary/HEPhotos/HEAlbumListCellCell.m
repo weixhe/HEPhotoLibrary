@@ -76,9 +76,9 @@
         self.iconImageView.image = image;
     }];
     
-    self.titleLabel.text = model.title;
+    self.titleLabel.text = LocalizedStringForKey(model.title);
     
-    self.subTibleLabel.text = [NSString stringWithFormat:@"共 %ld 张图片", model.count];
+    self.subTibleLabel.text = [NSString stringWithFormat:@"共 %ld 张图片", (long)model.count];
 }
 
 @end
