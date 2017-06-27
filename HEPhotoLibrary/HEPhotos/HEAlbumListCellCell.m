@@ -78,7 +78,7 @@
     
     self.titleLabel.text = LocalizedStringForKey(model.title);
     
-    self.subTibleLabel.text = [NSString stringWithFormat:@"共 %ld 张图片", (long)model.count];
+    self.subTibleLabel.text = [NSString stringWithFormat:@"%@ %ld %@", LocalizedStringForKey(kTextForTotal), (long)model.count, LocalizedStringForKey(kTextForImageCount)];
 }
 
 @end

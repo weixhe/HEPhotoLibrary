@@ -23,28 +23,34 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jA5-S2-cWc">
-                                <rect key="frame" x="16" y="102" width="144" height="30"/>
+                                <rect key="frame" x="33" y="102" width="100" height="30"/>
                                 <color key="backgroundColor" red="0.49956894959999998" green="0.90057145650000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Eb7-Tr-X3k"/>
+                                    <constraint firstAttribute="width" constant="100" id="ldv-Hw-B1L"/>
+                                </constraints>
                                 <state key="normal" title="选照片"/>
                                 <connections>
                                     <action selector="onChoosePhotos:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sDY-R1-dBl"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sLu-wL-gLh">
-                                <rect key="frame" x="16" y="154" width="144" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sLu-wL-gLh">
+                                <rect key="frame" x="149" y="102" width="100" height="30"/>
                                 <color key="backgroundColor" red="0.49956894959999998" green="0.90057145650000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="相册列表"/>
+                                <state key="normal" title="截图"/>
                                 <connections>
-                                    <action selector="onShowAlbumList:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RlQ-fA-gA0"/>
+                                    <action selector="onShowAlbumList:" destination="BYZ-38-t0r" eventType="touchUpInside" id="j9C-pw-sp3"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="jA5-S2-cWc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="0DO-kK-dNp"/>
-                            <constraint firstItem="jA5-S2-cWc" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="38" id="mV5-PD-uTc"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="jA5-S2-cWc" secondAttribute="trailing" constant="199" id="wPe-uv-yVP"/>
+                            <constraint firstItem="jA5-S2-cWc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="17" id="60b-kU-Ouh"/>
+                            <constraint firstItem="sLu-wL-gLh" firstAttribute="height" secondItem="jA5-S2-cWc" secondAttribute="height" id="Ieh-Yi-0wl"/>
+                            <constraint firstItem="sLu-wL-gLh" firstAttribute="leading" secondItem="jA5-S2-cWc" secondAttribute="trailing" constant="16" id="tmk-ll-JZc"/>
+                            <constraint firstItem="jA5-S2-cWc" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="38" id="ych-6F-2uX"/>
+                            <constraint firstItem="sLu-wL-gLh" firstAttribute="top" secondItem="jA5-S2-cWc" secondAttribute="top" id="z37-xw-YYV"/>
+                            <constraint firstItem="sLu-wL-gLh" firstAttribute="width" secondItem="jA5-S2-cWc" secondAttribute="width" id="zxt-49-axS"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bwn-XT-8OB"/>

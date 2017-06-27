@@ -76,10 +76,18 @@
     HEThumbnailViewController *thumbVC = [[HEThumbnailViewController alloc] init];
     thumbVC.title = model.title;
     thumbVC.assets = [[HEPhotoTool sharePhotoTool] getAssetsInAssetCollection:model.assetCollection ascending:NO];
-    thumbVC.maxSelectCount = self.maxSelectCount;
-    thumbVC.selectedAsset = self.selectedAsset;
-    thumbVC.FinishToSelectImage = self.FinishToSelectImage;
-    thumbVC.clickToShowBigImage = YES;
+    if (!self.isSingle) {
+        thumbVC.maxSelectCount = self.maxSelectCount;
+        thumbVC.selectedAsset = self.selectedAsset;
+        thumbVC.FinishToSelectImage = self.FinishToSelectImage;
+        thumbVC.clickToShowBigImage = self.clickToShowBigImage;
+        
+    } else {
+        thumbVC.isSingle = self.isSingle;
+        thumbVC.clipRatio = self.clipRatio;
+        thumbVC.clipWidth = self.clipWidth;
+        thumbVC.clipHeight = self.clipHeight;
+    }
     [self.navigationController pushViewController:thumbVC animated:NO];
 }
 
@@ -182,10 +190,17 @@
     HEThumbnailViewController *thumbVC = [[HEThumbnailViewController alloc] init];
     thumbVC.title = model.title;
     thumbVC.assets = [[HEPhotoTool sharePhotoTool] getAssetsInAssetCollection:model.assetCollection ascending:NO];
-    thumbVC.maxSelectCount = self.maxSelectCount;
-    thumbVC.selectedAsset = self.selectedAsset;
-    thumbVC.FinishToSelectImage = self.FinishToSelectImage;
-    thumbVC.clickToShowBigImage = YES;
+    if (!self.isSingle) {
+        thumbVC.maxSelectCount = self.maxSelectCount;
+        thumbVC.selectedAsset = self.selectedAsset;
+        thumbVC.FinishToSelectImage = self.FinishToSelectImage;
+        thumbVC.clickToShowBigImage = self.clickToShowBigImage;
+    } else {
+        thumbVC.isSingle = self.isSingle;
+        thumbVC.clipRatio = self.clipRatio;
+        thumbVC.clipWidth = self.clipWidth;
+        thumbVC.clipHeight = self.clipHeight;
+    }
     [self.navigationController pushViewController:thumbVC animated:YES];
 }
 

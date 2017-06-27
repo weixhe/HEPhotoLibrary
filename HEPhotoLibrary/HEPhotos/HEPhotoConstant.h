@@ -39,7 +39,8 @@ static NSString * const kTextForIKnow                           = @"i know";
 static NSString * const kTextForSure                            = @"sure";
 static NSString * const kTextForReachedMax                      = @"has reached the maximum";
 static NSString * const kTextForNotChooseImage                  = @"you have not chosen images";
-
+static NSString * const kTextForTotal                      = @"total";
+static NSString * const kTextForImageCount                      = @"images count";
 /// 智能相册名称
 static NSString * const kTextForCameraRoll                      = @"Camera Roll";
 static NSString * const kTextForRecentlyAdd                     = @"Recently Added";

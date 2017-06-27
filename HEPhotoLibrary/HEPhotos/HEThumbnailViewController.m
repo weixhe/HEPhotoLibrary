@@ -13,6 +13,7 @@
 #import "HEThumbnailBottomBar.h"
 #import "HEBigImageViewController.h"
 #import "ToastUtils.h"
+#import "HEClipImageViewController.h"
 
 #define Cell_Item_Space 2
 #define Cell_Line_Space 2
@@ -61,7 +62,9 @@
     
     [self layoutNavigation];
     [self setupCollectionView];
-    [self setupBottomBar];
+    if (!self.isSingle) {
+        [self setupBottomBar];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -92,7 +95,7 @@
 
 
 - (void)setupCollectionView {
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, kViewWidth, self.view.height - Height_BottomView - 64) collectionViewLayout:[[UICollectionViewFlowLayout alloc] init]];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, kViewWidth, kViewHeight - Height_BottomView - 64) collectionViewLayout:[[UICollectionViewFlowLayout alloc] init]];
     self.collectionView.backgroundColor = [UIColor clearColor];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
@@ -100,6 +103,10 @@
     [self.view addSubview:self.collectionView];
     
     cellWidth = (self.collectionView.width - (Cell_Item_Num - 1) * Cell_Item_Space) / Cell_Item_Num;
+    
+    if (self.isSingle) {
+        self.collectionView.frame = CGRectMake(0, 64, kViewWidth, kViewHeight - 64);
+    }
 }
 
 - (void)setupBottomBar {
@@ -157,41 +164,58 @@
     
     PHAsset *asset = [self.dataSource objectAtIndex:indexPath.item];
     cell.asset = asset;
-    if ([self.selectedAsset containsObject:asset]) {
-        cell.checked = YES;
+    if (self.isSingle) {
+        cell.hidenCheckBtn = YES;
     } else {
-        cell.checked = NO;
-    }
-    
-    WS(weakSelf);
-    cell.CheckImage = ^(UIImage *image, PHAsset *asset1, BOOL check) {
-        if (check) {
-            [weakSelf.bottomBar addImage:image asset:asset1];
-            if (!weakSelf.selectedAsset) {
-                weakSelf.selectedAsset = [NSMutableArray array];
-            }
-            [weakSelf.selectedAsset addObject:asset1];
+        if ([self.selectedAsset containsObject:asset]) {
+            cell.checked = YES;
         } else {
-            [weakSelf.bottomBar deleteImage:image asset:asset1];
-            if ([weakSelf.selectedAsset containsObject:asset1]) {
-                [weakSelf.selectedAsset removeObject:asset1];
+            cell.checked = NO;
+        }
+        WS(weakSelf);
+        cell.CheckImage = ^(UIImage *image, PHAsset *asset1, BOOL check) {
+            if (check) {
+                [weakSelf.bottomBar addImage:image asset:asset1];
+                if (!weakSelf.selectedAsset) {
+                    weakSelf.selectedAsset = [NSMutableArray array];
+                }
+                [weakSelf.selectedAsset addObject:asset1];
+            } else {
+                [weakSelf.bottomBar deleteImage:image asset:asset1];
+                if ([weakSelf.selectedAsset containsObject:asset1]) {
+                    [weakSelf.selectedAsset removeObject:asset1];
+                }
             }
-        }
-    };
-    
-    // 判断是否达到了最大量
-    cell.JudgeWhetherMaximize = ^BOOL {
-        if (weakSelf.selectedAsset.count == weakSelf.maxSelectCount) {
-            ShowToast(@"%@", LocalizedStringForKey(kTextForReachedMax));
-            return YES;
-        }
-        return NO;
-    };
+        };
+        
+        // 判断是否达到了最大量
+        cell.JudgeWhetherMaximize = ^BOOL {
+            if (weakSelf.selectedAsset.count == weakSelf.maxSelectCount) {
+                ShowToast(@"%@", LocalizedStringForKey(kTextForReachedMax));
+                return YES;
+            }
+            return NO;
+        };
+    }
     
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (self.isSingle) {
+        PHAsset *asset = [self.dataSource objectAtIndex:indexPath.item];
+
+        
+        HEClipImageViewController *clipImageVC = [[HEClipImageViewController alloc] init];
+        clipImageVC.asset = asset;
+        clipImageVC.clipRatio = self.clipRatio;
+        clipImageVC.clipWidth = self.clipWidth;
+        clipImageVC.clipHeight = self.clipHeight;
+        [self.navigationController pushViewController:clipImageVC animated:YES];
+        return;
+    }
+    
     if (self.clickToShowBigImage) {
         HEBigImageViewController *bigImageVC = [[HEBigImageViewController alloc] init];
         bigImageVC.assets = self.assets;
