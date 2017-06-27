@@ -27,7 +27,9 @@
 
 @property (nonatomic, strong) NSMutableArray *dataSource;
 
-- (IBAction)showAlbumList:(id)sender;
+- (IBAction)onChoosePhotos:(id)sender;
+- (IBAction)onShowAlbumList:(id)sender;
+
 @end
 
 @implementation ViewController
@@ -84,7 +86,7 @@
     [self.view addSubview:self.collectionView];
 }
 
-- (IBAction)showAlbumList:(id)sender {
+- (IBAction)onChoosePhotos:(id)sender {
     
     HEAlbumListViewController *albumListVC = [[HEAlbumListViewController alloc] init];
     albumListVC.maxSelectCount = 10;
@@ -100,6 +102,10 @@
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:albumListVC];
     
     [self presentViewController:nav animated:YES completion:nil];
+}
+
+- (IBAction)onShowAlbumList:(id)sender {
+    
 }
 
 #pragma mark - 显示结果集

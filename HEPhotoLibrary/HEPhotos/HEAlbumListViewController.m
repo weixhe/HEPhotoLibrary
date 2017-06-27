@@ -125,7 +125,10 @@
         case PHAuthorizationStatusNotDetermined: {      // 用户从未进行过授权等处理，首次访问相应内容会提示用户进行授权
             [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
                 if (status == PHAuthorizationStatusAuthorized) {
-                    [self getAlbumList];
+
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self getAlbumList];
+                    });
                 } else {
                     PhotoLog(@"Denied or Restricted");
                 }
