@@ -91,7 +91,7 @@
     
     bigView.BlockOnCurrentImage = ^(NSUInteger index) {
       
-        self.selectIndex = index;
+        weakSelf.selectIndex = index;
         // 更新title
         [weakSelf changeNavTitleAndBtnStatus:index];
         
