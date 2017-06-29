@@ -23,8 +23,9 @@
 @property (nonatomic, assign) BOOL clickToShowBigImage; // 是否点击看大图，如果是，则查看大图，否则，选中该图片
 
 @property (nonatomic, assign) BOOL isSingle;        // 是否为单选，如果为单选，可以进行截屏
-@property (nonatomic, assign) CGFloat clipRatio;    // 宽高比，宽/高，取值范围0~1
+@property (nonatomic, assign) BOOL canEdit;         // 是否能够编辑（移动，放缩）, 默认是YES
 @property (nonatomic, assign) CGFloat clipWidth;    // 自定义剪切的宽高值
 @property (nonatomic, assign) CGFloat clipHeight;
+@property (nonatomic, assign) CGPoint clipCenter;
 
 @end

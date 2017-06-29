@@ -47,6 +47,15 @@
     PhotoLog(@"HEThumbnailViewController dealloc");
 }
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.canEdit = YES;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -208,10 +217,11 @@
 
         
         HEClipImageViewController *clipImageVC = [[HEClipImageViewController alloc] init];
-        clipImageVC.asset = asset;
-        clipImageVC.clipRatio = self.clipRatio;
+        clipImageVC.canEdit = self.canEdit;
         clipImageVC.clipWidth = self.clipWidth;
         clipImageVC.clipHeight = self.clipHeight;
+        clipImageVC.clipCenter = self.clipCenter;
+        clipImageVC.asset = asset;
         [self.navigationController pushViewController:clipImageVC animated:YES];
         return;
     }

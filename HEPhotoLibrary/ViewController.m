@@ -82,7 +82,8 @@
 //    albumListVC.maxSelectCount = 10;
 //    albumListVC.selectedAsset = self.dataSource;
     albumListVC.isSingle = YES;
-    albumListVC.clipRatio = 0.5;
+    albumListVC.clipWidth = self.view.frame.size.width;
+    albumListVC.clipHeight = self.view.frame.size.width / 2;
     WS(weakSelf)
     albumListVC.FinishToSelectImage = ^(NSArray<PHAsset *> *assets) {
         

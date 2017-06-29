@@ -32,6 +32,14 @@
 
     PhotoLog(@"HEAlbumListViewController dealloc");
 }
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.canEdit = YES;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -84,9 +92,10 @@
         
     } else {
         thumbVC.isSingle = self.isSingle;
-        thumbVC.clipRatio = self.clipRatio;
+        thumbVC.canEdit = self.canEdit;
         thumbVC.clipWidth = self.clipWidth;
         thumbVC.clipHeight = self.clipHeight;
+        thumbVC.clipCenter = self.clipCenter;
     }
     [self.navigationController pushViewController:thumbVC animated:NO];
 }
@@ -197,9 +206,10 @@
         thumbVC.clickToShowBigImage = self.clickToShowBigImage;
     } else {
         thumbVC.isSingle = self.isSingle;
-        thumbVC.clipRatio = self.clipRatio;
+        thumbVC.canEdit = self.canEdit;
         thumbVC.clipWidth = self.clipWidth;
         thumbVC.clipHeight = self.clipHeight;
+        thumbVC.clipCenter = self.clipCenter;
     }
     [self.navigationController pushViewController:thumbVC animated:YES];
 }
