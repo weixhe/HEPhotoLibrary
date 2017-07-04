@@ -28,9 +28,8 @@
     self.tableView.dataSource = nil;
     self.tableView = nil;
     self.dataSource = nil;
-    self.FinishToSelectImage = NULL;
-
-    PhotoLog(@"HEAlbumListViewController dealloc");
+    self.BlockOnFinishToSelectImage = NULL;
+    self.BlockOnFinishClipImage = NULL;
 }
 - (instancetype)init
 {
@@ -83,11 +82,11 @@
     HEPhotoAlbumModel *model = [self.dataSource objectAtIndex:i];
     HEThumbnailViewController *thumbVC = [[HEThumbnailViewController alloc] init];
     thumbVC.title = model.title;
-    thumbVC.assets = [[HEPhotoTool sharePhotoTool] getAssetsInAssetCollection:model.assetCollection ascending:NO];
+    thumbVC.assets = [[HEPhotoTool sharePhotoTool] getAssetsInAssetCollection:model.assetCollection ascending:YES];
     if (!self.isSingle) {
         thumbVC.maxSelectCount = self.maxSelectCount;
         thumbVC.selectedAsset = self.selectedAsset;
-        thumbVC.FinishToSelectImage = self.FinishToSelectImage;
+        thumbVC.BlockOnFinishToSelectImage = self.BlockOnFinishToSelectImage;
         thumbVC.clickToShowBigImage = self.clickToShowBigImage;
         
     } else {
@@ -96,6 +95,7 @@
         thumbVC.clipWidth = self.clipWidth;
         thumbVC.clipHeight = self.clipHeight;
         thumbVC.clipCenter = self.clipCenter;
+        thumbVC.BlockOnFinishClipImage = self.BlockOnFinishClipImage;
     }
     [self.navigationController pushViewController:thumbVC animated:NO];
 }
@@ -198,11 +198,11 @@
     
     HEThumbnailViewController *thumbVC = [[HEThumbnailViewController alloc] init];
     thumbVC.title = model.title;
-    thumbVC.assets = [[HEPhotoTool sharePhotoTool] getAssetsInAssetCollection:model.assetCollection ascending:NO];
+    thumbVC.assets = [[HEPhotoTool sharePhotoTool] getAssetsInAssetCollection:model.assetCollection ascending:YES];
     if (!self.isSingle) {
         thumbVC.maxSelectCount = self.maxSelectCount;
         thumbVC.selectedAsset = self.selectedAsset;
-        thumbVC.FinishToSelectImage = self.FinishToSelectImage;
+        thumbVC.BlockOnFinishToSelectImage = self.BlockOnFinishToSelectImage;
         thumbVC.clickToShowBigImage = self.clickToShowBigImage;
     } else {
         thumbVC.isSingle = self.isSingle;
@@ -210,6 +210,7 @@
         thumbVC.clipWidth = self.clipWidth;
         thumbVC.clipHeight = self.clipHeight;
         thumbVC.clipCenter = self.clipCenter;
+        thumbVC.BlockOnFinishClipImage = self.BlockOnFinishClipImage;
     }
     [self.navigationController pushViewController:thumbVC animated:YES];
 }

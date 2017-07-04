@@ -16,5 +16,6 @@
 @property (nonatomic, assign) CGFloat clipWidth;    // 自定义剪切的宽高值
 @property (nonatomic, assign) CGFloat clipHeight;
 @property (nonatomic, assign) CGPoint clipCenter;   // 默认为屏幕中心
+@property (nonatomic, copy) void (^BlockOnFinishClipImage)(UIImage *clipImage);
 
 @end

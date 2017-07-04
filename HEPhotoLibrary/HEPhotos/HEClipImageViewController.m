@@ -33,6 +33,8 @@
     self.photoView = nil;
     self.indicator = nil;
     self.asset = nil;
+    self.maskView = nil;
+    self.BlockOnFinishClipImage = NULL;
 }
 
 - (instancetype)init
@@ -46,7 +48,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor blackColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     [self.view addSubview:self.scrollView];
@@ -101,15 +103,9 @@
 
 - (UIScrollView *)scrollView {
     if (!_scrollView) {
-        _scrollView = [[UIScrollView alloc] init];
-        _scrollView.frame = self.view.bounds;
-        
-        _scrollView.scrollsToTop = NO;
+        _scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.showsVerticalScrollIndicator = NO;
-        _scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        _scrollView.delaysContentTouches = NO;
-
     }
     return _scrollView;
 }
@@ -212,7 +208,7 @@
         // 4. 相对Screen：宽，高 都 < screen
         frame.size.width = image.size.width;
         frame.size.height = image.size.height;
-    } else {
+    } else {        // 已检验：✅
         // 5. 相对screen：宽，高 至少有一个超出了screen
         if (imageScale > screenScale) {
             frame.size.height = CGRectGetHeight(self.view.frame);
@@ -223,18 +219,25 @@
         }
     }
 
+    self.scrollView.clipsToBounds = NO;
+//    self.scrollView.center = self.clipCenter;
     self.scrollView.zoomScale = 1;
     self.scrollView.contentSize = frame.size;
-    self.photoView.frame = frame;
-    self.photoView.center = CGPointEqualToPoint(self.clipCenter, CGPointZero) ? CGPointMake(kViewWidth / 2, kViewHeight / 2) : self.clipCenter;
 
     // 设置contentInsert，保证imageView的top，bottom，left，right能滑动到clip区域
-    CGFloat offset_top = (_scrollView.frame.size.height - self.clipHeight) / 2;
-    CGFloat offset_left = (_scrollView.frame.size.width - self.clipWidth) / 2;
-    _scrollView.contentInset = UIEdgeInsetsMake(offset_top, offset_left, offset_top, offset_left);
+    CGFloat inset_top =  self.clipCenter.y - self.clipHeight / 2;
+    CGFloat inset_left = self.clipCenter.x - self.clipWidth / 2;
+    CGFloat inset_bottom = _scrollView.frame.size.height - self.clipCenter.y - self.clipHeight / 2;
+    CGFloat inset_right = _scrollView.frame.size.width - self.clipCenter.x - self.clipWidth / 2;
+
+    _scrollView.contentInset = UIEdgeInsetsMake(inset_top, inset_left, inset_bottom, inset_right);
     
-    // 因为设置了contentInsert，所以需要手动设置offset，保证imageView在clipCenter
-//    _scrollView.contentOffset = CGPointMake(-offset_left, -offset_top);
+    self.photoView.frame = frame;
+    
+    // 滚动到 clip的区域中间
+    CGFloat offset_x = self.photoView.center.x - self.clipCenter.x;
+    CGFloat offset_y = self.photoView.center.y - self.clipCenter.y;
+    [_scrollView setContentOffset:CGPointMake(offset_x, offset_y)];
 }
 
 #pragma mark - 事件
@@ -244,6 +247,26 @@
 
 - (void)onFinishAction {
     
+    if (self.clipWidth == 0 || self.clipHeight == 0) {
+        if (self.BlockOnFinishClipImage) {
+            self.BlockOnFinishClipImage(self.photoView.image);
+        }
+        [self dismissViewControllerAnimated:YES completion:nil];
+
+    } else {
+        
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            
+            UIImage *image = [self shotImage];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                if (self.BlockOnFinishClipImage) {
+                    self.BlockOnFinishClipImage(image);
+                }
+                [self dismissViewControllerAnimated:YES completion:nil];
+            });
+        });
+    }
 }
 
 - (void)doubleTapAction:(UIGestureRecognizer *)gesture {
@@ -279,9 +302,29 @@
 }
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
-    CGFloat offsetX = (CGRectGetWidth(scrollView.frame) > scrollView.contentSize.width) ? (CGRectGetWidth(scrollView.frame) - scrollView.contentSize.width) * 0.5 : 0.0;
-    CGFloat offsetY = (CGRectGetHeight(scrollView.frame) > scrollView.contentSize.height) ? (CGRectGetHeight(scrollView.frame) - scrollView.contentSize.height) * 0.5 : 0.0;
-    self.photoView.center = CGPointMake(scrollView.contentSize.width * 0.5 + offsetX, scrollView.contentSize.height * 0.5 + offsetY);
+
+}
+
+#pragma mark -  截屏
+
+- (UIImage *)shotImage {
+    
+    CGFloat scale = [UIScreen mainScreen].scale;
+    CGFloat x = self.clipCenter.x - self.clipWidth / 2;
+    CGFloat y = self.clipCenter.y - self.clipHeight / 2;
+    CGRect rect = CGRectMake(x * scale, y * scale, self.clipWidth * scale, self.clipHeight * scale);
+    
+    UIGraphicsBeginImageContextWithOptions(self.scrollView.size, YES, 0);
+    
+    // 设置截屏大小
+    [[self.view layer] renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    CGImageRef imageRefRect = CGImageCreateWithImageInRect(viewImage.CGImage, rect);   // 这里可以设置想要截图的区域
+    UIImage *sendImage = [[UIImage alloc] initWithCGImage:imageRefRect];
+    CGImageRelease(imageRefRect);
+    return sendImage;
 }
 
 @end

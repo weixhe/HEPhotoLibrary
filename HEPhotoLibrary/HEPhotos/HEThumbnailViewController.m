@@ -43,8 +43,8 @@
     self.bottomBar = nil;
     self.selectedAsset = nil;
     self.assets = nil;
-    self.FinishToSelectImage = NULL;
-    PhotoLog(@"HEThumbnailViewController dealloc");
+    self.BlockOnFinishToSelectImage = NULL;
+    self.BlockOnFinishClipImage = NULL;
 }
 
 - (instancetype)init
@@ -140,8 +140,8 @@
             return ;
         }
         
-        if (weakSelf.FinishToSelectImage) {
-            weakSelf.FinishToSelectImage(weakSelf.selectedAsset.copy);
+        if (weakSelf.BlockOnFinishToSelectImage) {
+            weakSelf.BlockOnFinishToSelectImage(weakSelf.selectedAsset.copy);
         }
         [weakSelf onCancelAction:nil];
     };
@@ -221,6 +221,7 @@
         clipImageVC.clipWidth = self.clipWidth;
         clipImageVC.clipHeight = self.clipHeight;
         clipImageVC.clipCenter = self.clipCenter;
+        clipImageVC.BlockOnFinishClipImage = self.BlockOnFinishClipImage;
         clipImageVC.asset = asset;
         [self.navigationController pushViewController:clipImageVC animated:YES];
         return;

@@ -19,7 +19,7 @@
 
 @property (nonatomic, assign) NSUInteger maxSelectCount;   // 最多选择几张图片
 
-@property (nonatomic, copy) void (^FinishToSelectImage)(NSArray <PHAsset *> *assets);  // 完成选择回调
+@property (nonatomic, copy) void (^BlockOnFinishToSelectImage)(NSArray <PHAsset *> *assets);  // 完成选择回调
 
 @property (nonatomic, assign) BOOL clickToShowBigImage; // 是否点击看大图，如果是，则查看大图，否则，选中该图片
 
@@ -28,4 +28,6 @@
 @property (nonatomic, assign) CGFloat clipWidth;    // 自定义剪切的宽高值
 @property (nonatomic, assign) CGFloat clipHeight;
 @property (nonatomic, assign) CGPoint clipCenter;
+@property (nonatomic, copy) void (^BlockOnFinishClipImage)(UIImage *clipImage);
+
 @end

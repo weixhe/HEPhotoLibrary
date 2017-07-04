@@ -27,6 +27,9 @@
 
 @property (nonatomic, strong) NSMutableArray *dataSource;
 
+@property (nonatomic, strong) UIImageView *imageView;
+
+
 - (IBAction)onChoosePhotos:(id)sender;
 - (IBAction)onShowAlbumList:(id)sender;
 
@@ -42,6 +45,9 @@
     [self setupCollectionView];
     cellWidth = (self.collectionView.width - (Cell_Item_Num - 1) * Cell_Item_Space) / Cell_Item_Num;
 
+    self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(30, 200, 100, 100)];
+    [self.view addSubview:self.imageView];
+    
 }
 
 
@@ -51,7 +57,7 @@
 }
 
 - (void)setupCollectionView {
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 140, kViewWidth, self.view.height - 140) collectionViewLayout:[[UICollectionViewFlowLayout alloc] init]];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 300, kViewWidth, self.view.height - 300) collectionViewLayout:[[UICollectionViewFlowLayout alloc] init]];
     self.collectionView.backgroundColor = [UIColor clearColor];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
@@ -65,7 +71,7 @@
     albumListVC.maxSelectCount = 10;
     albumListVC.selectedAsset = self.dataSource;
     WS(weakSelf)
-    albumListVC.FinishToSelectImage = ^(NSArray<PHAsset *> *assets) {
+    albumListVC.BlockOnFinishToSelectImage = ^(NSArray<PHAsset *> *assets) {
         
         weakSelf.dataSource = [NSMutableArray arrayWithArray:assets];
         [weakSelf.collectionView reloadData];
@@ -82,15 +88,13 @@
 //    albumListVC.maxSelectCount = 10;
 //    albumListVC.selectedAsset = self.dataSource;
     albumListVC.isSingle = YES;
+    albumListVC.clipCenter = CGPointMake(self.view.width / 2, 200);
     albumListVC.clipWidth = self.view.frame.size.width;
     albumListVC.clipHeight = self.view.frame.size.width / 2;
     WS(weakSelf)
-    albumListVC.FinishToSelectImage = ^(NSArray<PHAsset *> *assets) {
-        
-        weakSelf.dataSource = [NSMutableArray arrayWithArray:assets];
-        [weakSelf.collectionView reloadData];
+    albumListVC.BlockOnFinishClipImage = ^(UIImage *clipImage) {
+        weakSelf.imageView.image = clipImage;
     };
-    
     
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:albumListVC];
     
